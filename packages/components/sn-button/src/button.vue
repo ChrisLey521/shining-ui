@@ -1,6 +1,6 @@
 <template>
-    <button :class="round ? 'round-button' : ''">
-
+    <button text-red m-1 :class="round ? 'rounded-20px' : ''">
+        <slot />
     </button>
 </template>
 
@@ -29,9 +29,3 @@ interface ButtonProps {
 }
 defineProps<ButtonProps>()
 </script>
-
-<style scoped>
-.round-button {
-    border-radius: 10px;
-}
-</style>

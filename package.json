@@ -4,21 +4,32 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "unocss \"packages/components/**/*.vue\" -o \"packages/components\"",
+    "postinstall": "husky || true"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@eslint/js": "9.16.0",
+    "@iconify/json": "2.2.282",
+    "@unocss/cli": "0.65.1",
+    "@unocss/preset-icons": "0.65.1",
+    "@unocss/preset-typography": "0.65.1",
+    "@unocss/transformer-attributify-jsx": "0.65.1",
+    "@unocss/transformer-directives": "0.65.1",
     "@vitejs/plugin-vue": "5.2.1",
     "eslint": "9.16.0",
     "eslint-plugin-vue": "9.32.0",
     "globals": "15.13.0",
+    "husky": "9.1.7",
+    "lint-staged": "15.2.11",
     "stylelint": "16.11.0",
     "stylelint-config-standard": "36.0.1",
     "typescript": "5.7.2",
     "typescript-eslint": "8.17.0",
+    "unocss": "0.65.1",
     "vite": "6.0.3",
     "vue": "3.5.13"
   },
