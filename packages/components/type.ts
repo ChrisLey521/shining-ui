@@ -1,8 +1,8 @@
-enum ComponentSize {
+enum Size {
     Mini = 'mini',
     Small = 'small',
     Medium = 'medium',
-    Large = 'large'
+    Large = 'large',
 }
 
 enum Theme {
@@ -19,8 +19,13 @@ enum Variant {
     Danger = 'danger'
 }
 
+const DEFAULT_SIZE: Size = Size.Medium
+const DEFAULT_VARIANT: Variant = Variant.Primary
+const DEFAULT_THEME: Theme = Theme.Light
+
 export {
-    ComponentSize,
+    DEFAULT_SIZE, DEFAULT_THEME, DEFAULT_VARIANT, Size,
     Theme,
     Variant
 };
+

@@ -1,4 +1,4 @@
 {
-    "{*.vue,*.ts,*.js}": "pnpm eslint",
-    "*.css": "pnpm stylelint"
+    "{*.vue,*.ts,*.js}": "pnpm eslint --fix",
+    "*.css": "pnpm stylelint --fix"
 }

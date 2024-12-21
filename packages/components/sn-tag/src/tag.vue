@@ -1,6 +1,6 @@
 <script setup lang="ts">
     import { computed, defineProps } from "vue";
-import { ComponentSize, Theme, Variant } from "../../type";
+import { DEFAULT_SIZE, DEFAULT_THEME, DEFAULT_VARIANT, Size, Theme, Variant } from "../../type";
     interface TagProps {
         variant?: Variant;
         closable?: boolean;
@@ -9,22 +9,23 @@ import { ComponentSize, Theme, Variant } from "../../type";
         color?: string;
         border?: string;
         background?: string;
-        size?: ComponentSize;
+        size?: Size;
         round?: boolean;
         theme?: Theme;
+        onClose?: () => void
     }
 
     const {
-        variant = Variant.Primary,
-        // closable = false,
+        variant = DEFAULT_VARIANT,
+        closable = false,
         // "disable-transitions": disableTransitions = true,
         // hit = false,
         color,
         background,
         border,
-        // size = ComponentSize.Medium,
+        size = DEFAULT_SIZE,
         round = false,
-        theme = Theme.Light,
+        theme = DEFAULT_THEME,
     } = defineProps<TagProps>();
 
     const colors = computed<string[]>(() => {
@@ -62,20 +63,46 @@ import { ComponentSize, Theme, Variant } from "../../type";
             border
         ]
     });
+
+    const height = computed<string>(() => {
+        const size2height = new Map([
+            [Size.Large, 'h-32px'],
+            [Size.Medium, 'h-24px'],
+            [Size.Small, 'h-20px'],
+            [Size.Mini, 'h-16px']
+        ])
+        return size2height.get(size)
+    })
 </script>
 
 <template>
-    <div :style="{ background, color, border }" :class="[
-        {
-            'rounded-full': round,
-            rounded: !round,
-        },
-        'px-12px',
-        'py-8px',
-        'w-fit',
-        'text-xs',
-        ...colors
-    ]">
-        <slot />
+    <div
+        :style="{ background, color, border }"
+        :class="[
+            {
+                'rounded-full': round,
+                rounded: !round,
+            },
+            'relative',
+            'px-12px',
+            'w-fit',
+            'text-xs',
+            'flex',
+            'gap-4px',
+            'justify-between',
+            'items-center',
+            ...colors,
+            height
+        ]">
+        <div>
+            <slot />
+        </div>
+        <div
+            v-if="closable"
+            class="group text-sm"
+            @click.stop="$emit('close')">
+            <i class="i-material-symbols:close-small-outline block group-hover:hidden"/>
+            <i class="i-material-symbols:cancel hidden group-hover:block" />
+        </div>
     </div>
 </template>
