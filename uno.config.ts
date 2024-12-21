@@ -1,7 +1,7 @@
-import { defineConfig, presetAttributify, presetUno, presetTypography, } from 'unocss'
 import presetIcons from '@unocss/preset-icons'
-import transformerDirectives from '@unocss/transformer-directives'
 import transformerAttributifyJsx from '@unocss/transformer-attributify-jsx'
+import transformerDirectives from '@unocss/transformer-directives'
+import { defineConfig, presetAttributify, presetTypography, presetUno, } from 'unocss'
 
 export default defineConfig({
     presets: [
@@ -25,7 +25,7 @@ export default defineConfig({
     ],
     cli: {
         entry: {
-            outFile: 'packages/components/index.css',
+            outFile: 'packages/theme-chalk/styles/uno.css',
             patterns: [
                 'packages/components/**/*.vue'
             ]

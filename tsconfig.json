@@ -9,7 +9,10 @@
         ],
         "skipLibCheck": true,
         "emitDeclarationOnly": true,
-        "allowImportingTsExtensions": true
+        "allowImportingTsExtensions": true,
+        "module": "ESNext",
+        "isolatedDeclarations": true,
+        "moduleResolution": "node10"
     },
     "include": [
         "packages"
