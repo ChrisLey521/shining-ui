@@ -1,25 +1,33 @@
+import { Size, Variant } from 'constants'
+import { ButtonNativeType } from './const'
 
-enum ButtonSize {
-    Mini = 'mini',
-    Small = 'small',
-    Medium = 'medium',
-    Large = 'large',
-}
-enum ButtonType {
-    Primary = 'primary',
-    Success = 'success',
-    Warning = 'warning',
-    Danger = 'danger',
-    Info = 'info',
+
+
+interface ButtonProps {
+    size?: Size
+    variant?: Variant
+    plain?: boolean
+    text?: boolean
+    bg?: boolean
+    link?: boolean
+    round?: boolean
+    circle?: boolean
+    loading?: boolean
+    loadingIcon?: string
+    disabled?: boolean
+    icon?: string
+    autofocus?: boolean
+    nativeType?: ButtonNativeType
+    autoInsertSpace?: boolean
+    dark?: boolean
+    tag?: string
+    color?: string
+    border?: string
+    background?: string
 }
 
-enum ButtonNativeType {
-    Button = 'button',
-    Submit = 'submit',
-    Reset = 'reset',
-}
 export {
-    ButtonSize,
-    ButtonType,
-    ButtonNativeType
+    ButtonNativeType,
+    ButtonProps
 }
+

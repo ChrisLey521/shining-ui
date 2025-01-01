@@ -1,6 +1,7 @@
 import { IconName } from './type';
 
 const iconDict: Record<IconName, string> = {
+    // 系统图标
     [IconName.Plus]: 'i-material-symbols:add',
     [IconName.CirclePlus]: 'i-material-symbols:add-circle-outline-rounded',
     [IconName.CirclePlusFilled]: 'i-material-symbols:add-circle-rounded',
@@ -76,9 +77,11 @@ const iconDict: Record<IconName, string> = {
     [IconName.Trash]: 'i-material-symbols:delete-outline-sharp',
     [IconName.TrashFilled]: 'i-material-symbols:delete-sharp',
     [IconName.Finished]: 'i-material-symbols:playlist-add-check-rounded',
-    [IconName.Operation]: 'i-material-symbols:broadcast-on-personal-outline-rounded',
+    [IconName.Operation]: 'i-ep:operation',
     [IconName.Switch]: 'i-mi:switch',
 }
+
 export {
     iconDict
 };
+

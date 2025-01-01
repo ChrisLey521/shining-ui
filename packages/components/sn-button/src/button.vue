@@ -3,6 +3,7 @@
         'btn',
         sizeClass,
         sizeTypeClass,
+        bgColor,
         {
             'rounded-20px': round,
             circle: circle,
@@ -22,136 +23,44 @@
 </template>
 
 <script lang="ts" setup>
+import { DEFAULT_SIZE, DEFAULT_VARIANT, Size, Variant } from 'constants';
 import { computed } from 'vue';
-import { ButtonSize, ButtonType, ButtonNativeType } from './type.ts'
-
-interface ButtonProps {
-    size?: ButtonSize
-    type?: ButtonType
-    plain?: boolean
-    text?: boolean
-    bg?: boolean
-    link?: boolean
-    round?: boolean
-    circle?: boolean
-    loading?: boolean
-    loadingIcon?: string
-    disabled?: boolean
-    icon?: string
-    autofocus?: boolean
-    nativeType?: ButtonNativeType
-    autoInsertSpace?: boolean
-    dark?: boolean
-    tag?: string
-    color?: string
-    border?: string
-    background?: string
-}
-
-const DEFAULT_SIZE: ButtonSize = ButtonSize.Medium;
-const DEFAULT_TYPE: ButtonType = ButtonType.Danger;
-// const DEFAULT_NATIVETYPE_TYPE: ButtonNativeType = ButtonNativeType.Button;
+import { ButtonProps } from './type.ts';
 
 const props = defineProps<ButtonProps>();
 
 const sizeClass = computed<string>(() => {
     const sizeMap = new Map([
-        [ButtonSize.Large, "btn-large"],
-        [ButtonSize.Medium, "btn-medium"],
-        [ButtonSize.Small, "btn-small"],
-        [ButtonSize.Mini, "btn-mini"],
+        [Size.Large, "btn-large"],
+        [Size.Medium, "btn-medium"],
+        [Size.Small, "btn-small"],
+        [Size.Mini, "btn-mini"],
     ])
     return sizeMap.get(props.size || DEFAULT_SIZE) || "";
 })
 const sizeTypeClass = computed<string>(() => {
     const typeMap = new Map([
-        [ButtonType.Success, "btn-success"],
-        [ButtonType.Primary, "btn-primary"],
-        [ButtonType.Warning, "btn-warning"],
-        [ButtonType.Danger, "btn-danger"],
-        [ButtonType.Info, "btn-info"],
+        [Variant.Success, "btn-success"],
+        [Variant.Primary, "btn-primary"],
+        [Variant.Warning, "btn-warning"],
+        [Variant.Danger, "btn-danger"],
+        [Variant.Info, "btn-info"],
     ])
-    return typeMap.get(props.type || DEFAULT_TYPE) || "";
+    return typeMap.get(props.variant || DEFAULT_VARIANT) || "";
 })
+
+const colorMap = new Map<Variant, string[]>([
+    [Variant.Primary, ['bg-blue-7', 'hover:bg-blue-5', 'active:bg-blue-9']],
+    [Variant.Success, ['bg-green-7', 'hover:bg-green-5', 'active:bg-green-9']],
+    [Variant.Warning, ['bg-orange-7', 'hover:bg-orange-5', 'active:bg-orange-9']],
+    [Variant.Danger, ['bg-red-7', 'hover:bg-red-5', 'active:bg-red-9']],
+    [Variant.Info, ['bg-gray-7', 'hover:bg-gray-5', 'active:bg-gray-9']],
+])
+
+const bgColor = computed(() => colorMap.get(props.variant))
+
 </script>
 
 <style scoped>
-.btn {
-    display: inline-flex;
-    align-items: center;
-    cursor: pointer;
-    justify-content: center;
-    white-space: nowrap;
-    line-height: 1;
-    border-radius: 4px;
-}
-
-.btn-large {
-    padding: 10px 20px;
-    font-size: 16px;
-}
-
-.btn-medium {
-    padding: 8px 16px;
-    font-size: 14px;
-}
-
-.btn-small {
-    padding: 6px 12px;
-    font-size: 12px;
-}
-
-.btn-mini {
-    padding: 4px 10px;
-    font-size: 12px;
-}
-
-.btn-success {
-    background-color: #67c23a;
-    color: #fff;
-    border: 1px solid #67c23a;
-}
-
-.btn-primary {
-    background-color: #409eff;
-    color: #fff;
-    border: 1px solid #409eff;
-}
-
-.btn-warning {
-    background-color: #e6a23c;
-    color: #fff;
-    border: 1px solid #e6a23c;
-}
-
-.btn-danger {
-    background-color: #f56c6c;
-    color: #fff;
-    border: 1px solid #f56c6c;
-}
-
-.btn-info {
-    background-color: #909399;
-    color: #fff;
-    border: 1px solid #909399;
-}
-
-.btn.circle {
-    border-radius: 50%;
-    padding: 0px;
-    width: 40px;
-    height: 40px;
-}
-
-.btn.text {
-    background: none;
-    border: none;
-    color: #409eff;
-}
-
-.btn.plain {
-    background: none;
-    border: 1px solid #dcdfe6;
-    color: #606266;
-}
+@import url('./style.css');
 </style>

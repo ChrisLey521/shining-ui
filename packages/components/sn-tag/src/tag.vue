@@ -1,19 +1,7 @@
 <script setup lang="ts">
+import { DEFAULT_SIZE, DEFAULT_THEME, DEFAULT_VARIANT, size2height, Theme, Variant } from "constants";
 import { computed, defineProps } from "vue";
-import { DEFAULT_SIZE, DEFAULT_THEME, DEFAULT_VARIANT, Size, Theme, Variant } from "../../type";
-interface TagProps {
-    variant?: Variant;
-    closable?: boolean;
-    "disable-transitions"?: boolean;
-    hit?: boolean;
-    color?: string;
-    border?: string;
-    background?: string;
-    size?: Size;
-    round?: boolean;
-    theme?: Theme;
-    onClose?: () => void
-}
+import { TagProps } from './type';
 
 const {
     variant = DEFAULT_VARIANT,
@@ -44,7 +32,7 @@ const colors = computed<string[]>(() => {
         [Variant.Warning, ['bg-[var(--warning-2)]', 'text-[var(--warning-5)]', 'border-[var(--warning-5)]']],
         [Variant.Danger, ['bg-[var(--danger-2)]', 'text-[var(--danger-5)]', 'border-[var(--danger-5)]']],
     ])
-    const palinColorMap = new Map([
+    const plainColorMap = new Map([
         [Variant.Primary, ['bg-white', 'text-[var(--primary-5)]', 'border-[var(--primary-5)]']],
         [Variant.Info, ['bg-white', 'text-[var(--info-5)]', 'border-[var(--info-5)]']],
         [Variant.Success, ['bg-white', 'text-[var(--success-5)]', 'border-[var(--success-5)]']],
@@ -55,7 +43,7 @@ const colors = computed<string[]>(() => {
     const colorMap = new Map<Theme, Map<Variant, string[]>>([
         [Theme.Dark, darkColorMap],
         [Theme.Light, lightColorMap],
-        [Theme.Plain, palinColorMap]
+        [Theme.Plain, plainColorMap]
     ])
 
     return [
@@ -64,34 +52,28 @@ const colors = computed<string[]>(() => {
     ]
 });
 
-const height = computed<string>(() => {
-    const size2height = new Map([
-        [Size.Large, 'h-32px'],
-        [Size.Medium, 'h-24px'],
-        [Size.Small, 'h-20px'],
-        [Size.Mini, 'h-16px']
-    ])
-    return size2height.get(size)
-})
+const height = computed<string>(() => size2height.get(size))
 </script>
 
 <template>
-    <div :style="{ background, color, border }" :class="[
-        {
-            'rounded-full': round,
-            rounded: !round,
-        },
-        'relative',
-        'px-12px',
-        'w-fit',
-        'text-xs',
-        'flex',
-        'gap-4px',
-        'justify-between',
-        'items-center',
-        ...colors,
-        height
-    ]">
+    <div
+        :style="{ background, color, border }"
+        :class="[
+            {
+                'rounded-full': round,
+                rounded: !round,
+            },
+            'relative',
+            'px-12px',
+            'w-fit',
+            'text-xs',
+            'flex',
+            'gap-4px',
+            'justify-between',
+            'items-center',
+            ...colors,
+            height
+        ]">
         <div>
             <slot />
         </div>
