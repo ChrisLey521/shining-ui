@@ -27,7 +27,8 @@ export default defineConfig({
         entry: {
             outFile: 'packages/theme-chalk/styles/uno.css',
             patterns: [
-                'packages/components/**/*.vue'
+                'packages/components/**/*.vue',
+                'packages/components/**/*.ts'
             ]
         },
     }

@@ -19,12 +19,12 @@ enum IconName {
     Pointer = 'pointer',
     Star = 'star',
     StarFilled = 'star-filled',
-    Notification = 'notification',
     Connection = 'connection',
     Message = 'message',
     MessageSquare = 'message-square',
     MessageSquareFilled = 'message-square-filled',
     Setting = 'setting',
+    SettingFilled = 'setting-filled',
     Clock = 'clock',
     Position = 'position',
     Discount = 'discount',
@@ -66,16 +66,16 @@ enum IconName {
     Operation = 'operation',
     ZoomOut = 'zoom-out',
     ZoomIn = 'zoom-in',
+    Info = 'info',
     InfoFilled = 'info-filled',
     QuestionFilled = 'question-filled',
-    Tools = 'tools',
     Menu = 'menu',
     UploadFilled = 'upload-filled',
+    Upload = 'upload',
     Avatar = 'avatar',
     HelpFilled = 'help-filled',
     Share = 'share',
     Grid = 'grid',
-
 }
 
 interface SnIconProps {
