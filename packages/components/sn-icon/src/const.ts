@@ -279,6 +279,7 @@ const iconDict: Record<IconName, string> = {
     [IconName.Moon]: 'i-ep:moon',
     [IconName.MoonNight]: 'i-ep:moon-night',
     [IconName.Lightning]: 'i-ep:lightning',
+    [IconName.Pouring]: "i-ep:pouring",
 
     // 文档
     [IconName.DocAdd]: 'i-ep:document-add',
@@ -305,7 +306,6 @@ const iconDict: Record<IconName, string> = {
     [IconName.Bubble]: 'i-material-symbols-light:bubble-chart-outline',
     [IconName.Flag]: 'i-system-uicons:flag',
     [IconName.Key]: 'i-solar:key-minimalistic-outline',
-    [IconName.Pouring]: "i-ep:pouring"
 }
 
 export {
