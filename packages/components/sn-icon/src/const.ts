@@ -116,7 +116,7 @@ enum IconName {
     HeartFilled = 'heart-filled',
 
     // 天气
-    Sunrize = 'sunrize',
+    Sunrise = 'sunrise',
     Sunny = 'sunny',
     Ship = 'ship',
     Cloudy = 'cloudy',
@@ -232,8 +232,80 @@ const iconDict: Record<IconName, string> = {
     [IconName.Finished]: 'i-material-symbols:playlist-add-check-rounded',
     [IconName.Operation]: 'i-ep:operation',
     [IconName.Switch]: 'i-mi:switch',
+
+    // 箭头
+    [IconName.ArrowLeft]: 'i-material-symbols-light:chevron-left-rounded',
+    [IconName.ArrowRight]: 'i-material-symbols-light:chevron-right-rounded',
+    [IconName.ArrowUp]: 'i-material-symbols-light:keyboard-arrow-down-rounded',
+    [IconName.ArrowDown]: 'i-material-symbols-light:keyboard-arrow-down-rounded',
+    [IconName.ArrowLeftBold]: 'i-material-symbols:chevron-left-rounded',
+    [IconName.ArrowRightBold]: 'i-material-symbols:chevron-right-rounded',
+    [IconName.ArrowUpBold]: 'i-material-symbols:keyboard-arrow-up-rounded',
+    [IconName.ArrowDownBold]: 'i-material-symbols:keyboard-arrow-down-rounded',
+    [IconName.DoubleArrowLeft]: 'i-material-symbols:keyboard-double-arrow-left-rounded',
+    [IconName.DoubleArrowRight]: 'i-material-symbols:keyboard-double-arrow-right-rounded',
+    [IconName.DoubleArrowUp]: 'i-material-symbols:keyboard-double-arrow-up-rounded',
+    [IconName.DoubleArrowDown]: 'i-material-symbols:keyboard-double-arrow-down-rounded',
+    [IconName.DownloadArrow]: 'i-material-symbols:download',
+    [IconName.UploadArrow]: 'i-material-symbols:upload',
+    [IconName.Top]: 'i-material-symbols:arrow-upward-alt-rounded',
+    [IconName.Bottom]: 'i-material-symbols:arrow-downward-alt-rounded',
+    [IconName.Left]: 'i-material-symbols:arrow-left-alt-rounded',
+    [IconName.Right]: 'i-material-symbols:arrow-right-alt-rounded',
+    [IconName.TopRight]: 'i-ix:arrow-diagonal-top-right',
+    [IconName.TopLeft]: 'i-ix:arrow-diagonal-top-left',
+    [IconName.BottomLeft]: 'i-ix:arrow-diagonal-bottom-left',
+    [IconName.BottomRight]: 'i-ix:arrow-diagonal-bottom-right',
+    [IconName.Sort]: 'i-ep:sort',
+    [IconName.Ascent]: 'i-ep:sort-up',
+    [IconName.Descent]: 'i-ep:sort-down',
+    [IconName.Rank]: 'i-ep:rank',
+    [IconName.CaretLeft]: 'i-material-symbols:arrow-left-rounded',
+    [IconName.CaretRight]: 'i-material-symbols:arrow-right-rounded',
+    [IconName.CaretUp]: 'i-material-symbols:arrow-drop-up-rounded',
+    [IconName.CaretDown]: 'i-material-symbols:arrow-drop-down-rounded',
+    [IconName.DoubleCaret]: 'i-gravity-ui:carets-expand-vertical',
+    [IconName.Expand]: 'i-ep:expand',
+    [IconName.Fold]: 'i-ep:fold',
     [IconName.Heart]: 'i-material-symbols:favorite-outline',
-    [IconName.HeartFilled]: 'i-material-symbols-light-favorite-rounded'
+    [IconName.HeartFilled]: 'i-material-symbols-light-favorite-rounded',
+
+    // 天气
+    [IconName.Sunrise]: 'i-ep:sunrise',
+    [IconName.Sunny]: 'i-ep:sunny',
+    [IconName.Ship]: 'i-ep:ship',
+    [IconName.Cloudy]: 'i-ep:cloudy',
+    [IconName.Sunset]: 'i-ep:sunset',
+    [IconName.Moon]: 'i-ep:moon',
+    [IconName.MoonNight]: 'i-ep:moon-night',
+    [IconName.Lightning]: 'i-ep:lightning',
+
+    // 文档
+    [IconName.DocAdd]: 'i-ep:document-add',
+    [IconName.Doc]: 'i-ep:document',
+    [IconName.Copy]: 'i-material-symbols-light:content-copy-outline-rounded',
+    [IconName.FolderOpened]: 'i-material-symbols:folder-outline-rounded',
+    [IconName.Folder]: 'i-material-symbols:folder-outline-rounded',
+    [IconName.FolderAdd]: 'i-material-symbols:create-new-folder-outline-rounded',
+    [IconName.Reading]: 'i-solar:notebook-minimalistic-line-duotone',
+    [IconName.DocChecked]: 'i-ep:document-checked',
+    [IconName.Collection]: 'i-ep:collection',
+
+    // 媒体
+    [IconName.Microphone]: 'i-mynaui:microphone',
+    [IconName.Picture]: 'i-material-symbols:imagesmode-outline-rounded',
+    [IconName.PictureFilled]: 'i-material-symbols:imagesmode-rounded',
+    [IconName.Camera]: 'i-material-symbols:android-camera-outline',
+
+    // 工具
+    [IconName.Calendar]: 'i-material-symbols-light:calendar-month-outline-rounded',
+    [IconName.MagicStick]: 'i-ep:magic-stick',
+    [IconName.Scissor]: 'i-ep:scissor',
+    [IconName.Tag]: 'i-mdi-light:tag',
+    [IconName.Bubble]: 'i-material-symbols-light:bubble-chart-outline',
+    [IconName.Flag]: 'i-system-uicons:flag',
+    [IconName.Key]: 'i-solar:key-minimalistic-outline',
+    [IconName.Pouring]: "i-ep:pouring"
 }
 
 export {
