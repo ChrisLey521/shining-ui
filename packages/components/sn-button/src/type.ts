@@ -1,5 +1,6 @@
 import { Size, Variant } from 'constants'
 import { ButtonNativeType } from './const'
+import { IconName } from '../../sn-icon/src/const'
 
 
 
@@ -13,11 +14,11 @@ interface ButtonProps {
     round?: boolean
     circle?: boolean
     loading?: boolean
-    loadingIcon?: string
+    loadingIcon?: `${IconName}`
     disabled?: boolean
-    icon?: string
+    icon?: `${IconName}`
     autofocus?: boolean
-    nativeType?: ButtonNativeType
+    type?: ButtonNativeType
     autoInsertSpace?: boolean
     dark?: boolean
     tag?: string

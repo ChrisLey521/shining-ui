@@ -17,7 +17,9 @@ export default defineConfig({
         })
     ],
     transformers: [
-        transformerDirectives(),
+        transformerDirectives({
+            applyVariable: ['--at-apply'],
+        }),
         transformerAttributifyJsx(),
     ],
     rules: [
@@ -28,7 +30,8 @@ export default defineConfig({
             outFile: 'packages/theme-chalk/styles/uno.css',
             patterns: [
                 'packages/components/**/*.vue',
-                'packages/components/**/*.ts'
+                'packages/components/**/*.ts',
+                // 'packages/theme-chalk/styles/directives.css'
             ]
         },
     }

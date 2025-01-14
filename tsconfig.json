@@ -12,7 +12,8 @@
         "allowImportingTsExtensions": true,
         "module": "ESNext",
         "isolatedDeclarations": true,
-        "moduleResolution": "node10"
+        "moduleResolution": "node10",
+        "target": "ESNext"
     },
     "include": [
         "packages"
