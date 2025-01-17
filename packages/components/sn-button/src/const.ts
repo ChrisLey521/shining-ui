@@ -15,8 +15,6 @@ const sizeMap: Map<Size, string[]> = new Map<Size, string[]>([
     [Size.Mini, ['w-20px', 'px-10px', 'py-4px', 'text-xs', 'h-20px']],
 ]);
 
-
-
 const lightVariantStyles: Record<Variant, Record<'default' | 'text' | 'plain' | 'link', string[]>> = {
     [Variant.Primary]: {
         default: ['bg-blue-5/90', 'text-white', 'hover:bg-blue-5/80', 'active:bg-blue-5'],
@@ -98,10 +96,6 @@ const darkVariantStyles: Record<Variant, Record<'default' | 'text' | 'plain' | '
 const DEFAULT_BUTTON_VARIANT: Variant = Variant.Default
 
 export {
-    ButtonNativeType,
-    DEFAULT_BUTTON_VARIANT,
-    sizeMap,
-    lightVariantStyles,
-    darkVariantStyles,
+    ButtonNativeType, darkVariantStyles, DEFAULT_BUTTON_VARIANT, lightVariantStyles, sizeMap
 };
 
