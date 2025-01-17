@@ -6,7 +6,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "unocss \"packages/components/**/*.vue\" -o \"packages/components\"",
-    "postinstall": "husky || true"
+    "postinstall": "husky || true",
+    "docs:dev": "pnpm run -C docs dev",
+    "docs:build": "pnpm run -C docs build",
+    "docs:preview": "pnpm run -C docs preview"
   },
   "keywords": [],
   "author": "",
@@ -31,6 +34,7 @@
     "typescript-eslint": "8.17.0",
     "unocss": "0.65.1",
     "vite": "6.0.3",
+    "vitepress": "1.5.0",
     "vue": "3.5.13"
   },
   "type": "module"
