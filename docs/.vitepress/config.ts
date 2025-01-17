@@ -1,4 +1,6 @@
-import { defineConfig } from 'vitepress'
+import json from '@rollup/plugin-json';
+import { defineConfig } from 'vitepress';
+import { generateSidebarConfig } from './locales';
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -6,6 +8,13 @@ export default defineConfig({
   description: "A UI lib for Vue3.5+",
   cleanUrls: true,
   vite: {
+    plugins: [
+      json({
+        // 假设你的YAML文件有JSON类型的数据
+        // 如果不是，你可能需要一个特定的插件来处理YAML
+        include: '**/*.yaml',
+      })
+    ],
     resolve: {
       extensions: ['.vue', '.ts', '.js']
     }
@@ -20,27 +29,19 @@ export default defineConfig({
       { text: '示例', link: '/examples', activeMatch: '/examples/' }
     ],
 
-    sidebar: [
-      {
-        text: 'Guide',
-        items: [
-          { text: 'Guide', link: '/guide' }
-        ]
-      },
-      {
-        text: 'Components',
-        items: [
-          { text: 'Components', link: '/components' },
-        ]
-      },
-      {
-        text: 'Examples',
-        items: [
-          { text: 'Markdown Examples', link: '/markdown-examples' },
-          { text: 'Runtime API Examples', link: '/api-examples' }
-        ]
-      }
-    ],
+    // search: {
+    //   provider: 'algolia',
+    //   options: {
+    //     appId: '',
+    //     apiKey: '',
+    //     indexName: ''
+    //   }
+    // },
+    search: {
+      provider: 'local'
+    },
+
+    sidebar: generateSidebarConfig('zh'),
 
     socialLinks: [
       { icon: 'github', link: 'https://github.com/vuejs/vitepress' }
@@ -48,7 +49,7 @@ export default defineConfig({
   },
 
   rewrites(id) {
-    const replacingRegExp = /^(locales\/zh\/|locales\/).*/
+    const replacingRegExp = /^(pages\/zh\/|pages\/).*/
     const routePath = id.replace(replacingRegExp, (path, group: string) => path.slice(group?.length ?? 0))
     console.log(routePath)
     return routePath
@@ -68,6 +69,8 @@ export default defineConfig({
           { text: 'Components', link: '/en/components', activeMatch: '/en/components'  },
           { text: 'Examples', link: '/en/examples', activeMatch: '/en/examples'  }
         ],
+        
+        sidebar: generateSidebarConfig('en'),
       }
     }
   }

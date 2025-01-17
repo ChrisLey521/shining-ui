@@ -13,7 +13,8 @@
         "module": "ESNext",
         "isolatedDeclarations": true,
         "moduleResolution": "node10",
-        "target": "ESNext"
+        "target": "ESNext",
+        "types": ["node"]
     },
     "include": [
         "packages"
