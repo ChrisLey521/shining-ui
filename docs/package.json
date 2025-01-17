@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "components": "workspace:*",
-    "theme-chalk": "workspace:*"
+    "theme-chalk": "workspace:*",
+    "utils": "workspace:*"
   }
 }
