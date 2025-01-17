@@ -15,5 +15,9 @@
   "license": "ISC",
   "devDependencies": {
     "vitepress": "1.5.0"
+  },
+  "dependencies": {
+    "components": "workspace:*",
+    "theme-chalk": "workspace:*"
   }
 }
