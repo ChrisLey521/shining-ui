@@ -27,5 +27,5 @@
         "**/test-helper",
         "packages/test-utils",
         "**/*.md"
-    ],
+    ]
 }

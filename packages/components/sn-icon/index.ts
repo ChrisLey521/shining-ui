@@ -1,4 +1,4 @@
 
 import Icon from "./src/icon.vue";
-export { Icon };
+export { Icon, Icon as SnIcon };
 

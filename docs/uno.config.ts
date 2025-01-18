@@ -25,13 +25,15 @@ export default defineConfig({
     rules: [
         ['m-1', { margin: '1px' }],
     ],
-    cli: {
-        entry: {
-            outFile: 'packages/theme-chalk/styles/uno.css',
-            patterns: [
-                'packages/components/**/*.{vue,ts,js}',
-                'packages/theme-chalk/styles/directives.css'
+    content: {
+        filesystem: [
+            'pages/**/*.{md,html}',
+            '.vitepress/**/*.{vue,js,ts}'
+        ],
+        pipeline: {
+            exclude: [
+                '.vitepress/cache/**/*'
             ]
-        },
+        }
     }
 })

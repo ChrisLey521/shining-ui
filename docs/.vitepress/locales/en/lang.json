@@ -1,6 +1,8 @@
 {
+    "Home": "Home",
     "Guide": "guide",
     "Components": "Components",
+    "Examples": "Examples",
     "Button": "Button",
     "Markdown Examples": "Markdown Examples",
     "Runtime API Examples": "Runtime API EXamples"
