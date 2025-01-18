@@ -32,11 +32,23 @@
                     'b-b-solid': !codeCollopsed
                 }
             ]">
-                <sn-button icon="magic-stick" circle />
-                <sn-button icon="copy" circle />
                 <sn-button
-                    :icon="codeCollopsed ? 'arrow-down-bold' : 'arrow-up-bold'"
+                    icon="magic-stick"
                     circle
+                    text
+                />
+                <sn-button
+                    icon="copy"
+                    circle
+                    text
+                />
+                <sn-button
+                    :icon="codeCollopsed
+                        ? 'arrow-down-bold'
+                        : 'arrow-up-bold'
+                    "
+                    circle
+                    text
                     @click="codeCollopsed = !codeCollopsed"
                 />
             </div>

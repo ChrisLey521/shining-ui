@@ -9,6 +9,7 @@ const generateSidebarConfig = (locale: Locale) => ({
     { text: t('Button', locale), link: getLink('/components/button', locale) }
   ],
   [getLink('/examples', locale)]: [
+    { text: t('Doc Examples', locale), link: getLink('/examples/doc-examples', locale) },
     { text: t('Markdown Examples', locale), link: getLink('/examples/markdown-examples', locale) },
     { text: t('Runtime API Examples', locale), link: getLink('/examples/api-examples', locale) }
   ],
