@@ -5,33 +5,31 @@ import zh from './zh/lang.json'
 // const zh = readYamlAsJson('./zh/lang.yaml')
 // const en = readYamlAsJson('./en/lang.yaml')
 
+enum Locale {
+  Zh = 'zh',
+  En = 'en'
+}
+const DEFAULT_LOCALE = Locale.Zh
+
 type LangConfig = Record<string, string>
 
-const langMap = new Map<string, LangConfig>([
-    ['zh', zh],
-    ['en', en]
+const langMap = new Map<Locale, LangConfig>([
+    [Locale.Zh, zh],
+    [Locale.En, en]
 ])
 
-const translate = (key: string, locale: string) => langMap.get(locale)?.[key] ?? key
+const translate = (key: string, locale: Locale) => langMap.get(locale)?.[key] ?? key
 
-const getLink = (path: string, locale: string) => locale === 'zh'
+const getLink = (path: string, locale: Locale) => locale === DEFAULT_LOCALE
     ? path
     : `/${locale}${path}/`
 
-const generateSidebarConfig = (locale: string) => ({
-  [getLink('/guide', locale)]: [
-    { text: translate('Guide', locale), link: getLink('/guide', locale)}
-  ],
-  [getLink('/components', locale)]: [
-    { text: translate('Components', locale), link: getLink('/components', locale) },
-    { text: translate('Button', locale), link: '/components/button' }
-  ],
-  [getLink('/examples', locale)]: [
-    { text: translate('Markdown Examples', locale), link: getLink('/markdown-examples', locale) },
-    { text: translate('Runtime API Examples', locale), link: getLink('/api-examples', locale) }
-  ],
-})
+const getActiveMatch = (match: string, locale: Locale) => {
+  const localePrefix = locale === DEFAULT_LOCALE ? '' : `/${locale}`
+  return match === '/' ? `^${localePrefix}/$` : `${localePrefix}${match}`
+}
 
 export {
-    generateSidebarConfig
+  DEFAULT_LOCALE, getActiveMatch, getLink, Locale, translate as t
 }
+

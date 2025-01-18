@@ -1,6 +1,7 @@
-# Button
+# Button 按钮
 
-## Basic Usage
+## 基础用法
+通过`variant`, `round`, `circle`, `plain`等来定义不同的按钮样式，
 
 <exhibition-card :columns="5">
 <!-- 这里需要空一格 -->
