@@ -2,7 +2,7 @@
   "name": "theme-chalk",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "styles/index.css",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
