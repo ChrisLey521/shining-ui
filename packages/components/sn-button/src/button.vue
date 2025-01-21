@@ -56,7 +56,13 @@ const {
     circle,
 } = defineProps<ButtonProps>();
 
-const sizeClass = computed(() => sizeMap.get(size).slice(Number(!circle)));
+const sizeClass = computed(() => {
+    const baseSize = sizeMap.get(size).slice(Number(!circle));
+    if (circle) {
+        return baseSize.filter((item) => !item.startsWith('px-') && !item.startsWith('py-'));
+    }
+    return baseSize;
+});
 
 const styleType = computed<'text' | 'default' | 'plain' | 'link'>(() => text
     ? 'text'
