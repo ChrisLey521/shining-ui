@@ -5,16 +5,15 @@
             b-gray-3
             rounded-lg
         ">
-        <div
-            :style="{
-                'grid-template-columns': `repeat(${columns}, minmax(0, 1fr))`
-            }"
-            class="
-                p-5
-                grid
-                gap-2
-            ">
-            <slot name="exhibition" />
+        <div :class="[
+            'grid',
+            'gap-2',
+            'grid-cols-1',
+            gridCols,
+            'p-5',
+            'overflow-x-auto'
+        ]">
+            <slot />
         </div>
         <div>
             <div :class="[
@@ -57,16 +56,33 @@
                 codeCollopsed ? 'h-0' : 'h-fit p-5',
                 'overflow-hidden'
             ]">
-                <slot />
+                <!-- <code-fence :content="code" /> -->
             </div>
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 
-const { columns = 1 } = defineProps<{columns?: number}>()
+type ColumnCount = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10
+const { columns = 1 } = defineProps<{columns?: ColumnCount}>()
+
+const gridCols = computed(() => {
+    const gridColMap = [
+        'sm:grid-cols-1',
+        'sm:grid-cols-2',
+        'sm:grid-cols-3',
+        'sm:grid-cols-4',
+        'sm:grid-cols-5',
+        'sm:grid-cols-6',
+        'sm:grid-cols-7',
+        'sm:grid-cols-8',
+        'sm:grid-cols-9',
+        'sm:grid-cols-10',
+    ]
+    return gridColMap[columns - 1]
+})
 
 const codeCollopsed = ref(true)
 </script>
