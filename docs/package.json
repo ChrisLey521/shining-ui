@@ -15,10 +15,12 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/markdown-it": "14.1.2",
     "vitepress": "1.5.0"
   },
   "dependencies": {
     "components": "workspace:*",
+    "markdown-it": "14.1.0",
     "theme-chalk": "workspace:*",
     "utils": "workspace:*"
   }

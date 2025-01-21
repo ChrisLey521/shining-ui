@@ -1,9 +1,9 @@
 import presetIcons from '@unocss/preset-icons'
 import transformerAttributifyJsx from '@unocss/transformer-attributify-jsx'
 import transformerDirectives from '@unocss/transformer-directives'
-import { defineConfig, presetAttributify, presetTypography, presetUno, } from 'unocss'
+import { defineConfig, presetAttributify, presetTypography, presetUno, UserConfig } from 'unocss'
 
-export default defineConfig({
+const unocssConfig: UserConfig = defineConfig({
     presets: [
         presetAttributify({}),
         presetUno(),
@@ -37,3 +37,5 @@ export default defineConfig({
         }
     }
 })
+
+export default unocssConfig

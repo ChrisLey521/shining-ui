@@ -2,34 +2,33 @@
 import { defineConfig, UserConfig } from 'vitepress';
 import { DEFAULT_LOCALE } from '../locales';
 import { localesConfig } from './locales';
-import { generateNavConfig } from './nav';
-import { generateSidebarConfig } from './sidebar';
-import { viteConfig } from './vite';
+import { generateNavConfig, navConfig } from './nav';
+import { generateSidebarConfig, sidebarConfig } from './sidebar';
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   title: "Shining UI",
   description: "A UI lib for Vue3.5+",
   cleanUrls: true,
-  vite: viteConfig,
+  vite: {
+    resolve: {
+      extensions: ['.vue', '.ts', '.js'],
+      alias: {
+        '@common': '/.vitepress/vitepress/common',
+        '@demos': '/.vitepress/vitepress/demos'
+      }
+    }
+  },
   vue: {},
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
-    nav: generateNavConfig(DEFAULT_LOCALE),
+    nav: generateNavConfig(navConfig, DEFAULT_LOCALE),
 
-    // search: {
-    //   provider: 'algolia',
-    //   options: {
-    //     appId: '',
-    //     apiKey: '',
-    //     indexName: ''
-    //   }
-    // },
     search: {
       provider: 'local'
     },
 
-    sidebar: generateSidebarConfig(DEFAULT_LOCALE),
+    sidebar: generateSidebarConfig(sidebarConfig, DEFAULT_LOCALE),
 
     socialLinks: [
       { icon: 'github', link: 'https://github.com/ChrisLey521/shining-ui' }

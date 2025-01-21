@@ -2,15 +2,13 @@
 import { Button } from 'components'
 import 'theme-chalk'
 import type { Theme } from 'vitepress'
-import ExhibitionCard from '../components/exhibition-card/index.vue'
-import Layout from '../components/layout/index.vue'
 import '../styles/index.css'
+import Layout from '../vitepress/layout/index.vue'
 
 export default {
   Layout,
   enhanceApp({ app }) {
     // ...
     app.component('sn-button', Button)
-    app.component('exhibition-card', ExhibitionCard)
   }
 } satisfies Theme
