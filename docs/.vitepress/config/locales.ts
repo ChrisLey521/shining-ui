@@ -1,6 +1,6 @@
 import { DEFAULT_LOCALE, Locale } from '../locales'
-import { generateNavConfig } from './nav'
-import { generateSidebarConfig } from './sidebar'
+import { generateNavConfig, navConfig } from './nav'
+import { generateSidebarConfig, sidebarConfig } from './sidebar'
 
 const localesConfig = {
   root: {
@@ -11,13 +11,14 @@ const localesConfig = {
     label: 'English',
     lang: Locale.En,
     themeConfig: {
-      nav: generateNavConfig(Locale.En),
+      nav: generateNavConfig(navConfig, Locale.En),
       
-      sidebar: generateSidebarConfig(Locale.En),
+      sidebar: generateSidebarConfig(sidebarConfig, Locale.En),
     }
   }
 }
 
 export {
-    localesConfig
+  localesConfig
 }
+

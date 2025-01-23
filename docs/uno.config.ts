@@ -1,9 +1,9 @@
 import presetIcons from '@unocss/preset-icons'
 import transformerAttributifyJsx from '@unocss/transformer-attributify-jsx'
 import transformerDirectives from '@unocss/transformer-directives'
-import { defineConfig, presetAttributify, presetTypography, presetUno, } from 'unocss'
+import { defineConfig, presetAttributify, presetTypography, presetUno, UserConfig } from 'unocss'
 
-export default defineConfig({
+const unocssConfig: UserConfig = defineConfig({
     presets: [
         presetAttributify({}),
         presetUno(),
@@ -28,7 +28,8 @@ export default defineConfig({
     content: {
         filesystem: [
             'pages/**/*.{md,html}',
-            '.vitepress/**/*.{vue,js,ts}'
+            '.vitepress/**/*.{vue,js,ts}',
+            'node_modules/components/**/*.{ts,vue,js}'
         ],
         pipeline: {
             exclude: [
@@ -37,3 +38,5 @@ export default defineConfig({
         }
     }
 })
+
+export default unocssConfig

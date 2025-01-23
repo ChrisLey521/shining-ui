@@ -4,7 +4,6 @@
         'items-center',
         'justify-center',
         'white-nowrap',
-        'border-none',
         'rounded-4px',
         'focus:outline-none',
         'cursor-pointer',
@@ -13,8 +12,10 @@
         sizeClass,
         ...variantClass,
         {
+            'w-fit': !fullWidth && !circle,
             'rounded-full': round || circle,
             'opacity-50 cursor-not-allowed': disabled,
+            'border-none': variant !== DEFAULT_BUTTON_VARIANT,
             plain,
             bg,
             link,
@@ -34,17 +35,18 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, VNode } from 'vue';
 import { DEFAULT_SIZE } from 'constants';
-import { ButtonProps } from './type.ts';
-import { darkVariantStyles, DEFAULT_BUTTON_VARIANT, lightVariantStyles, sizeMap } from './const';
+import { computed, VNode } from 'vue';
 import { Icon } from '../../sn-icon';
 import { IconName } from '../../sn-icon/src/const';
+import { darkVariantStyles, DEFAULT_BUTTON_VARIANT, lightVariantStyles, paddingMap, sizeMap } from './const';
+import { ButtonProps } from './type.ts';
 
 const {
     tag = 'button',
     size = DEFAULT_SIZE,
     variant = DEFAULT_BUTTON_VARIANT,
+    fullWidth,
     loadingIcon = IconName.Loading,
     autoInsertSpace = false,
     dark = false,
@@ -61,7 +63,9 @@ const sizeClass = computed(() => {
     if (circle) {
         return baseSize.filter((item) => !item.startsWith('px-') && !item.startsWith('py-'));
     }
-    return baseSize;
+    return circle
+        ? baseSize
+        : [...baseSize, ...paddingMap]
 });
 
 const styleType = computed<'text' | 'default' | 'plain' | 'link'>(() => text

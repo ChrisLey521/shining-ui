@@ -15,10 +15,15 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@shining-ui/build-constants": "workspace:*",
+    "@types/markdown-it": "14.1.2",
+    "fast-glob": "3.3.3",
+    "markdown-it-container": "4.0.0",
     "vitepress": "1.5.0"
   },
   "dependencies": {
     "components": "workspace:*",
+    "markdown-it": "14.1.0",
     "theme-chalk": "workspace:*",
     "utils": "workspace:*"
   }

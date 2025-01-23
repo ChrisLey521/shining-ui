@@ -15,10 +15,14 @@
         "moduleResolution": "node10",
         "target": "ESNext",
         "types": ["node"]
+    },  
+    "vueCompilerOptions": {
+        "vitePressExtensions": [".md"],
     },
     "include": [
-        "packages",
-        "docs/**/*"
+        "**/*.ts",
+        "**/*.vue",
+        "**/*.md",
     ],
     "exclude": [
         "node_modules",

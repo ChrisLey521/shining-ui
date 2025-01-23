@@ -1,3 +1,6 @@
+import { docRoot } from '@shining-ui/build-constants'
+import { readdirSync } from 'fs'
+import { relative, resolve, sep } from 'path'
 import en from './en/lang.json'
 import zh from './zh/lang.json'
 
@@ -29,7 +32,11 @@ const getActiveMatch = (match: string, locale: Locale) => {
   return match === '/' ? `^${localePrefix}/$` : `${localePrefix}${match}`
 }
 
+const languages = readdirSync(resolve(docRoot, '.vitepress/locales'))
+
+const getLang = (id: string) => relative(docRoot, id).split(sep)[0]
+
 export {
-  DEFAULT_LOCALE, getActiveMatch, getLink, Locale, translate as t
+  DEFAULT_LOCALE, getActiveMatch, getLang, getLink, languages, Locale, translate as t
 }
 

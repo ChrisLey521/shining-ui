@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { DEFAULT_SIZE, DEFAULT_THEME, DEFAULT_VARIANT, size2height, Theme, Variant } from "constants";
-import { computed, defineProps } from "vue";
+import { computed } from "vue";
 import { TagProps } from './type';
 
 const {
