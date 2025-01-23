@@ -2,7 +2,8 @@
 <template>
     <div
         grid
-        grid-cols-5
+        grid-cols-2
+        sm:grid-cols-5
         gap-2
     >
         <sn-button>默认按钮</sn-button>
