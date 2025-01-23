@@ -11,6 +11,7 @@ const viteConfig = defineConfig({
   resolve: {
     extensions: ['.vue', '.ts', '.js'],
     alias: {
+      '@': '/.vitepress',
       '@common': '/.vitepress/vitepress/common',
       '@demos': '/.vitepress/vitepress/demos'
     }

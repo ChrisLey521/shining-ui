@@ -1,5 +1,5 @@
 import type { MarkdownRenderer } from 'vitepress'
-export const ApiListContainer = (md: MarkdownRenderer) => {
+const ApiListContainer = (md: MarkdownRenderer) => {
     const fence = md.renderer.rules.fence!
 
     md.renderer.rules.fence = (...args) => {
@@ -8,7 +8,6 @@ export const ApiListContainer = (md: MarkdownRenderer) => {
         const token = tokens[idx]
         if (token.info === 'api') {
             const newTokens = md.parse(token.content, env)
-
             let result = ''
             const { rules } = md.renderer
             newTokens.forEach((newToken, idx) => {
@@ -32,3 +31,5 @@ export const ApiListContainer = (md: MarkdownRenderer) => {
         return fence.call(md, ...args)
     }
 }
+
+export default ApiListContainer
