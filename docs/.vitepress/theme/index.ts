@@ -10,6 +10,7 @@ export default {
   Layout,
   enhanceApp({ app }) {
     // ...
+    // app.component('sn-tooltip', Tooltip)
     app.component('sn-button', Button)
     app.component('exhibition-card', ExhibitionCard)
   }
