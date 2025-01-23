@@ -1,10 +1,10 @@
-// https://vitepress.dev/guide/custom-theme 
+// https://vitepress.dev/guide/custom-theme
+import ExhibitionCard from '@common/exhibition-card.vue';
 import { Button, Tooltip } from 'components'
-import 'theme-chalk'
-import type { Theme } from 'vitepress'
-import ExhibitionCard from '../components/exhibition-card/index.vue'
-import Layout from '../components/layout/index.vue'
-import '../styles/index.css'
+import 'theme-chalk';
+import type { Theme } from 'vitepress';
+import '../styles/index.css';
+import Layout from '../vitepress/layout/index.vue';
 
 export default {
   Layout,
