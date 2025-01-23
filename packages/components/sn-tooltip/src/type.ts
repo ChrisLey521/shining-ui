@@ -3,10 +3,12 @@ import { Placement, Trigger } from "./const"
 
 interface TooltipProps {
     container?: string | HTMLElement
+
     theme?: Theme
     content?: string
     rawContent?: boolean
     placement?: Placement
+    
     fallbackPlacements?: Placement[]
     visible?: boolean
     disabled?: boolean
