@@ -8,16 +8,23 @@ enum ButtonNativeType {
     Reset = 'reset',
 }
 
+const paddingMap: Map<Size, string[]> = new Map<Size, string[]>([
+    [Size.Large, ['px-20px', 'py-10px']],
+    [Size.Medium, ['px-16px', 'py-8px']],
+    [Size.Small, ['px-12px', 'py-6px']],
+    [Size.Mini, ['px-10px', 'py-4px']],
+]);
+
 const sizeMap: Map<Size, string[]> = new Map<Size, string[]>([
-    [Size.Large, ['w-40px', 'px-20px', 'py-10px', 'text-lg', 'h-40px']],
-    [Size.Medium, ['w-32px', 'px-16px', 'py-8px', 'text-base', 'h-32px']],
-    [Size.Small, ['w-24px', 'px-12px', 'py-6px', 'text-sm', 'h-24px']],
-    [Size.Mini, ['w-20px', 'px-10px', 'py-4px', 'text-xs', 'h-20px']],
+    [Size.Large, ['w-40px', 'text-lg', 'h-40px']],
+    [Size.Medium, ['w-32px', 'text-base', 'h-32px']],
+    [Size.Small, ['w-24px', 'text-sm', 'h-24px']],
+    [Size.Mini, ['w-20px', 'text-xs', 'h-20px']],
 ]);
 
 const lightVariantStyles: Record<Variant, Record<'default' | 'text' | 'plain' | 'link', string[]>> = {
     [Variant.Primary]: {
-        default: ['bg-blue-5/90', 'text-white', 'hover:bg-blue-5/80', 'active:bg-blue-5'],
+        default: ['bg-blue-5/90', 'text-white', 'border', 'border-solid', 'border-gray-2', 'hover:bg-blue-5/80', 'active:bg-blue-5'],
         text: ['text-blue-5/90', 'bg-transparent', 'hover:bg-gray-1', 'active:bg-gray-2/80'],
         plain: ['bg-blue-5/10', 'text-blue-5', 'border', 'border-solid', 'border-blue-3', 'hover:bg-blue-5/80', 'hover:text-white', 'active:bg-blue-5', 'active:text-white'],
         link: ['text-blue-5/90', 'bg-transparent', 'hover:text-blue-5/70', 'active:text-blue-6'],
@@ -96,6 +103,6 @@ const darkVariantStyles: Record<Variant, Record<'default' | 'text' | 'plain' | '
 const DEFAULT_BUTTON_VARIANT: Variant = Variant.Default
 
 export {
-    ButtonNativeType, darkVariantStyles, DEFAULT_BUTTON_VARIANT, lightVariantStyles, sizeMap
+    ButtonNativeType, darkVariantStyles, DEFAULT_BUTTON_VARIANT, lightVariantStyles, paddingMap, sizeMap
 };
 

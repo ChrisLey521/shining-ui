@@ -13,7 +13,7 @@
             'p-5',
             'overflow-x-auto'
         ]">
-            <slot />
+            <slot name="exhibitions" />
         </div>
         <div>
             <div :class="[
@@ -57,6 +57,9 @@
                 'overflow-hidden'
             ]">
                 <!-- <code-fence :content="code" /> -->
+                <div class="example-source-wrapper">
+                    <div class="example-source" v-html="decodeURIComponent(code)" />
+                </div>
             </div>
         </div>
     </div>
@@ -66,7 +69,11 @@
 import { computed, ref } from 'vue';
 
 type ColumnCount = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10
-const { columns = 1 } = defineProps<{columns?: ColumnCount}>()
+const { code = '', columns = 1 } = defineProps<{
+    code?: string
+    columns?: ColumnCount
+    path?: string
+}>()
 
 const gridCols = computed(() => {
     const gridColMap = [

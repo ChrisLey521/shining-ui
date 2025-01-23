@@ -1,5 +1,7 @@
 packages:
-  # 这是组件库所有的组件包
-  - packages/*
-  # 这是文档的包
+  # 文档
   - docs
+  # 内部使用
+  - internal/*
+  # 组件包
+  - packages/*

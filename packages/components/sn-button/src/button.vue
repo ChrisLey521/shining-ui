@@ -4,7 +4,6 @@
         'items-center',
         'justify-center',
         'white-nowrap',
-        'border-none',
         'rounded-4px',
         'focus:outline-none',
         'cursor-pointer',
@@ -13,8 +12,11 @@
         sizeClass,
         ...variantClass,
         {
+            
+            'w-fit': !fullWidth,
             'rounded-full': round || circle,
             'opacity-50 cursor-not-allowed': disabled,
+            'border-none': variant !== DEFAULT_BUTTON_VARIANT,
             plain,
             bg,
             link,
@@ -34,16 +36,17 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, VNode } from 'vue';
 import { DEFAULT_SIZE } from 'constants';
-import { ButtonProps } from './type.ts';
-import { darkVariantStyles, DEFAULT_BUTTON_VARIANT, lightVariantStyles, sizeMap } from './const';
+import { computed, VNode } from 'vue';
 import { Icon } from '../../sn-icon';
 import { IconName } from '../../sn-icon/src/const';
+import { darkVariantStyles, DEFAULT_BUTTON_VARIANT, lightVariantStyles, paddingMap, sizeMap } from './const';
+import { ButtonProps } from './type.ts';
 
 const {
     tag = 'button',
     size = DEFAULT_SIZE,
+    fullWidth,
     variant = DEFAULT_BUTTON_VARIANT,
     loadingIcon = IconName.Loading,
     autoInsertSpace = false,
@@ -56,7 +59,11 @@ const {
     circle,
 } = defineProps<ButtonProps>();
 
-const sizeClass = computed(() => sizeMap.get(size).slice(Number(!circle)));
+const sizeClass = computed(() => {
+    const baseSize = sizeMap.get(size).slice(Number(!circle));
+    const padding = paddingMap.get(size)
+    return circle ? baseSize : [...baseSize, ...padding];
+});
 
 const styleType = computed<'text' | 'default' | 'plain' | 'link'>(() => text
     ? 'text'
@@ -87,7 +94,6 @@ const shouldAddSpace = computed(() => {
         const slot = defaultSlot[0]
         if (slot?.type === Symbol.for('v-txt') && typeof slot?.children === 'string') {
             const text = slot?.children as string
-            console.log(/^\p{Unified_Ideograph}{2,}$/u.test(text.trim()), /^\p{Unified_Ideograph}{2,}$/u.test('确定保存'), text, text.trim() === '确定保存');
             return /^\p{Unified_Ideograph}{2,}$/u.test(text.trim())
         }
     }

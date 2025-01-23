@@ -1,11 +1,10 @@
 import { Size, Variant } from 'constants'
-import { ButtonNativeType } from './const'
 import { IconName } from '../../sn-icon/src/const'
-
-
+import { ButtonNativeType } from './const'
 
 interface ButtonProps {
     size?: Size
+    fullWidth?: boolean
     variant?: Variant
     plain?: boolean
     text?: boolean

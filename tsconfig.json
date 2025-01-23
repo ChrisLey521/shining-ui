@@ -10,8 +10,11 @@
         "skipLibCheck": true,
         "emitDeclarationOnly": true,
         "allowImportingTsExtensions": true,
+        "allowSyntheticDefaultImports": true,
         "module": "ESNext",
-        "isolatedDeclarations": true,
+        "isolatedModules": true,
+        "isolatedDeclarations": false,
+        "resolveJsonModule": true,
         "moduleResolution": "node10",
         "target": "ESNext",
         "types": ["node"]

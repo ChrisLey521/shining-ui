@@ -1,5 +1,11 @@
+import { docRoot } from '@shining-ui/build-utils'
+import { readdirSync } from 'fs'
+import { relative, sep } from 'path'
 import en from './en/lang.json'
 import zh from './zh/lang.json'
+
+// import En from './en/lang.yaml?url'
+// console.log('看看', En)
 
 // import { readYamlAsJson } from 'utils'
 // const zh = readYamlAsJson('./zh/lang.yaml')
@@ -29,7 +35,11 @@ const getActiveMatch = (match: string, locale: Locale) => {
   return match === '/' ? `^${localePrefix}/$` : `${localePrefix}${match}`
 }
 
+const languages = readdirSync('..')
+const getLang = (id: string) =>
+  relative(docRoot, id).split(sep)[0]
+
 export {
-  DEFAULT_LOCALE, getActiveMatch, getLink, Locale, translate as t
+  DEFAULT_LOCALE, getActiveMatch, getLang, getLink, languages, Locale, translate as t
 }
 

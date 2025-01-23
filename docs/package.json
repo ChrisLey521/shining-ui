@@ -15,10 +15,17 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@shikijs/markdown-it": "2.1.0",
+    "@shikijs/vitepress-twoslash": "2.1.0",
     "@types/markdown-it": "14.1.2",
+    "fast-glob": "3.3.3",
+    "markdown-it-container": "4.0.0",
+    "shiki": "2.1.0",
     "vitepress": "1.5.0"
   },
   "dependencies": {
+    "@shining-ui/build-utils": "workspace:*",
+    "@shining-ui/plugins": "workspace:*",
     "components": "workspace:*",
     "markdown-it": "14.1.0",
     "theme-chalk": "workspace:*",
