@@ -261,6 +261,7 @@
 .text-white{--un-text-opacity:1;color:rgb(255 255 255 / var(--un-text-opacity)) /* #fff */;}
 .hover\:text-blue-4:hover{--un-text-opacity:1;color:rgb(96 165 250 / var(--un-text-opacity)) /* #60a5fa */;}
 .hover\:text-blue-5\/70:hover{color:rgb(59 130 246 / 0.7) /* #3b82f6 */;}
+.hover\:text-blue-5\/90:hover{color:rgb(59 130 246 / 0.9) /* #3b82f6 */;}
 .hover\:text-gray-5\/50:hover{color:rgb(107 114 128 / 0.5) /* #6b7280 */;}
 .hover\:text-gray-5\/70:hover{color:rgb(107 114 128 / 0.7) /* #6b7280 */;}
 .hover\:text-green-5\/70:hover{color:rgb(34 197 94 / 0.7) /* #22c55e */;}
