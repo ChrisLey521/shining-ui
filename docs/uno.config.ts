@@ -28,7 +28,8 @@ const unocssConfig: UserConfig = defineConfig({
     content: {
         filesystem: [
             'pages/**/*.{md,html}',
-            '.vitepress/**/*.{vue,js,ts}'
+            '.vitepress/**/*.{vue,js,ts}',
+            'node_modules/components/**/*.{ts,vue,js}'
         ],
         pipeline: {
             exclude: [
