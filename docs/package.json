@@ -22,9 +22,10 @@
     "vitepress": "1.5.0"
   },
   "dependencies": {
+    "@shining-ui/directives": "workspace:*",
+    "@shining-ui/theme-chalk": "workspace:*",
     "components": "workspace:*",
     "markdown-it": "14.1.0",
-    "theme-chalk": "workspace:*",
     "utils": "workspace:*"
   }
 }
