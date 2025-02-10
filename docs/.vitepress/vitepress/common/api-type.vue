@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import { t } from '@/locales'
-import { computed } from 'vue'
-import { useLang } from '../../composables/lang'
+import { Tag } from 'components';
+import { useData } from 'vitepress';
+import { h } from 'vue';
 
 defineProps({
   type: String,
   details: String,
 })
 
-const lang = useLang()
-const detail = computed(() => t('detail', lang.value))
+const { isDark } = useData()
+
 </script>
 
 <template>
@@ -18,28 +18,23 @@ const detail = computed(() => t('detail', lang.value))
       {{ type }}
     </code>
     <ClientOnly>
-      <SnTooltip v-if="details" effect="light" trigger="click">
-        <SnButton
-          text
-          icon="warning"
-          :aria-label="detail"
-          class="p-2 text-4"
-        />
-        <template #content>
-          <slot>
-            <div class="m-1" style="max-width: 600px">
-              <code
-                style="
-                  color: var(--code-tooltip-color);
-                  background-color: var(--code-tooltip-bg-color);
-                "
-              >
-                {{ details }}
-              </code>
-            </div>
-          </slot>
-        </template>
-      </SnTooltip>
+      <sn-button
+        v-tooltip="{
+          content: h(Tag, {
+            background: 'var(--vp-code-bg)',
+            color: 'var(--vp-code-color)',
+            border: 'none',
+            size: 'small'
+          }, details),
+          theme: isDark ? 'dark' : 'light',
+          trigger: 'click',
+          contentAsComponent: true
+        }"
+        text
+        circle
+        icon="warning"
+        class="p-2 text-4"
+      />
     </ClientOnly>
   </span>
 </template>

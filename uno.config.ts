@@ -22,14 +22,12 @@ export default defineConfig({
         }),
         transformerAttributifyJsx(),
     ],
-    rules: [
-        ['m-1', { margin: '1px' }],
-    ],
     cli: {
         entry: {
             outFile: 'packages/theme-chalk/styles/uno.css',
             patterns: [
                 'packages/components/**/*.{vue,ts,js}',
+                'packages/directives/**/*.{vue,ts,js}',
                 'packages/theme-chalk/styles/directives.css'
             ]
         },

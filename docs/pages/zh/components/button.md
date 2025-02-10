@@ -14,6 +14,6 @@ button/basic
 
 ### Attrs
 
-|Name|Description |Type                                              |Default   |
-|----|------------|--------------------------------------------------|----------|
-|size|Button size.|^[enum]`'large' \| 'medium' \| 'small' \| 'mini' `|`'medium'`|
+|Name         |Description |Type                                              |Default   |
+|-------------|------------|--------------------------------------------------|----------|
+|size ^(1.0.0)|Button size.|^[enum]`'large' \| 'medium' \| 'small' \| 'mini' `|`'medium'`|

@@ -14,14 +14,20 @@ const Tagify = (md: MarkdownRenderer): void => {
 
         const token = state.push('html_inline', '', 0)
         const value = result[1].trim()
-        /**
-         * Add styles for some special tags
-         * vitepress/styles/content/tag-content.scss
-         */
-        const tagClass = ['beta', 'deprecated', 'a11y', 'required'].includes(value)
-            ? value
-            : ''
-        token.content = `<span class="vp-tag ${tagClass}">${value}</span>`
+
+        const tagVariantMap = new Map([
+            ['beta', 'warning'],
+            ['deprecated', 'danger'],
+            ['ally', 'success'],
+            ['required', 'primary']
+        ])
+        
+        token.content = `<sn-tag
+            variant="${tagVariantMap.get(value) ?? 'primary'}"
+            size="small"
+            theme="${tagVariantMap.has(value) ? 'dark' : 'plain'}"
+            round="${tagVariantMap.has(value)}"
+        >${value}</sn-tag>`
         token.level = state.level
         state.pos += result[0].length
 

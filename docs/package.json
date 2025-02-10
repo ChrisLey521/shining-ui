@@ -19,12 +19,14 @@
     "@types/markdown-it": "14.1.2",
     "fast-glob": "3.3.3",
     "markdown-it-container": "4.0.0",
+    "sass-embedded": "1.83.4",
     "vitepress": "1.5.0"
   },
   "dependencies": {
+    "@shining-ui/directives": "workspace:*",
+    "@shining-ui/theme-chalk": "workspace:*",
     "components": "workspace:*",
     "markdown-it": "14.1.0",
-    "theme-chalk": "workspace:*",
     "utils": "workspace:*"
   }
 }

@@ -6,5 +6,8 @@
     "Button": "Button",
     "Doc Examples": "Doc Examples",
     "Markdown Examples": "Markdown Examples",
-    "Runtime API Examples": "Runtime API EXamples"
+    "Runtime API Examples": "Runtime API EXamples",
+    "playground": "playground",
+    "copy": "copy",
+    "source code": "source code"
 }

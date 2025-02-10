@@ -11,7 +11,7 @@
         "emitDeclarationOnly": true,
         "allowImportingTsExtensions": true,
         "module": "ESNext",
-        "isolatedDeclarations": true,
+        "isolatedDeclarations": false,
         "moduleResolution": "node10",
         "target": "ESNext",
         "types": ["node"]

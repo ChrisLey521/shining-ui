@@ -1,9 +1,11 @@
 // https://vitepress.dev/guide/custom-theme
+import ApiType from '@common/api-type.vue';
 import ExhibitionCard from '@common/exhibition-card.vue';
-import { Button } from 'components';
-import 'theme-chalk';
+import '@shining-ui/theme-chalk';
+import { Button, Tag } from 'components';
 import type { Theme } from 'vitepress';
-import '../styles/index.css';
+import { vTooltip } from '../../../packages/directives';
+import '../styles/index.scss';
 import Layout from '../vitepress/layout/index.vue';
 
 export default {
@@ -12,6 +14,9 @@ export default {
     // ...
     // app.component('sn-tooltip', Tooltip)
     app.component('sn-button', Button)
+    app.component('sn-tag', Tag)
     app.component('exhibition-card', ExhibitionCard)
+    app.component('api-type', ApiType)
+    app.directive('tooltip', vTooltip)
   }
 } satisfies Theme
