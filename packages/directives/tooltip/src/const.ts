@@ -32,3 +32,4 @@ const DEFAULT_TOOLTIP_PROPS: TooltipProps = {
 const tooltipZIndex = 'z-1000'
 
 export { DEFAULT_TOOLTIP_PROPS, Placement, tooltipZIndex, Trigger };
+

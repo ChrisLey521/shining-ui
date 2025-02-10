@@ -1,13 +1,16 @@
-import { DirectiveBinding } from 'vue'
+import { DirectiveBinding, VNode } from 'vue'
 import { Theme } from '../../../constants'
 import { Placement, Trigger } from './const'
+
+type TooltipContent = string | number | VNode
 
 interface TooltipProps {
     visible?: boolean
     container?: string | HTMLElement
     theme?: Extract<Theme, 'light' | 'dark'>
-    content?: string
+    content?: TooltipContent
     contentAsHTML?: boolean
+    contentAsComponent?: boolean
     placement?: Placement
     allowedPlacements?: Placement[]
     disabled?: boolean
@@ -24,6 +27,15 @@ interface TooltipProps {
     showOnEllipses?: boolean
 }
 
+type TooltipEvent = 'mouseenter' | 'mouseleave' | 'focus' | 'blur' | 'click'
+
+enum TooltipAction {
+    Show,
+    Hide,
+    Toggle,
+    ClickOutside
+}
+
 type TooltipValue = TooltipProps | string | number
 
 type TooltipBinding = DirectiveBinding<TooltipValue>
@@ -32,7 +44,6 @@ const isTooltipProps = (options: TooltipValue): options is TooltipProps =>
     !['string', 'number', 'undefined'].includes(typeof options)
 
 export {
-    isTooltipProps, TooltipBinding, TooltipProps,
-    TooltipValue
+    isTooltipProps, TooltipAction, TooltipBinding, TooltipContent, TooltipEvent, TooltipProps, TooltipValue
 }
 

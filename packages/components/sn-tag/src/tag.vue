@@ -56,30 +56,28 @@ const height = computed<string>(() => size2height.get(size))
 </script>
 
 <template>
-    <div
+    <span
         :style="{ background, color, border }"
         :class="[
             {
-                'rounded-full': round,
-                rounded: !round,
+                'rounded-full': round === true,
+                rounded: round !== true,
             },
             'relative',
             'px-12px',
             'w-fit',
             'text-xs',
-            'flex',
+            'inline-flex',
             'gap-4px',
             'justify-between',
             'items-center',
             ...colors,
             height
         ]">
-        <div>
-            <slot />
-        </div>
-        <div v-if="closable" class="group text-sm" @click.stop="$emit('close')">
+        <slot />
+        <span v-if="closable" class="group text-sm" @click.stop="$emit('close')">
             <i class="i-material-symbols:close-small-outline block group-hover:hidden" />
             <i class="i-material-symbols:cancel hidden group-hover:block" />
-        </div>
-    </div>
+        </span>
+    </span>
 </template>

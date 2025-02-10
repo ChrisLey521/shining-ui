@@ -32,16 +32,19 @@
                 }
             ]">
                 <sn-button
+                    v-tooltip="{ placement: 'bottom', content: t('playground') }"
                     icon="magic-stick"
                     circle
                     text
                 />
                 <sn-button
+                    v-tooltip="{ placement: 'bottom', content: t('copy') }"
                     icon="copy"
                     circle
                     text
                 />
                 <sn-button
+                    v-tooltip="{ placement: 'bottom', content: t('source code') }"
                     :icon="codeCollopsed
                         ? 'arrow-down-bold'
                         : 'arrow-up-bold'
@@ -56,8 +59,7 @@
                 codeCollopsed ? 'h-0' : 'h-fit p-5',
                 'overflow-hidden'
             ]">
-                <!-- <code-fence :content="code" /> -->
-                <div v-html="decodeURIComponent(code)"></div>
+                <div v-html="decodeURIComponent(code)" />
             </div>
         </div>
     </div>
@@ -66,11 +68,16 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
 
+
 type ColumnCount = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10
-const { columns = 1 } = defineProps<{
+const {
+    columns = 1
+} = defineProps<{
     columns?: ColumnCount
     code: string
 }>()
+
+const t = (key: string) => key
 
 const gridCols = computed(() => {
     const gridColMap = [

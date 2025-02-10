@@ -37,6 +37,6 @@ const languages = readdirSync(resolve(docRoot, '.vitepress/locales'))
 const getLang = (id: string) => relative(docRoot, id).split(sep)[0]
 
 export {
-  DEFAULT_LOCALE, getActiveMatch, getLang, getLink, languages, Locale, translate as t
+  DEFAULT_LOCALE, getActiveMatch, getLang, getLink, languages, Locale, translate as t, zh
 }
 

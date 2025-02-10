@@ -128,3 +128,15 @@
   --docsearch-primary-color: var(--vp-c-brand-1) !important;
 }
 
+/**
+* Component: Table
+*/
+.vp-doc > div > .vp-table > table {
+  display: table;
+  width: 100%;
+
+  th {
+    color: var(--vp-c-text-1);
+    font-weight: 600;
+  }
+}

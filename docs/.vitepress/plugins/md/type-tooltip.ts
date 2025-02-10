@@ -4,7 +4,7 @@ const TypeTooltip = (md: MarkdownRenderer): void => {
     md.renderer.rules.tooltip = (tokens, idx) => {
         const token = tokens[idx]
 
-        return `<api-typing type="${token.content}" details="${token.info}" />`
+        return `<api-type type="${token.content}" details="${token.info}" />`
     }
 
     md.inline.ruler.before('emphasis', 'tooltip', (state, silent) => {

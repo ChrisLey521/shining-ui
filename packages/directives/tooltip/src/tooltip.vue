@@ -1,14 +1,21 @@
 <template>
     <div
-        :class="bg"
-        text-white
+        :class="themeStyles"
         rounded-md
-        p-1
+        b
+        b-solid
+        py-1
+        px-2
     >
-        {{ content }}
+        <component v-if="contentAsComponent" :is="content" />
+        <div v-else-if="contentAsHTML" v-html="content" />
+        <template v-else>{{ content }}</template>
         <div
-            :class="bg"
+            id="__tooltip-arrow"
+            :class="themeStyles"
             absolute
+            b
+            b-solid
             w-8px
             h-8px
             transform-rotate-45
@@ -17,9 +24,25 @@
 </template>
 
 <script setup lang=ts>
-defineProps<{
+import { computed } from 'vue';
+import { Theme } from '../../../constants';
+import { TooltipProps } from './type';
+
+const {
+    theme = Theme.Dark
+} = defineProps<{
     content: string
+    theme?: TooltipProps['theme']
+    contentAsHTML?: boolean
+    contentAsComponent?: boolean
 }>()
 
-const bg = 'bg-dark-5'
+const themeStyles = computed(() => {
+    const bgMap = new Map<TooltipProps['theme'], string[]>([
+        [Theme.Dark, ['bg-dark-5', 'text-white', 'b-gray-6']],
+        [Theme.Light, ['bg-white', 'text-blue', 'b-gray-2']]
+    ])
+
+    return bgMap.get(theme)
+})
 </script>

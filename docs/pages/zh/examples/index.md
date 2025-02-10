@@ -1,4 +1,4 @@
 # 示例
 这是实力
 
-<span v-tooltip="{ visible: true, content: 'whh', placement: 'bottom' }">娃哈哈</span>
+<span v-tooltip="'红红火火'">娃哈哈</span>
