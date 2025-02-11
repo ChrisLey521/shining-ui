@@ -31,8 +31,37 @@ const size2height: Map<Size, string> = new Map([
     [Size.Mini, 'h-20px']
 ])
 
+enum Trigger {
+    Hover = 'hover',
+    Click = 'click',
+    Focus = 'focus',
+    ContextMenu = 'contextmenu'
+}
+
+enum Placement {
+    Top = 'top',
+    TopStart = 'top-start',
+    TopEnd = 'top-end',
+    Bottom = 'bottom',
+    BottomStart = 'bottom-start',
+    BottomEnd = 'bottom-end',
+    Left = 'left',
+    LeftStart = 'left-start',
+    LeftEnd = 'left-end',
+    Right = 'right',
+    RightStart = 'right-start',
+    RightEnd = 'right-end'
+}
+
+// z-index adapted to tailwind CSS
+enum ZIndex {
+    Tooltip = 'z-999',
+    Overlay = 'z-1000',
+    Mask = 'z-1001',
+    Loading = 'z-1002'
+}
+
 export {
-    DEFAULT_SIZE, DEFAULT_THEME, DEFAULT_VARIANT, Size, size2height, Theme,
-    Variant
+    DEFAULT_SIZE, DEFAULT_THEME, DEFAULT_VARIANT, Placement, Size, size2height, Theme, Trigger, Variant, ZIndex
 };
 

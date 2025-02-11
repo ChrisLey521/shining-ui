@@ -1,13 +1,14 @@
+import { Placement, Theme, Trigger } from 'constants'
 import { DirectiveBinding, VNode } from 'vue'
-import { Theme } from '../../../constants'
-import { Placement, Trigger } from './const'
 
 type TooltipContent = string | number | VNode
+
+type PopperTheme = Extract<Theme, 'light' | 'dark'>
 
 interface TooltipProps {
     visible?: boolean
     container?: string | HTMLElement
-    theme?: Extract<Theme, 'light' | 'dark'>
+    theme?: PopperTheme
     content?: TooltipContent
     contentAsHTML?: boolean
     contentAsComponent?: boolean
@@ -33,7 +34,8 @@ enum TooltipAction {
     Show,
     Hide,
     Toggle,
-    ClickOutside
+    ClickOutside,
+    ContextMenu
 }
 
 type TooltipValue = TooltipProps | string | number

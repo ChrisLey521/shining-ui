@@ -3,7 +3,7 @@ import { Directive } from 'vue'
 const nodeList = new WeakMap<HTMLElement, (() => void)[]>()
 const flushList = new WeakMap<HTMLElement, (e: MouseEvent) => void>()
 
-const clickOutside: Directive<HTMLElement> = {
+const vClickOutside: Directive<HTMLElement> = {
     mounted(el, binding) {
         if (typeof binding.value !== 'function') return
         const handlers = nodeList.get(el) ?? []
@@ -31,5 +31,5 @@ const clickOutside: Directive<HTMLElement> = {
 }
 
 export {
-    clickOutside
+    vClickOutside
 }

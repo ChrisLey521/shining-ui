@@ -131,12 +131,16 @@
 /**
 * Component: Table
 */
-.vp-doc > div > .vp-table > table {
-  display: table;
-  width: 100%;
+.vp-doc > div > .vp-table {
+  overflow: auto;
 
-  th {
-    color: var(--vp-c-text-1);
-    font-weight: 600;
+  & > table {
+    display: table;
+    width: 100%;
+  
+    th {
+      color: var(--vp-c-text-1);
+      font-weight: 600;
+    }
   }
 }

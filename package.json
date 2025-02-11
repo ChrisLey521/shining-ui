@@ -43,6 +43,8 @@
     "@floating-ui/vue": "1.1.6",
     "@rollup/plugin-json": "6.1.0",
     "@types/node": "22.10.7",
-    "js-yaml": "4.1.0"
+    "@vue/shared": "3.5.13",
+    "js-yaml": "4.1.0",
+    "lodash-unified": "1.0.3"
   }
 }
