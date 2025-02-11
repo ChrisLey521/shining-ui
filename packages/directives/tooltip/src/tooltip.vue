@@ -1,4 +1,6 @@
 <template>
+    <Transition>
+    </Transition>
     <div
         :class="themeStyles"
         rounded-md
@@ -11,7 +13,7 @@
         <div v-else-if="contentAsHTML" v-html="content" />
         <template v-else>{{ content }}</template>
         <div
-            id="__tooltip-arrow"
+            id="__popper-arrow"
             :class="themeStyles"
             absolute
             b
@@ -24,8 +26,8 @@
 </template>
 
 <script setup lang=ts>
+import { Theme } from 'constants';
 import { computed } from 'vue';
-import { Theme } from '../../../constants';
 import { TooltipProps } from './type';
 
 const {

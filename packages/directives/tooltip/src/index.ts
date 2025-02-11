@@ -1,7 +1,7 @@
 import { arrow, autoUpdate, computePosition, flip, offset, shift } from '@floating-ui/vue';
+import { Theme, Trigger, ZIndex } from 'constants';
 import { App, createApp, Directive, DirectiveBinding } from 'vue';
-import { Theme } from '../../../constants';
-import { DEFAULT_TOOLTIP_PROPS, tooltipZIndex, Trigger } from './const';
+import { DEFAULT_TOOLTIP_PROPS } from './const';
 import Tooltip from './tooltip.vue';
 import { isTooltipProps, TooltipAction, TooltipContent, TooltipProps } from './type';
 import { hideTooltip, isEllipsis, showTooltip, toggleTooltip } from './utils';
@@ -16,7 +16,16 @@ const tooltipTriggerMap = new WeakMap<HTMLElement, Trigger>()
 const tooltipEventMap = new WeakMap<HTMLElement, Map<TooltipAction, (e: MouseEvent) => void>>()
 
 const unmountTooltip = (el: HTMLElement) => {
-    console.log(el)
+    removeEvent(el)
+    
+    const tooltip = nodeMap.get(el)
+    const tooltipApp = tooltipMap.get(tooltip)
+
+    tooltipApp?.unmount?.()
+    tooltip?.remove?.()
+
+    nodeMap.delete(el)
+    tooltipMap.delete(tooltip)
 }
 
 const createTooltip = (el: HTMLElement, tooltipWrapper: HTMLElement, bindingValue: TooltipProps) => {
@@ -24,14 +33,14 @@ const createTooltip = (el: HTMLElement, tooltipWrapper: HTMLElement, bindingValu
     if (typeof bindingValue === 'number' || typeof bindingValue === 'string') {
         content = bindingValue
     } else {
-        content = bindingValue.content ?? el.textContent
+        content = bindingValue?.content ?? el.textContent
     }
 
     const {
         contentAsHTML = false,
         contentAsComponent = false,
         theme = Theme.Dark
-    } = ['string', 'number', 'boolean'].includes(typeof bindingValue) ? {} : bindingValue as TooltipProps
+    } = ['string', 'number', 'boolean', 'undefined'].includes(typeof bindingValue) ? {} : bindingValue as TooltipProps
 
     const tooltip = createApp(Tooltip, {
         content,
@@ -70,7 +79,7 @@ const updatePosition = async (el: HTMLElement, tooltip: HTMLElement, bindingValu
     if (!tooltipWrapper) return
 
 
-    const arrowEl: HTMLElement = tooltipWrapper.querySelector('#__tooltip-arrow')
+    const arrowEl: HTMLElement = tooltipWrapper.querySelector('#__popper-arrow')
     const { x, y, middlewareData, placement: computedPlacement } = await computePosition(el, tooltip, {
         placement,
         middleware: [
@@ -135,7 +144,10 @@ const attachEvent = (
         if (el.contains(target as HTMLElement) || tooltip.contains(target as HTMLElement)) return
         hideTooltip(el, tooltip, bindingValue)
     })
-    
+    tooltipActionMap.set(TooltipAction.ContextMenu, (e: MouseEvent) => {
+        e.preventDefault()
+        toggleTooltip(el, tooltip, bindingValue)
+    })
 
     tooltipEventMap.set(el, tooltipActionMap)
 
@@ -148,15 +160,22 @@ const attachEvent = (
     }
 
     // focus 触发
-    if (trigger === 'focus') {
+    if (trigger === Trigger.Focus) {
         el.addEventListener('focus', tooltipActionMap.get(TooltipAction.Show))
         el.addEventListener('blur', tooltipActionMap.get(TooltipAction.Hide))
         return
     }
 
     // click 触发
-    if (trigger === 'click') {
+    if (trigger === Trigger.Click) {
         el.addEventListener('click', tooltipActionMap.get(TooltipAction.Toggle))
+        window.addEventListener('click', tooltipActionMap.get(TooltipAction.ClickOutside))
+        return
+    }
+
+    // contextmenu触发
+    if (trigger === Trigger.ContextMenu) {
+        el.addEventListener('contextmenu', tooltipActionMap.get(TooltipAction.ContextMenu))
         window.addEventListener('click', tooltipActionMap.get(TooltipAction.ClickOutside))
     }
 }
@@ -169,6 +188,7 @@ const removeEvent = (el: HTMLElement) => {
     const handleHideTooltip = tooltipActionMap.get(TooltipAction.Hide)
     const handleToggleTooltip = tooltipActionMap.get(TooltipAction.Toggle)
     const handleClickOutside = tooltipActionMap.get(TooltipAction.ClickOutside)
+    const handleContextMenu = tooltipActionMap.get(TooltipAction.ContextMenu)
 
     switch (trigger) {
         case Trigger.Hover:
@@ -195,6 +215,11 @@ const removeEvent = (el: HTMLElement) => {
 
             break
 
+        case Trigger.ContextMenu:
+            el.removeEventListener('contextmenu', handleContextMenu)
+            window.removeEventListener('click', handleClickOutside)
+            break
+
         default:
             return
     }
@@ -211,7 +236,7 @@ const initTooltip = (el: HTMLElement, binding: DirectiveBinding<TooltipProps>) =
         'sn-tooltip-wrapper',
         'absolute',
         'w-max',
-        tooltipZIndex
+        ZIndex.Tooltip
     )
 
     if (!binding.value?.visible) {
@@ -240,19 +265,6 @@ const mountTooltip = (el: HTMLElement, binding: DirectiveBinding<TooltipProps>) 
     if (!visible || (showOnEllipses && !ellipsis)) return unmountTooltip(el)
     
     return initTooltip(el, binding)
-}
-
-const unmoutToooltip = (el: HTMLElement) => {
-    removeEvent(el)
-    
-    const tooltip = nodeMap.get(el)
-    const tooltipApp = tooltipMap.get(tooltip)
-
-    tooltipApp?.unmount?.()
-    tooltip?.remove?.()
-
-    nodeMap.delete(el)
-    tooltipMap.delete(tooltip)
 }
 
 const vTooltip: Directive<HTMLElement, TooltipProps> = {

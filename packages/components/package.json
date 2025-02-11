@@ -10,7 +10,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@shining-ui/directives": "workspace:*",
     "@shining-ui/theme-chalk": "workspace:*",
+    "@shining-ui/utils": "workspace:*",
     "constants": "workspace:*"
   }
 }

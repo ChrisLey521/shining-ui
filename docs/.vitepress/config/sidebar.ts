@@ -16,7 +16,15 @@ const sidebarConfig: SidebarConfig = {
       text: 'Button',
       link: '/button',
       // children: []
-    }
+    },
+    {
+      text: 'Overlay',
+      link: '/overlay',
+    },
+    {
+      text: 'Tooltip',
+      link: '/tooltip',
+    },
   ],
   '/examples': [
     {
