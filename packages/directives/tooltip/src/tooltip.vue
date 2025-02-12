@@ -1,10 +1,17 @@
 <template>
-    <Transition name="fade" :duration="100">
+    <Transition
+        name="fade"
+        mode="out-in"
+        :duration="100">
         <div
             v-if="!disabled && visible"
             ref="floating"
-            :class="[...themeStyles, ZIndex.Tooltip]"
-            :style="floatingStyles"
+            :class="[...themeStyles, ZIndex.Tooltip, popperClass]"
+            :style="{
+                ...floatingStyles,
+                width,
+                ...objectifyStyle(popperStyle)
+            }"
             rounded-md
             b
             b-solid
@@ -32,18 +39,19 @@
 
 <script setup lang=ts>
 import { attachEvent, removeEvent } from '@shining-ui/utils';
+import { objectifyStyle } from '@shining-ui/utils/dom';
 import { useFloatingEvents, useFloatingVue } from 'composables/floating';
-import { Theme, ZIndex } from 'constants/common';
-import { tooltipBgMap, TooltipProps } from 'constants/popper';
+import { ZIndex } from 'constants/common';
+import { PopperTheme, tooltipBgMap, TooltipProps } from 'constants/popper';
 import { computed, onMounted, onUnmounted } from 'vue';
 
 const {
-    theme = Theme.Dark,
+    theme = PopperTheme.Dark,
     trigger,
     disabled,
     visible: controlledVisible,
     placement,
-    offset,
+    offset = 10,
     referenceElement
 } = defineProps<TooltipProps & {
     referenceElement: HTMLElement

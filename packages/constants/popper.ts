@@ -1,30 +1,42 @@
-import { VNode } from 'vue'
+import { CSSProperties, VNode } from 'vue'
 import { DEFAULT_PLACEMENT, Trigger } from '../components/node_modules/constants/common'
 import { Placement, Theme } from './common'
 
-type TooltipContent = string | number | VNode
-type PopperTheme = Extract<Theme, 'light' | 'dark'>
-
-interface TooltipProps {
-    visible?: boolean
-    container?: string | HTMLElement
+interface PopperProps {
+    trigger?: Trigger
     theme?: PopperTheme
+    placement?: Placement
+    offset?: number
+    transition?: string
+    width?: string
+    popperClass?: string
+    popperStyle?: string | CSSProperties
+    delayIn?: number
+    delayOut?: number
+    autoClose?: number
+    tabindex?: string
+    delay?: number
+    container?: string | HTMLElement
+}
+
+type TooltipContent = string | number | VNode
+
+enum PopperTheme {
+    Dark = Theme.Dark,
+    Light = Theme.Light
+}
+
+interface TooltipProps extends PopperProps {
+    visible?: boolean
     content?: TooltipContent
     contentAsHTML?: boolean
     contentAsComponent?: boolean
-    placement?: Placement
     allowedPlacements?: Placement[]
     disabled?: boolean
-    offset?: number
-    transition?: string
     showArrow?: boolean
-    autoClose?: number
     enterable?: boolean
-    trigger?: Trigger
     triggerKeys?: string[]
     persistent?: boolean
-    class?: string
-    delay?: number
     showOnEllipses?: boolean
 }
 
@@ -45,15 +57,15 @@ const POPPER_SIDE = {
     left: 'right',
 }
 
-const overlayBgMap = new Map<Theme.Dark | Theme.Light, string[]>([
-    [Theme.Dark, ['bg-dark-5', 'text-white', 'b-gray-6']],
-    [Theme.Light, ['bg-white', 'text-gray-9', 'b-gray-2']]
+const overlayBgMap = new Map<PopperTheme, string[]>([
+    [PopperTheme.Dark, ['bg-dark-5', 'text-white', 'b-gray-6']],
+    [PopperTheme.Light, ['bg-white', 'text-gray-9', 'b-gray-2']]
 ])
 
-const tooltipBgMap = new Map<TooltipProps['theme'], string[]>([
-    [Theme.Dark, ['bg-dark-5', 'text-white', 'b-gray-6']],
-    [Theme.Light, ['bg-white', 'text-blue', 'b-gray-2']]
+const tooltipBgMap = new Map<PopperTheme, string[]>([
+    [PopperTheme.Dark, ['bg-dark-5', 'text-white', 'b-gray-6']],
+    [PopperTheme.Light, ['bg-white', 'text-blue', 'b-gray-2']]
 ])
 
-export { DEFAULT_TOOLTIP_PROPS, overlayBgMap, POPPER_SIDE, tooltipBgMap, type TooltipProps }
+export { DEFAULT_TOOLTIP_PROPS, overlayBgMap, POPPER_SIDE, PopperTheme, tooltipBgMap, type PopperProps, type TooltipProps }
 

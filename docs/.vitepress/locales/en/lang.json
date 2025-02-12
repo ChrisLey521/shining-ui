@@ -3,11 +3,16 @@
     "Guide": "guide",
     "Components": "Components",
     "Examples": "Examples",
-    "Button": "Button",
     "Doc Examples": "Doc Examples",
     "Markdown Examples": "Markdown Examples",
     "Runtime API Examples": "Runtime API EXamples",
     "playground": "playground",
     "copy": "copy",
-    "source code": "source code"
+    "source code": "source code",
+    "Button": "Button",
+    "Icon": "Icon",
+    "Tag": "Tag",
+    "Tooltip": "Tooltip",
+    "Overlay": "Overlay",
+    "Dropdown": "Dropdown"
 }

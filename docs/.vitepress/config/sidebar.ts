@@ -13,6 +13,10 @@ const sidebarConfig: SidebarConfig = {
   ],
   '/components': [
     {
+      text: 'Icon',
+      link: '/icon',
+    },
+    {
       text: 'Button',
       link: '/button',
       // children: []
@@ -24,6 +28,14 @@ const sidebarConfig: SidebarConfig = {
     {
       text: 'Tooltip',
       link: '/tooltip',
+    },
+    {
+      text: 'Dropdown',
+      link: '/dropdown',
+    },
+    {
+      text: 'Tag',
+      link: '/tag',
     },
   ],
   '/examples': [

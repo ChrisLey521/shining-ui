@@ -3,7 +3,7 @@ import { Size, Theme, Variant } from 'constants/common';
 interface TagProps {
     variant?: Variant;
     closable?: boolean;
-    "disable-transitions"?: boolean;
+    disableTransitions?: boolean;
     hit?: boolean;
     color?: string;
     border?: string;
