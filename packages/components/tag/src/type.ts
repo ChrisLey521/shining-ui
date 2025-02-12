@@ -1,4 +1,4 @@
-import { Size, Theme, Variant } from 'constants';
+import { Size, Theme, Variant } from 'constants/common';
 
 interface TagProps {
     variant?: Variant;

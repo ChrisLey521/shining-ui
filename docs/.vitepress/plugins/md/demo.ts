@@ -1,7 +1,7 @@
 import { docDemoPath, docRoot } from '@shining-ui/build-constants'
 import fs from 'fs'
 import path from 'path'
-import type { MarkdownRenderer } from 'vitepress'
+import { type MarkdownRenderer } from 'vitepress'
 
 interface ContainerOpts {
     marker?: string | undefined
@@ -34,7 +34,7 @@ function createDemoContainer(md: MarkdownRenderer): ContainerOpts {
                     md.render(`\`\`\` vue\n${source}\`\`\``)
                 )}" path="${sourceFile}" description="${encodeURIComponent(md.render(description))}">
                     <template #exhibition>
-                        <sn-${sourceFile.replaceAll('/', '-')}/>
+                        <sn-${sourceFile.replaceAll('/', '-')} />
                     </template>`
             } else {
                 return '</exhibition-card>\n'

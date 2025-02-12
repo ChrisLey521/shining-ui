@@ -1,6 +1,6 @@
 import { Directive } from 'vue'
 
-const nodeList = new WeakMap<HTMLElement, (() => void)[]>()
+const nodeList = new WeakMap<HTMLElement, ((e?: MouseEvent) => void)[]>()
 const flushList = new WeakMap<HTMLElement, (e: MouseEvent) => void>()
 
 const vClickOutside: Directive<HTMLElement> = {
@@ -10,9 +10,9 @@ const vClickOutside: Directive<HTMLElement> = {
         handlers.push(binding.value)
         nodeList.set(el, handlers)
 
-        const flushHandler = ({ target }: MouseEvent) => {
-            if (el.contains(target as HTMLElement)) return
-            (nodeList.get(el) ?? []).forEach(cb => cb())
+        const flushHandler = (e: MouseEvent) => {
+            if (el.contains(e.target as HTMLElement)) return
+            (nodeList.get(el) ?? []).forEach(cb => cb(e))
         }
         flushList.set(el, flushHandler)
         window.addEventListener('click', flushHandler)

@@ -1,5 +1,5 @@
-import { Size, Variant } from 'constants'
-import { IconName } from '../../sn-icon/src/const'
+import { Size, Variant } from 'constants/common'
+import { IconName } from '../../icon/src/const'
 import { ButtonNativeType } from './const'
 
 

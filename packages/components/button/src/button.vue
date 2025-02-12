@@ -35,10 +35,10 @@
 </template>
 
 <script lang="ts" setup>
-import { DEFAULT_SIZE } from 'constants';
+import { DEFAULT_SIZE } from 'constants/common';
 import { computed, VNode } from 'vue';
-import { Icon } from '../../sn-icon';
-import { IconName } from '../../sn-icon/src/const';
+import { Icon } from '../../icon';
+import { IconName } from '../../icon/src/const';
 import { darkVariantStyles, DEFAULT_BUTTON_VARIANT, lightVariantStyles, paddingMap, sizeMap } from './const';
 import { ButtonProps } from './type.ts';
 

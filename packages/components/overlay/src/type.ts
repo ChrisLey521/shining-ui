@@ -1,6 +1,6 @@
-import { Placement, Theme, Trigger } from 'constants';
+import { Placement, Theme, Trigger } from 'constants/common';
+import { POPPER_SIDE } from 'constants/popper';
 import { CSSProperties } from 'vue';
-import { side } from './const';
 
 type PopperTheme = Extract<Theme, 'light' | 'dark'>
 
@@ -26,7 +26,7 @@ interface OverlayProps {
     persistent?: boolean
 }
 
-type PlacementSide = keyof typeof side
+type PlacementSide = keyof typeof POPPER_SIDE
 
 export {
     OverlayProps, PlacementSide

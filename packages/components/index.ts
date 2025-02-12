@@ -1,5 +1,7 @@
-export * from './sn-button/index'
-export * from './sn-icon'
-export * from './sn-overlay'
-export * from './sn-switch'
-export * from './sn-tag'
+export * from './button/index'
+export * from './icon'
+export * from './overlay'
+export * from './switch'
+export * from './tag'
+export * from './tooltip'
+

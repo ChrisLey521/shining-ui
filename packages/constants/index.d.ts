@@ -61,7 +61,7 @@ enum ZIndex {
     Loading = 'z-1002'
 }
 
-const DEFAULT_PLACEMENT = Placement.TopStart
-
-export { DEFAULT_PLACEMENT, DEFAULT_SIZE, DEFAULT_THEME, DEFAULT_VARIANT, Placement, Size, size2height, Theme, Trigger, Variant, ZIndex }
+export {
+    DEFAULT_SIZE, DEFAULT_THEME, DEFAULT_VARIANT, Placement, Size, size2height, Theme, Trigger, Variant, ZIndex
+};
 
