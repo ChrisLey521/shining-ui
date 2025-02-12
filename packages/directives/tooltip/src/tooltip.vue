@@ -1,50 +1,115 @@
 <template>
-    <Transition>
-    </Transition>
-    <div
-        :class="themeStyles"
-        rounded-md
-        b
-        b-solid
-        py-1
-        px-2
-    >
-        <component v-if="contentAsComponent" :is="content" />
-        <div v-else-if="contentAsHTML" v-html="content" />
-        <template v-else>{{ content }}</template>
+    <Transition name="fade" :duration="100">
         <div
-            id="__popper-arrow"
-            :class="themeStyles"
-            absolute
+            v-if="!disabled && visible"
+            ref="floating"
+            :class="[...themeStyles, ZIndex.Tooltip]"
+            :style="floatingStyles"
+            rounded-md
             b
             b-solid
-            w-8px
-            h-8px
-            transform-rotate-45
-        />
-    </div>
+            py-1
+            px-2
+        >
+            <component v-if="contentAsComponent" :is="content" />
+            <div v-else-if="contentAsHTML" v-html="content" />
+            <template v-else>{{ content }}</template>
+            <div
+                ref="floatingArrow"
+                id="__popper-arrow"
+                :class="[...themeStyles, ...arrowBorderClasses]"
+                :style="arrowPositionStyles"
+                absolute
+                b
+                b-solid
+                w-8px
+                h-8px
+                transform-rotate-45
+            />
+        </div>
+    </Transition>
 </template>
 
 <script setup lang=ts>
-import { Theme } from 'constants';
-import { computed } from 'vue';
-import { TooltipProps } from './type';
+import { attachEvent, removeEvent } from '@shining-ui/utils';
+import { useFloatingEvents, useFloatingVue } from 'composables/floating';
+import { Theme, ZIndex } from 'constants/common';
+import { tooltipBgMap, TooltipProps } from 'constants/popper';
+import { computed, onMounted, onUnmounted } from 'vue';
 
 const {
-    theme = Theme.Dark
-} = defineProps<{
-    content: string
-    theme?: TooltipProps['theme']
-    contentAsHTML?: boolean
-    contentAsComponent?: boolean
+    theme = Theme.Dark,
+    trigger,
+    disabled,
+    visible: controlledVisible,
+    placement,
+    offset,
+    referenceElement
+} = defineProps<TooltipProps & {
+    referenceElement: HTMLElement
 }>()
 
-const themeStyles = computed(() => {
-    const bgMap = new Map<TooltipProps['theme'], string[]>([
-        [Theme.Dark, ['bg-dark-5', 'text-white', 'b-gray-6']],
-        [Theme.Light, ['bg-white', 'text-blue', 'b-gray-2']]
-    ])
+const themeStyles = computed(() => tooltipBgMap.get(theme))
 
-    return bgMap.get(theme)
+const modelVisible = defineModel<boolean>('visible')
+
+const {
+    reference,
+    floating,
+    floatingArrow,
+    arrowPositionStyles,
+    arrowBorderClasses,
+    floatingStyles,
+} = useFloatingVue({
+    placement,
+    offset,
+    trigger,
+    modelVisible,
+    controlledVisible,
+    disabled
 })
+
+const {
+    visible,
+    showFloatingEvent,
+    hideFloatingEvent,
+    showFloating,
+    hideFloating,
+    handleReferenceClick,
+    handleClickOutside,
+} = useFloatingEvents({
+    reference,
+    floating,
+    trigger,
+    disabled,
+    modelVisible,
+    controlledVisible
+})
+
+onMounted(() => {
+    reference.value = referenceElement
+
+    if (!referenceElement) return
+    attachEvent(referenceElement, showFloatingEvent.value, showFloating)
+    attachEvent(referenceElement, hideFloatingEvent.value, hideFloating)
+    attachEvent(referenceElement, 'click', handleReferenceClick)
+
+    attachEvent(window, 'click', handleClickOutside)
+})
+
+const destroy = () => {
+    if (!referenceElement) return
+    removeEvent(referenceElement, showFloatingEvent.value, showFloating)
+    removeEvent(referenceElement, hideFloatingEvent.value, hideFloating)
+    removeEvent(referenceElement, 'click', handleReferenceClick)
+    
+    removeEvent(window, 'click', handleClickOutside)
+}
+
+onUnmounted(destroy)
+
+defineExpose({
+    destroy
+})
+
 </script>

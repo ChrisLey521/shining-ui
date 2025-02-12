@@ -1,4 +1,5 @@
-import { TooltipProps } from './type'
+import { DEFAULT_TOOLTIP_PROPS, TooltipProps } from 'constants/popper'
+import { isObject } from 'lodash-unified'
 
 // 文本等是否溢出, 用于只在溢出时显示tooltip
 const isEllipsis = (el: HTMLElement) => {
@@ -15,36 +16,22 @@ const isEllipsis = (el: HTMLElement) => {
     return rangeWidth + padding > el.offsetWidth
 }
 
-const tooltip = {
-  el: null as HTMLElement | null,
-  setTooltip: (el: HTMLElement): void => {
-    tooltip.el = el
-  },
-  getTooltip: () => tooltip.el,
-  clearTooltip: (): void => tooltip.el = null
-}
+const normalizeProps = (el: HTMLElement, options?: TooltipProps | string | number): TooltipProps & {
+  referenceElement?: HTMLElement
+} => {
+  const content = typeof options === 'string' || typeof options === 'number'
+    ? options
+    : (options?.content ?? el.textContent)
 
-const showTooltip = (el: HTMLElement, tooltip: HTMLElement, { showOnEllipses, visible }: TooltipProps) => {
-  if (!tooltip) return
-  if ((showOnEllipses && !isEllipsis(el)) || typeof visible !== 'undefined') return
-  if (!tooltip.classList.contains('hidden')) return
-  tooltip.classList.remove('hidden')
-}
-
-const hideTooltip = (el: HTMLElement, tooltip: HTMLElement, { showOnEllipses, visible }: TooltipProps) => {
-  if (!tooltip) return
-  if ((showOnEllipses && !isEllipsis(el)) || typeof visible !== 'undefined') return
-  if (tooltip.classList.contains('hidden')) return
-  tooltip.classList.add('hidden')
-}
-
-const toggleTooltip = (el: HTMLElement, tooltip: HTMLElement, { showOnEllipses, visible }: TooltipProps) => {
-  if (!tooltip) return
-  if ((showOnEllipses && !isEllipsis(el)) || typeof visible !== 'undefined') return
-  tooltip.classList.toggle('hidden')
+  return {
+    ...DEFAULT_TOOLTIP_PROPS,
+    ...(isObject(options) ? options : {}),
+    content,
+    referenceElement: el,
+  }
 }
 
 export {
-  hideTooltip, isEllipsis, showTooltip, toggleTooltip, tooltip
+  isEllipsis, normalizeProps
 }
 

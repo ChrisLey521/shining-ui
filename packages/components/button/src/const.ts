@@ -1,6 +1,6 @@
 // const DEFAULT_NATIVETYPE_TYPE: ButtonNativeType = ButtonNativeType.Button;
 
-import { Size, Variant } from "constants";
+import { Size, Variant } from "constants/common";
 
 enum ButtonNativeType {
     Button = 'button',

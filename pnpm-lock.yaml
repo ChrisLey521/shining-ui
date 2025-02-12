@@ -147,16 +147,29 @@ importers:
       '@shining-ui/utils':
         specifier: workspace:*
         version: link:../utils
+      composables:
+        specifier: workspace:*
+        version: link:../composables
       constants:
         specifier: workspace:*
         version: link:../constants
 
-  packages/composables: {}
+  packages/composables:
+    dependencies:
+      constants:
+        specifier: workspace:*
+        version: link:../constants
 
   packages/constants: {}
 
   packages/directives:
     dependencies:
+      '@shining-ui/utils':
+        specifier: workspace:*
+        version: link:../utils
+      composables:
+        specifier: workspace:*
+        version: link:../composables
       constants:
         specifier: workspace:*
         version: link:../constants

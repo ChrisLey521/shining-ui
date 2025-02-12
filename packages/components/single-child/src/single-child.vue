@@ -18,7 +18,6 @@ const slots = defineSlots<{ default(): VNode[] }>();
 
 const defaultSlot = slots.default();
 const child = computed(() => findFirstLegitChild(defaultSlot));
-console.log("child => ", child.value);
 
 onMounted(() => {
   assert(defaultSlot?.length === 1, `${name} requires exact only one valid child.`);
