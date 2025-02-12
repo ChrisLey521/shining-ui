@@ -1,19 +1,15 @@
 import { POPPER_SIDE, PopperProps } from 'constants/popper';
 
-interface OverlayProps extends PopperProps {
+interface DropdownProps extends PopperProps {
     title?: string
     content?: string
-    disabled?: boolean
-    visible?: boolean
     showArrow?: boolean
-    delayIn?: number
-    delayOut?: number
-    enterable?: boolean
+    disabled?: boolean
     persistent?: boolean
 }
 
 type PlacementSide = keyof typeof POPPER_SIDE
 
 export {
-    OverlayProps, PlacementSide
+    DropdownProps, PlacementSide
 };

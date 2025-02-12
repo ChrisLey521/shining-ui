@@ -3,11 +3,16 @@
     "Guide": "指南",
     "Components": "组件",
     "Examples": "示例",
-    "Button": "按钮",
     "Doc Examples": "文档编写示例",
     "Markdown Examples": "马克党实力",
     "Runtime API Examples": "跑起来, API!",
     "playground": "在线演练",
     "copy": "复制代码",
-    "source code": "查看源码"
+    "Button": "按钮",
+    "Icon": "图标",
+    "Tag": "标签",
+    "source code": "查看源码",
+    "Tooltip": "文字提示",
+    "Overlay": "浮窗",
+    "Dropdown": "下拉菜单"
 }

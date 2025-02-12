@@ -1,13 +1,13 @@
 <template>
     <SingleChild
-        v-if="$slots.reference"
+        v-if="$slots.default"
         v-click-outside="handleClickOutside"
         ref="reference"
         @[showFloatingEvent]="showFloating"
         @[hideFloatingEvent]="hideFloating"
         @click="handleReferenceClick"
     >
-        <slot name="reference" />
+        <slot />
     </SingleChild>
     <Teleport defer :to="container">
         <Transition
@@ -18,11 +18,10 @@
             <div
                 ref="floating"
                 v-if="!disabled && visible"
-                :class="[...themeStyles, popperClass]"
+                :class="themeStyles"
                 :style="{
                     ...floatingStyles,
-                    width,
-                    ...objectifyStyle(popperStyle)
+                    width
                 }"
                 rounded-md
                 b
@@ -30,7 +29,7 @@
                 p-4
             >
                 <h3 v-if="title" mb-2 text-gray-9 text-base font-550>{{ title }}</h3>
-                <slot>
+                <slot name="dropdown">
                     {{ content }}
                 </slot>
                 <div
@@ -53,28 +52,24 @@
 
 <script setup lang=ts>
 import { vClickOutside } from '@shining-ui/directives';
-import { objectifyStyle } from '@shining-ui/utils/dom';
 import { useFloatingEvents, useFloatingVue } from 'composables/floating';
 import { Placement, Trigger } from 'constants/common';
-import { PopperTheme, tooltipBgMap } from 'constants/popper';
+import { overlayBgMap, PopperTheme } from 'constants/popper';
 import { computed } from 'vue';
 import SingleChild from '../../single-child/src/single-child.vue';
-import { OverlayProps } from './type';
+import { DropdownProps } from './type';
 
 const {
     theme = PopperTheme.Light,
-    placement = Placement.TopStart,
+    placement = Placement.Bottom,
     offset = 10,
-    visible: controlledVisible = false,
     trigger = Trigger.Hover,
     container = 'body',
     showArrow = true,
-    disabled,
-} = defineProps<OverlayProps>()
+    disabled
+} = defineProps<DropdownProps>()
 
-const themeStyles = computed(() => tooltipBgMap.get(theme))
-
-const modelVisible = defineModel<boolean>('visible')
+const themeStyles = computed(() => overlayBgMap.get(theme))
 
 const {
     reference,
@@ -87,8 +82,6 @@ const {
     placement,
     offset,
     trigger,
-    modelVisible,
-    controlledVisible,
     disabled
 })
 
@@ -105,8 +98,6 @@ const {
     floating,
     trigger,
     disabled,
-    modelVisible,
-    controlledVisible
 })
 
 </script>

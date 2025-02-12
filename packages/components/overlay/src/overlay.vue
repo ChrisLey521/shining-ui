@@ -10,14 +10,18 @@
         <slot name="reference" />
     </SingleChild>
     <Teleport defer :to="container">
-        <Transition type="animation" name="fade">
+        <Transition
+            type="animation"
+            name="fade"
+            :duration="100">
             <div
                 ref="floating"
                 v-if="!disabled && visible"
                 :class="themeStyles"
                 :style="{
                     ...floatingStyles,
-                    width
+                    width,
+                    ...objectifyStyle(popperStyle)
                 }"
                 rounded-md
                 b
@@ -48,15 +52,16 @@
 
 <script setup lang=ts>
 import { vClickOutside } from '@shining-ui/directives';
+import { objectifyStyle } from '@shining-ui/utils/dom';
 import { useFloatingEvents, useFloatingVue } from 'composables/floating';
-import { Placement, Theme, Trigger } from 'constants/common';
-import { overlayBgMap } from 'constants/popper';
+import { Placement, Trigger } from 'constants/common';
+import { overlayBgMap, PopperTheme } from 'constants/popper';
 import { computed } from 'vue';
 import SingleChild from '../../single-child/src/single-child.vue';
 import { OverlayProps } from './type';
 
 const {
-    theme = Theme.Light,
+    theme = PopperTheme.Light,
     placement = Placement.TopStart,
     offset,
     visible: controlledVisible = false,

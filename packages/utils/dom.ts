@@ -1,3 +1,5 @@
+import { isObject, isString, trim } from 'lodash-unified'
+import { CSSProperties } from 'vue'
 import { assert } from './assert'
 
 const attachEvent = (
@@ -18,8 +20,21 @@ const removeEvent = (
     dom?.removeEventListener?.(eventName, handler)
 }
 
+const objectifyStyle = (style?: string | CSSProperties) => {
+    if (isString(style)) {
+        const isInvalidStyleString = style.includes('{')
+        if (isInvalidStyleString) {
+            assert(!isInvalidStyleString, `Invalid style ${style}`)
+            return {}
+        }
+        const styles = style.split(/(;|,)/).map(item => item.split(':').map(str => trim(str, ' ')))
+        return Object.fromEntries(styles)
+    }
+    if (isObject(style) && !!style) return style
+    return {}
+}
+
 export {
-    attachEvent,
-    removeEvent
+    attachEvent, objectifyStyle, removeEvent
 }
 
