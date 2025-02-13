@@ -1,8 +1,7 @@
 import { CSSProperties, VNode } from 'vue'
-import { DEFAULT_PLACEMENT, Trigger } from '../components/node_modules/constants/common'
-import { Placement, Theme } from './common'
+import { DEFAULT_PLACEMENT, Placement, Theme, Trigger } from './common'
 
-interface PopperProps {
+interface FloatingProps {
     trigger?: Trigger
     theme?: PopperTheme
     placement?: Placement
@@ -26,10 +25,10 @@ enum PopperTheme {
     Light = Theme.Light
 }
 
-interface TooltipProps extends PopperProps {
+interface TooltipProps extends FloatingProps {
     visible?: boolean
     content?: TooltipContent
-    contentAsHTML?: boolean
+    contentAsHtml?: boolean
     contentAsComponent?: boolean
     allowedPlacements?: Placement[]
     disabled?: boolean
@@ -38,6 +37,8 @@ interface TooltipProps extends PopperProps {
     triggerKeys?: string[]
     persistent?: boolean
     showOnEllipses?: boolean
+    floatingClass?: string
+    floatingStyles?: string | CSSProperties
 }
 
 const DEFAULT_TOOLTIP_PROPS: TooltipProps = {
@@ -67,5 +68,5 @@ const tooltipBgMap = new Map<PopperTheme, string[]>([
     [PopperTheme.Light, ['bg-white', 'text-blue', 'b-gray-2']]
 ])
 
-export { DEFAULT_TOOLTIP_PROPS, overlayBgMap, POPPER_SIDE, PopperTheme, tooltipBgMap, type PopperProps, type TooltipProps }
+export { DEFAULT_TOOLTIP_PROPS, overlayBgMap, POPPER_SIDE, PopperTheme, tooltipBgMap, type FloatingProps, type TooltipProps }
 

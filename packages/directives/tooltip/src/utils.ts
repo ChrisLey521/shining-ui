@@ -1,4 +1,4 @@
-import { DEFAULT_TOOLTIP_PROPS, TooltipProps } from 'constants/popper'
+import { DEFAULT_TOOLTIP_PROPS, TooltipProps } from 'constants/floating'
 import { isObject } from 'lodash-unified'
 
 // 文本等是否溢出, 用于只在溢出时显示tooltip

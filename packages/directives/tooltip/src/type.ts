@@ -1,4 +1,4 @@
-import { TooltipProps } from 'constants/popper'
+import { TooltipProps } from 'constants/floating'
 import { DirectiveBinding } from 'vue'
 
 

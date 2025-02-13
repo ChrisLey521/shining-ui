@@ -15,7 +15,8 @@ const vClickOutside: Directive<HTMLElement> = {
             (nodeList.get(el) ?? []).forEach(cb => cb(e))
         }
         flushList.set(el, flushHandler)
-        window.addEventListener('click', flushHandler)
+        // 捕获事件，使得回调函数尽早触发
+        window.addEventListener('click', flushHandler, true)
     },
     updated(el, { value, oldValue }) {
         if (value === oldValue) return

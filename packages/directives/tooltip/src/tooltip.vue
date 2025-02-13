@@ -1,57 +1,47 @@
 <template>
     <Transition
-        name="fade"
         mode="out-in"
-        :duration="100">
-        <div
-            v-if="!disabled && visible"
+        :name="transition"
+        :duration="delay">
+        <Floating
             ref="floating"
-            :class="[...themeStyles, ZIndex.Tooltip, popperClass]"
-            :style="{
-                ...floatingStyles,
-                width,
-                ...objectifyStyle(popperStyle)
-            }"
-            rounded-md
-            b
-            b-solid
-            py-1
-            px-2
+            :visible
+            :disabled
+            :container
+            :content
+            :content-as-html
+            :placement
+            :offset
+            :trigger
+            :enterable
+            :width
+            :show-arrow
+            :themeStyles
+            :floating-class
+            :floating-styles
+            :reference-element
         >
-            <component v-if="contentAsComponent" :is="content" />
-            <div v-else-if="contentAsHTML" v-html="content" />
-            <template v-else>{{ content }}</template>
-            <div
-                ref="floatingArrow"
-                id="__popper-arrow"
-                :class="[...themeStyles, ...arrowBorderClasses]"
-                :style="arrowPositionStyles"
-                absolute
-                b
-                b-solid
-                w-8px
-                h-8px
-                transform-rotate-45
-            />
-        </div>
+            <component v-if="contentAsComponent" :is="content"></component>
+        </Floating>
     </Transition>
 </template>
 
 <script setup lang=ts>
-import { attachEvent, removeEvent } from '@shining-ui/utils';
-import { objectifyStyle } from '@shining-ui/utils/dom';
-import { useFloatingEvents, useFloatingVue } from 'composables/floating';
-import { ZIndex } from 'constants/common';
-import { PopperTheme, tooltipBgMap, TooltipProps } from 'constants/popper';
-import { computed, onMounted, onUnmounted } from 'vue';
+import { attachEvent, removeEvent } from '@shining-ui/utils/dom';
+import { useFloatingActions } from 'composables/floating';
+import { Placement, Trigger } from 'constants/common';
+import { PopperTheme, tooltipBgMap, TooltipProps } from 'constants/floating';
+import { computed, onMounted, onUnmounted, useTemplateRef } from 'vue';
+import { Floating } from '../../../components/floating';
 
 const {
+    visible,
     theme = PopperTheme.Dark,
-    trigger,
-    disabled,
-    visible: controlledVisible,
-    placement,
+    trigger = Trigger.Hover,
+    placement = Placement.TopStart,
     offset = 10,
+    showArrow = true,
+    enterable = true,
     referenceElement
 } = defineProps<TooltipProps & {
     referenceElement: HTMLElement
@@ -59,65 +49,44 @@ const {
 
 const themeStyles = computed(() => tooltipBgMap.get(theme))
 
-const modelVisible = defineModel<boolean>('visible')
+const floating = useTemplateRef('floating')
 
 const {
-    reference,
-    floating,
-    floatingArrow,
-    arrowPositionStyles,
-    arrowBorderClasses,
-    floatingStyles,
-} = useFloatingVue({
-    placement,
-    offset,
-    trigger,
-    modelVisible,
-    controlledVisible,
-    disabled
-})
-
-const {
-    visible,
     showFloatingEvent,
-    hideFloatingEvent,
-    showFloating,
-    hideFloating,
-    handleReferenceClick,
-    handleClickOutside,
-} = useFloatingEvents({
-    reference,
-    floating,
-    trigger,
-    disabled,
-    modelVisible,
-    controlledVisible
-})
+    hideFloatingEvent
+} = useFloatingActions(trigger)
 
-onMounted(() => {
-    reference.value = referenceElement
+const actions = computed(() => new Map([
+    [showFloatingEvent.value, floating.value.open],
+    [hideFloatingEvent.value, floating.value.close],
+    ['click', floating.value.toggle]
+]))
 
+const handleClickOutside = ({ target }: MouseEvent) => {
+    if (referenceElement.contains(target as HTMLElement)) return
+    if (floating.value?.contentElement?.contains?.(target as HTMLElement)) return
+    floating.value.close()
+}
+
+const attachEvents = () => {
     if (!referenceElement) return
-    attachEvent(referenceElement, showFloatingEvent.value, showFloating)
-    attachEvent(referenceElement, hideFloatingEvent.value, hideFloating)
-    attachEvent(referenceElement, 'click', handleReferenceClick)
+    [...actions.value.entries()].forEach(([eventName, handler]) => attachEvent(referenceElement, eventName, handler))
 
     attachEvent(window, 'click', handleClickOutside)
-})
+}
 
-const destroy = () => {
+const removeEvents = () => {
     if (!referenceElement) return
-    removeEvent(referenceElement, showFloatingEvent.value, showFloating)
-    removeEvent(referenceElement, hideFloatingEvent.value, hideFloating)
-    removeEvent(referenceElement, 'click', handleReferenceClick)
-    
+    [...actions.value.entries()].forEach(([eventName, handler]) => removeEvent(referenceElement, eventName, handler))
+
     removeEvent(window, 'click', handleClickOutside)
 }
 
-onUnmounted(destroy)
-
-defineExpose({
-    destroy
+onMounted(() => {
+    attachEvents()
 })
 
+onUnmounted(() => {
+    removeEvents()
+})
 </script>

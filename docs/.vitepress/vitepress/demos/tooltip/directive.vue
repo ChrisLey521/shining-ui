@@ -11,9 +11,9 @@
         <sn-button v-tooltip="{ placement: 'bottom-start' }" variant="primary">BottomStart</sn-button>
         <sn-button v-tooltip="{ placement: 'bottom' }" variant="primary">Bottom</sn-button>
         <sn-button v-tooltip="{ placement: 'bottom-end' }" variant="primary">BottomEnd</sn-button>
-        <sn-button v-tooltip="{ placement: 'left-start' }" variant="success">TopStart</sn-button>
-        <sn-button v-tooltip="{ placement: 'left' }" variant="success">Top</sn-button>
-        <sn-button v-tooltip="{ placement: 'left-end' }" variant="success">TopEnd</sn-button>
+        <sn-button v-tooltip="{ placement: 'left-start' }" variant="success">LeftStart</sn-button>
+        <sn-button v-tooltip="{ placement: 'left' }" variant="success">Left</sn-button>
+        <sn-button v-tooltip="{ placement: 'left-end' }" variant="success">LeftEnd</sn-button>
         <sn-button v-tooltip="{ placement: 'right-start' }" variant="warning">RightStart</sn-button>
         <sn-button v-tooltip="{ placement: 'right' }" variant="warning">Right</sn-button>
         <sn-button v-tooltip="{ placement: 'right-end' }" variant="warning">RightEnd</sn-button>

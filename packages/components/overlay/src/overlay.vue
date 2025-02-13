@@ -1,70 +1,45 @@
 <template>
-    <SingleChild
-        v-if="$slots.reference"
-        v-click-outside="handleClickOutside"
-        ref="reference"
-        @[showFloatingEvent]="showFloating"
-        @[hideFloatingEvent]="hideFloating"
-        @click="handleReferenceClick"
+    <Floating
+        v-model:visible="modelVisible"
+        :visible
+        :disabled
+        :container
+        :content
+        :content-as-html
+        :placement
+        :offset
+        :trigger
+        enterable
+        :width
+        :show-arrow
+        :delay
+        :transition
+        :themeStyles
+        :floating-class
+        :floating-styles
     >
-        <slot name="reference" />
-    </SingleChild>
-    <Teleport defer :to="container">
-        <Transition
-            type="animation"
-            name="fade"
-            :duration="100">
-            <div
-                ref="floating"
-                v-if="!disabled && visible"
-                :class="themeStyles"
-                :style="{
-                    ...floatingStyles,
-                    width,
-                    ...objectifyStyle(popperStyle)
-                }"
-                rounded-md
-                b
-                b-solid
-                p-4
-            >
-                <h3 v-if="title" mb-2 text-gray-9 text-base font-550>{{ title }}</h3>
-                <slot>
-                    {{ content }}
-                </slot>
-                <div
-                    v-if="showArrow"
-                    ref="floatingArrow"
-                    id="__popper-arrow"
-                    :class="[...themeStyles, ...arrowBorderClasses]"
-                    :style="arrowPositionStyles"
-                    absolute
-                    b
-                    b-solid
-                    w-8px
-                    h-8px
-                    transform-rotate-45
-                />
-            </div>
-        </Transition>
-    </Teleport>
+        <template #reference>
+            <slot name="reference" />
+        </template>
+        <h3 v-if="title" mb-2 text-gray-9 text-base font-550>{{ title }}</h3>
+        <slot>
+            {{ content }}
+        </slot>
+    </Floating>
 </template>
 
 <script setup lang=ts>
-import { vClickOutside } from '@shining-ui/directives';
-import { objectifyStyle } from '@shining-ui/utils/dom';
-import { useFloatingEvents, useFloatingVue } from 'composables/floating';
 import { Placement, Trigger } from 'constants/common';
-import { overlayBgMap, PopperTheme } from 'constants/popper';
+import { overlayBgMap, PopperTheme } from 'constants/floating';
 import { computed } from 'vue';
-import SingleChild from '../../single-child/src/single-child.vue';
+import { Floating } from '../../floating';
 import { OverlayProps } from './type';
 
 const {
     theme = PopperTheme.Light,
     placement = Placement.TopStart,
     offset,
-    visible: controlledVisible = false,
+    visible,
     trigger = Trigger.Hover,
     container = 'body',
     showArrow = true,
@@ -74,38 +49,4 @@ const {
 const themeStyles = computed(() => overlayBgMap.get(theme))
 
 const modelVisible = defineModel<boolean>('visible')
-
-const {
-    reference,
-    floating,
-    floatingArrow,
-    arrowPositionStyles,
-    arrowBorderClasses,
-    floatingStyles,
-} = useFloatingVue({
-    placement,
-    offset,
-    trigger,
-    modelVisible,
-    controlledVisible,
-    disabled
-})
-
-const {
-    visible,
-    showFloatingEvent,
-    hideFloatingEvent,
-    showFloating,
-    hideFloating,
-    handleClickOutside,
-    handleReferenceClick,
-} = useFloatingEvents({
-    reference,
-    floating,
-    trigger,
-    disabled,
-    modelVisible,
-    controlledVisible
-})
-
 </script>
