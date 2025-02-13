@@ -1,4 +1,4 @@
-import { TooltipProps } from 'constants/popper';
+import { TooltipProps } from 'constants/floating';
 import { Directive, DirectiveBinding, h, render, VNode } from 'vue';
 import Tooltip from './tooltip.vue';
 import { normalizeProps } from './utils';
@@ -7,15 +7,19 @@ import { normalizeProps } from './utils';
 const nodeMap = new WeakMap<HTMLElement, VNode>()
 
 const unmountTooltip = (el: HTMLElement) => {
-    const tooltip = nodeMap.get(el)
-    tooltip?.component?.exposed?.destroy?.()
+    // const tooltip = nodeMap.get(el)
+    // tooltip?.component?.exposed?.destroy?.()
     nodeMap.delete(el)
 }
 
 const initTooltip = (el: HTMLElement, { value }: DirectiveBinding<TooltipProps>) => {
     const props = normalizeProps(el, value)
     
-    const tooltip = h(Tooltip, props)
+    const tooltip = h(Tooltip, {
+        ...props,
+        container: void 0,
+        referenceElement: el
+    })
 
     const div = document.createElement('div')
     render(tooltip, div)

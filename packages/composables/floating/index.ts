@@ -1,18 +1,34 @@
 import { arrow, autoUpdate, flip, offset, shift, useFloating } from '@floating-ui/vue';
 import { Trigger } from 'constants/common';
-import { POPPER_SIDE } from 'constants/popper';
-import { computed, ref } from 'vue';
+import { POPPER_SIDE } from 'constants/floating';
+import { isElement } from 'lodash-unified';
+import { computed, isRef, Ref, ref } from 'vue';
 import { FloatingEventsOptions, FloatingVueOptions, PlacementSide } from './type';
+
+const normalizeRef = (reference?: Ref<unknown> | HTMLElement) => {
+    if (isRef(reference)) return reference
+    if (isElement) return ref(reference)
+    return ref(null)
+}
 
 const useFloatingVue = ({
     placement,
+    showArrow,
     offset: popperOffset = 10,
+    reference,
+    floating,
+    floatingArrow
 }: FloatingVueOptions) => {
-    const reference = ref(null);
-    const floating = ref(null);
-    const floatingArrow = ref(null)
+    reference = normalizeRef(reference)
+    floating = normalizeRef(floating)
+    floatingArrow = normalizeRef(floatingArrow)
 
-    const middleware = [offset(popperOffset), flip(), shift(), arrow({ element: floatingArrow })]
+    const middleware = computed(() => [
+        offset(popperOffset),
+        flip(),
+        shift(),
+        ...(showArrow ? [arrow({ element: floatingArrow })] : [])
+    ])
 
     const { floatingStyles, middlewareData, placement: computedPlacement } = useFloating(reference, floating, {
         placement,
@@ -62,16 +78,58 @@ const useFloatingVue = ({
 }
 
 const useFloatingEvents = ({
-    floating,
-    reference,
     trigger = Trigger.Hover,
     disabled,
-    modelVisible,
-    controlledVisible
+    hasModelVisible,
+    controlled,
+    emits
 }: FloatingEventsOptions) => {
     
-    const visible = ref(modelVisible?.value ?? controlledVisible)
+    // const visible = ref(modelVisible?.value ?? controlledVisible)
 
+    const { showFloatingEvent, hideFloatingEvent } = useFloatingActions(trigger)
+
+    const toggleFloating = (action: Parameters<typeof emits>[0]) => {
+        if (disabled) return
+        // 优先级策略: v-model:visible > controlledVisible (受控) > visible
+
+        // 没有 v-model:visible
+        if (!hasModelVisible) {
+            // 传入了 props.visible , 则由 props.visible 决定，组件不能更改可见性
+            if (controlled) return
+            // 没有传入 props.visible 则由组件自己决定
+            // visible.value = shouldShowFloating
+            emits(action)
+            return
+        }
+        emits(action)
+    }
+
+    const showFloating = (e: MouseEvent) => {
+        e.preventDefault()
+        toggleFloating('open')
+    }
+
+    const hideFloating = () => {
+        toggleFloating('close')
+    }
+
+    const handleReferenceClick = () => {
+        if (trigger !== Trigger.Click) return
+        toggleFloating('toggle')
+    }
+
+    return {
+        /** 用于 @[event]="showFloating" 动态事件绑定 */
+        showFloatingEvent,
+        hideFloatingEvent,
+        showFloating,
+        hideFloating,
+        handleReferenceClick,
+    }
+}
+
+const useFloatingActions = (trigger: Trigger) => {
     const showFloatingEvent = computed(() => {
         const showFloatingEventMap = new Map<Trigger, string>([
             [Trigger.Hover, 'mouseenter'],
@@ -91,59 +149,11 @@ const useFloatingEvents = ({
         return showFloatingEventMap.get(trigger) ?? void 0
     })
 
-    const toggleFloating = (shouldShowFloating: boolean) => {
-        if (disabled) return
-        // 优先级策略: v-model:visible > controlledVisible (受控) > visible
-
-        // 没有 v-model:visible
-        if (typeof modelVisible?.value === 'undefined') {
-            // 传入了 props.visible , 则由 props.visible 决定，组件不能更改可见性
-            if (typeof controlledVisible !== 'undefined') return
-            // 没有传入 props.visible 则由组件自己决定
-            visible.value = shouldShowFloating
-            return
-        }
-        // 有 v-model:visible, 组件可更改可见性, 且v-model:visible也同样会更新值
-        visible.value = shouldShowFloating
-        // v-model值变更时, 会自动 emits update:visible ?
-        modelVisible.value = shouldShowFloating
-    }
-
-    const showFloating = (e: MouseEvent) => {
-        e.preventDefault()
-        toggleFloating(true)
-    }
-
-    const hideFloating = () => {
-        toggleFloating(false)
-    }
-
-    const handleClickOutside = (e: MouseEvent) => {
-        if (!e?.target) return
-        if (floating?.value?.contains?.(e.target as HTMLElement) || reference?.value?.contains?.(e.target as HTMLElement)) return
-        if (trigger !== Trigger.Click && trigger !== Trigger.ContextMenu) return
-        toggleFloating(false)
-    }
-
-    const handleReferenceClick = () => {
-        if (trigger !== Trigger.Click) return
-        const shouldShowFloating = !visible.value
-        toggleFloating(shouldShowFloating)
-    }
-
     return {
-        /** popper实际的可见性 */
-        visible,
-        /** 用于 @[event]="showFloating" 动态事件绑定 */
         showFloatingEvent,
-        hideFloatingEvent,
-        showFloating,
-        hideFloating,
-        handleClickOutside,
-        handleReferenceClick,
+        hideFloatingEvent
     }
 }
 
-export {
-    useFloatingEvents, useFloatingVue
-};
+export { useFloatingActions, useFloatingEvents, useFloatingVue };
+

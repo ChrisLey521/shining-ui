@@ -1,5 +1,5 @@
 import { Placement, Trigger } from 'constants/common'
-import { POPPER_SIDE } from 'constants/popper'
+import { POPPER_SIDE } from 'constants/floating'
 import { Ref } from 'vue'
 
 interface FloatingVueReference {
@@ -11,25 +11,21 @@ interface FloatingVueReference {
 interface FloatingVueOptions {
     placement?: Placement
     offset?: number
-    trigger?: Trigger
-    disabled?: boolean
-    /** v-model:visible */
-    modelVisible?: Ref<boolean>
-    /** props.visible */
-    controlledVisible?: boolean
+    showArrow?: boolean
+    reference?: Ref<HTMLElement> | HTMLElement
+    floating?: Ref<HTMLElement> | HTMLElement
+    floatingArrow?: Ref<HTMLElement> | HTMLElement
 }
 
 interface FloatingEventsOptions {
-    floating?: Ref<HTMLElement>
-    reference?: Ref<HTMLElement>
     trigger: Trigger
     disabled?: boolean
-    modelVisible?: Ref<boolean>
-    controlledVisible?: boolean
+    hasModelVisible?: boolean
+    controlled?: boolean
+    emits: (event: "open" | "close" | "toggle", ...args: unknown[]) => void
 }
 
 type PlacementSide = keyof typeof POPPER_SIDE
 
-export {
-    FloatingEventsOptions, FloatingVueOptions, FloatingVueReference, PlacementSide
-}
+export { FloatingEventsOptions, FloatingVueOptions, FloatingVueReference, PlacementSide }
+

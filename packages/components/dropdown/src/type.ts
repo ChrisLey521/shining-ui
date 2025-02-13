@@ -1,9 +1,8 @@
-import { POPPER_SIDE, PopperProps } from 'constants/popper';
+import { FloatingProps, POPPER_SIDE } from 'constants/floating';
 
-interface DropdownProps extends PopperProps {
+interface DropdownProps extends FloatingProps {
     title?: string
     content?: string
-    showArrow?: boolean
     disabled?: boolean
     persistent?: boolean
 }
@@ -13,3 +12,4 @@ type PlacementSide = keyof typeof POPPER_SIDE
 export {
     DropdownProps, PlacementSide
 };
+

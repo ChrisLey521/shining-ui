@@ -1,6 +1,6 @@
-import { PopperProps } from 'constants/popper';
+import { FloatingProps } from 'constants/floating';
 
-interface OverlayProps extends PopperProps {
+interface OverlayProps extends FloatingProps {
     title?: string
     content?: string
     disabled?: boolean
@@ -14,3 +14,4 @@ interface OverlayProps extends PopperProps {
 export {
     OverlayProps
 };
+
