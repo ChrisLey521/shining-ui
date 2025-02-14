@@ -6,7 +6,6 @@
         :disabled
         :has-model-visible
         :controlled
-        :on-click-outside
         @open="open"
         @close="close"
         @toggle="toggle"
@@ -34,6 +33,7 @@
                 :floating-styles
                 @mouseenter="enterable && trigger === Trigger.Hover && open()"
                 @mouseleave="handleMouseLeave"
+                @close="close"
             >
                 <slot />
                 <template v-if="showArrow" #arrow>
@@ -120,12 +120,6 @@ const handleMouseLeave = (e: MouseEvent) => {
     })
 }
 
-const onClickOutside = ({ target }: MouseEvent) => {
-    if (trigger === Trigger.Hover) return
-    if (floating.value?.element?.contains?.(target as HTMLElement)) return
-    close()
-}
-
 const triggerRef = useTemplateRef('trigger')
 const triggerElement = computed(() => triggerRef.value?.element)
 
@@ -135,12 +129,9 @@ onMounted(() => {
         : triggerElement.value
 })
 
-const contentElement = computed(() => floating.value?.element)
-
 defineExpose({
     open,
     close,
-    toggle,
-    contentElement
+    toggle
 })
 </script>

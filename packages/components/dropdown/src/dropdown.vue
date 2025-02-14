@@ -32,7 +32,7 @@ import { DropdownProps } from './type';
 
 const {
     theme = PopperTheme.Light,
-    placement = Placement.TopStart,
+    placement = Placement.Bottom,
     offset,
     trigger = Trigger.Hover,
     container = 'body',

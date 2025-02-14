@@ -63,18 +63,11 @@ const actions = computed(() => new Map([
     // ['click', floating.value.toggle]
 ]))
 
-const handleClickOutside = ({ target }: MouseEvent) => {
-    if (referenceElement.contains(target as HTMLElement)) return
-    if (floating.value?.contentElement?.contains?.(target as HTMLElement)) return
-    floating.value.close()
-}
-
 const attachEvents = () => {
     if (!referenceElement) return
     [...actions.value.entries()].forEach(([eventName, handler]) => attachEvent(referenceElement, eventName, handler))
 
     attachEvent(referenceElement, 'click',floating.value.toggle)
-    attachEvent(window, 'click', handleClickOutside)
 }
 
 const removeEvents = () => {
@@ -82,7 +75,6 @@ const removeEvents = () => {
     [...actions.value.entries()].forEach(([eventName, handler]) => removeEvent(referenceElement, eventName, handler))
 
     removeEvent(referenceElement, 'click',floating.value.toggle)
-    removeEvent(window, 'click', handleClickOutside)
 }
 
 onMounted(attachEvents)
