@@ -29,9 +29,9 @@ function createDemoContainer(md: MarkdownRenderer): ContainerOpts {
                     )
                 }
                 if (!source) throw new Error(`Incorrect source file: ${sourceFile}`)
-
+                    
                 return `<exhibition-card code="${encodeURIComponent(
-                    md.render(`\`\`\` vue\n${source}\`\`\``)
+                    md.render(`\`\`\` vue\n${source} \n\`\`\``)
                 )}" path="${sourceFile}" description="${encodeURIComponent(md.render(description))}">
                     <template #exhibition>
                         <sn-${sourceFile.replaceAll('/', '-')} />
