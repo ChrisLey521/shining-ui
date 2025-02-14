@@ -11,3 +11,9 @@
 
 # Components
 这是康剖恁次
+
+```vue
+<template></template>
+
+asdasda
+```
