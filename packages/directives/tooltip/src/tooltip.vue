@@ -32,7 +32,7 @@ import { attachEvent, removeEvent } from '@shining-ui/utils/dom';
 import { useFloatingActions } from 'composables/floating';
 import { Placement, Trigger } from 'constants/common';
 import { PopperTheme, tooltipBgMap, TooltipProps } from 'constants/floating';
-import { computed, onMounted, onUnmounted, useTemplateRef } from 'vue';
+import { computed, onBeforeUnmount, onMounted, useTemplateRef } from 'vue';
 import { Floating } from '../../../components/floating';
 
 const {
@@ -85,11 +85,7 @@ const removeEvents = () => {
     removeEvent(window, 'click', handleClickOutside)
 }
 
-onMounted(() => {
-    attachEvents()
-})
+onMounted(attachEvents)
 
-onUnmounted(() => {
-    removeEvents()
-})
+onBeforeUnmount(removeEvents)
 </script>

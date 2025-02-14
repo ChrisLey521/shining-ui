@@ -1,15 +1,15 @@
 import { TooltipProps } from 'constants/floating';
-import { Directive, DirectiveBinding, h, render, VNode } from 'vue';
+import { App, createApp, Directive, DirectiveBinding, h } from 'vue';
 import Tooltip from './tooltip.vue';
 import { normalizeProps } from './utils';
 
 // el -> tooltipWrapper
-const nodeMap = new WeakMap<HTMLElement, VNode>()
+const nodeMap = new WeakMap<HTMLElement, App>()
 
 const unmountTooltip = (el: HTMLElement) => {
-    // const tooltip = nodeMap.get(el)
-    // tooltip?.component?.exposed?.destroy?.()
-    nodeMap.delete(el)
+    const tooltipApp = nodeMap.get(el)
+    tooltipApp.unmount()
+    // nodeMap.delete(el) // WeakMap自动清理
 }
 
 const initTooltip = (el: HTMLElement, { value }: DirectiveBinding<TooltipProps>) => {
@@ -22,11 +22,13 @@ const initTooltip = (el: HTMLElement, { value }: DirectiveBinding<TooltipProps>)
     })
 
     const div = document.createElement('div')
-    render(tooltip, div)
+    // render(tooltip, div)
+    const tooltipApp = createApp(tooltip)
+    tooltipApp.mount(div)
     const { firstChild } = div
     document.body.appendChild(firstChild)
     
-    nodeMap.set(el, tooltip)
+    nodeMap.set(el, tooltipApp)
 }
 
 const vTooltip: Directive<HTMLElement, TooltipProps> = {
@@ -46,3 +48,4 @@ const vTooltip: Directive<HTMLElement, TooltipProps> = {
 export {
     vTooltip
 };
+

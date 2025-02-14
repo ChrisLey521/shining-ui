@@ -1,19 +1,19 @@
 <template>
     <FloatingTrigger
-        :ref="virtual ? void 0 : 'reference'"
+        ref="trigger"
         v-if="!virtual"
-        v-click-outside="handleClickOutside"
         :trigger
         :disabled
         :has-model-visible
         :controlled
-        @open="openFloating"
-        @close="closeFloating"
-        @toggle="toggleFloating"
+        :on-click-outside
+        @open="open"
+        @close="close"
+        @toggle="toggle"
     >
         <slot name="reference" />
     </FloatingTrigger>
-    <Teleport defer :to="container">
+    <Teleport :to="container">
         <Transition
             mode="out-in"
             :name="transition"
@@ -32,7 +32,7 @@
                 :floating-class
                 :floating-position-styles
                 :floating-styles
-                @mouseenter="enterable && trigger === Trigger.Hover && openFloating()"
+                @mouseenter="enterable && trigger === Trigger.Hover && open()"
                 @mouseleave="handleMouseLeave"
             >
                 <slot />
@@ -55,17 +55,17 @@
 </template>
 
 <script setup lang="ts">
-import { vClickOutside } from '@shining-ui/directives/click-outside';
 import { stopWhenFalsePositive } from '@shining-ui/utils/dom';
 import { useFloatingVue } from 'composables/floating';
 import { Placement, Trigger } from 'constants/common';
-import { computed, ref, useTemplateRef } from 'vue';
+import { computed, onMounted, ref, useTemplateRef } from 'vue';
 import FloatingContent from './content.vue';
 import FloatingTrigger from './trigger.vue';
 import { FloatingProps } from './type';
 
 const {
     visible: controlledVisible,
+    virtual = false,
     container = 'body',
     placement = Placement.TopStart,
     offset = 10,
@@ -76,7 +76,7 @@ const {
     referenceElement
 } = defineProps<FloatingProps>()
 
-const reference = ref(referenceElement ?? null)
+const reference = ref(virtual ? referenceElement : null)
 
 const modelVisible = defineModel<boolean>('visible')
 
@@ -99,39 +99,48 @@ const {
     floating
 })
 
-const openFloating = () => {
+const open = () => {
     visible.value = true
     if (hasModelVisible.value) modelVisible.value = true
 }
 
-const closeFloating = () => {
+const close = () => {
     visible.value = false
     if (hasModelVisible.value) modelVisible.value = false
 }
 
-const toggleFloating = () => visible.value
-    ? closeFloating()
-    : openFloating()
-
-const handleClickOutside = ({ target }: MouseEvent) => {
-    if (trigger === Trigger.Hover) return
-    if (floating.value?.element?.contains?.(target as HTMLElement)) return
-    closeFloating()
-}
+const toggle = () => visible.value
+    ? close()
+    : open()
 
 const handleMouseLeave = (e: MouseEvent) => {
     stopWhenFalsePositive(e, () => {
         if (trigger !== Trigger.Hover) return
-        closeFloating()
+        close()
     })
 }
+
+const onClickOutside = ({ target }: MouseEvent) => {
+    if (trigger === Trigger.Hover) return
+    if (floating.value?.element?.contains?.(target as HTMLElement)) return
+    close()
+}
+
+const triggerRef = useTemplateRef('trigger')
+const triggerElement = computed(() => triggerRef.value?.element)
+
+onMounted(() => {
+    reference.value = virtual
+        ? referenceElement
+        : triggerElement.value
+})
 
 const contentElement = computed(() => floating.value?.element)
 
 defineExpose({
-    open: openFloating,
-    close: closeFloating,
-    toggle: toggleFloating,
+    open,
+    close,
+    toggle,
     contentElement
 })
 </script>
