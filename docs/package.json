@@ -9,7 +9,7 @@
     "dev": "vitepress dev",
     "build": "vitepress build",
     "styles:build": "unocss --config-file ./unocss.config.js",
-    "preview": "vitepress preview"
+    "preview": "vitepress build && vitepress preview || vitepress build;vitepress preview"
   },
   "keywords": [],
   "author": "",

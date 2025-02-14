@@ -1,10 +1,10 @@
 <template>
     <div>
         <sn-dropdown>
-            <sn-button variant="primary">更多</sn-button>
-            <template #dropdown>
-                更多内容
+            <template #reference>
+                <sn-button variant="primary">更多</sn-button>
             </template>
+            更多内容
         </sn-dropdown>
     </div>
 </template>

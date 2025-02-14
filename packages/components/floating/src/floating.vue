@@ -1,6 +1,6 @@
-<template v-click-outside="handleClickOutside">
+<template>
     <FloatingTrigger
-        :ref="referenceElement ? void 0 : 'reference'"
+        :ref="virtual ? void 0 : 'reference'"
         v-if="!virtual"
         v-click-outside="handleClickOutside"
         :trigger
@@ -33,7 +33,7 @@
                 :floating-position-styles
                 :floating-styles
                 @mouseenter="enterable && trigger === Trigger.Hover && openFloating()"
-                @mouseleave="trigger === Trigger.Hover && closeFloating()"
+                @mouseleave="handleMouseLeave"
             >
                 <slot />
                 <template v-if="showArrow" #arrow>
@@ -56,6 +56,7 @@
 
 <script setup lang="ts">
 import { vClickOutside } from '@shining-ui/directives/click-outside';
+import { stopWhenFalsePositive } from '@shining-ui/utils/dom';
 import { useFloatingVue } from 'composables/floating';
 import { Placement, Trigger } from 'constants/common';
 import { computed, ref, useTemplateRef } from 'vue';
@@ -116,6 +117,13 @@ const handleClickOutside = ({ target }: MouseEvent) => {
     if (trigger === Trigger.Hover) return
     if (floating.value?.element?.contains?.(target as HTMLElement)) return
     closeFloating()
+}
+
+const handleMouseLeave = (e: MouseEvent) => {
+    stopWhenFalsePositive(e, () => {
+        if (trigger !== Trigger.Hover) return
+        closeFloating()
+    })
 }
 
 const contentElement = computed(() => floating.value?.element)

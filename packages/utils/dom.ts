@@ -34,7 +34,29 @@ const objectifyStyle = (style?: string | CSSProperties) => {
     return {}
 }
 
+interface Point {
+    x: number
+    y: number
+}
+
+const isWithingARect = ({ x, y }: Point, rect: DOMRect) => {
+    const xIsWithin = x > rect.left && x < rect.right;
+    const yIsWithin = y > rect.top && y < rect.bottom;
+    return xIsWithin && yIsWithin;
+}
+
+const stopWhenFalsePositive = (e: MouseEvent, handler: (e: MouseEvent) => void) => {
+    const trigger: HTMLElement = e.target as HTMLElement
+    const triggerRect = trigger.getBoundingClientRect();
+    const falsePositive = isWithingARect({
+        x: e.clientX,
+        y: e.clientY
+    }, triggerRect)
+    if (falsePositive) return
+    handler(e)
+}
+
 export {
-    attachEvent, objectifyStyle, removeEvent
+    attachEvent, isWithingARect, objectifyStyle, removeEvent, stopWhenFalsePositive
 }
 
