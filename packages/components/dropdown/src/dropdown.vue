@@ -17,7 +17,6 @@
         <template #reference>
             <slot name="reference" />
         </template>
-        <h3 v-if="title" mb-2 text-gray-9 text-base font-550>{{ title }}</h3>
         <slot>
             {{ content }}
         </slot>

@@ -31,6 +31,7 @@ interface FloatingTriggerProps {
     disabled?: boolean
     hasModelVisible?: boolean
     controlled?: boolean
+    onClickOutside?: (e?: MouseEvent) => void
 }
 
 export {

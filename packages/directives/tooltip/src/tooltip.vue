@@ -5,6 +5,7 @@
         :duration="delay">
         <Floating
             ref="floating"
+            virtual
             :visible
             :disabled
             :container
@@ -31,7 +32,7 @@ import { attachEvent, removeEvent } from '@shining-ui/utils/dom';
 import { useFloatingActions } from 'composables/floating';
 import { Placement, Trigger } from 'constants/common';
 import { PopperTheme, tooltipBgMap, TooltipProps } from 'constants/floating';
-import { computed, onMounted, onUnmounted, useTemplateRef } from 'vue';
+import { computed, onBeforeUnmount, onMounted, useTemplateRef } from 'vue';
 import { Floating } from '../../../components/floating';
 
 const {
@@ -59,7 +60,7 @@ const {
 const actions = computed(() => new Map([
     [showFloatingEvent.value, floating.value.open],
     [hideFloatingEvent.value, floating.value.close],
-    ['click', floating.value.toggle]
+    // ['click', floating.value.toggle]
 ]))
 
 const handleClickOutside = ({ target }: MouseEvent) => {
@@ -72,6 +73,7 @@ const attachEvents = () => {
     if (!referenceElement) return
     [...actions.value.entries()].forEach(([eventName, handler]) => attachEvent(referenceElement, eventName, handler))
 
+    attachEvent(referenceElement, 'click',floating.value.toggle)
     attachEvent(window, 'click', handleClickOutside)
 }
 
@@ -79,14 +81,11 @@ const removeEvents = () => {
     if (!referenceElement) return
     [...actions.value.entries()].forEach(([eventName, handler]) => removeEvent(referenceElement, eventName, handler))
 
+    removeEvent(referenceElement, 'click',floating.value.toggle)
     removeEvent(window, 'click', handleClickOutside)
 }
 
-onMounted(() => {
-    attachEvents()
-})
+onMounted(attachEvents)
 
-onUnmounted(() => {
-    removeEvents()
-})
+onBeforeUnmount(removeEvents)
 </script>
