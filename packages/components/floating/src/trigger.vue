@@ -1,7 +1,6 @@
 <template>
     <SingleChild
         v-if="$slots.default"
-        v-click-outside="onClickOutside"
         @[showFloatingEvent]="showFloating"
         @[hideFloatingEvent]="hideFloating"
         @click="handleReferenceClick"
@@ -11,7 +10,6 @@
 </template>
 
 <script setup lang="ts">
-import { vClickOutside } from '@shining-ui/directives/click-outside';
 import { useFloatingEvents } from 'composables/floating';
 import { computed, getCurrentInstance } from 'vue';
 import { SingleChild } from '../../single-child';
@@ -42,7 +40,7 @@ const {
 })
 
 const { proxy } = getCurrentInstance()
-const element = computed(() => proxy.$el)
+const element = computed<HTMLElement>(() => proxy.$el)
 
 defineExpose({
     element

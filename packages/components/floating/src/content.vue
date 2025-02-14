@@ -1,5 +1,7 @@
 <template>
     <div
+        ref="floating"
+        v-click-outside="onClickOutside"
         :class="[...themeStyles, ZIndex.Tooltip, floatingClass]"
         :style="{
             width,
@@ -21,23 +23,25 @@
 </template>
 
 <script setup lang="ts">
+import { vClickOutside } from '@shining-ui/directives';
 import { objectifyStyle } from '@shining-ui/utils';
-import { ZIndex } from 'constants/common';
-import { computed, getCurrentInstance } from 'vue';
+import { Trigger, ZIndex } from 'constants/common';
+import { useTemplateRef } from 'vue';
 import { FloatingContentProps } from './type';
 
-
 const {
+    trigger = Trigger.Hover,
     themeStyles = [],
     floatingStyles: customFloatingStyle,
     floatingPositionStyles = {}
 } = defineProps<FloatingContentProps>()
 
-const { proxy } = getCurrentInstance()
+const floating = useTemplateRef('floating')
 
-const element = computed(() => proxy.$el)
-
-defineExpose({
-    element
-})
+const emits = defineEmits(['close'])
+const onClickOutside = ({ target }: MouseEvent) => {
+    if (trigger === Trigger.Hover) return
+    if (floating.value?.contains?.(target as HTMLElement)) return
+    emits('close')
+}
 </script>

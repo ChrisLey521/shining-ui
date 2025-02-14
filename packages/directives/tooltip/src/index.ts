@@ -1,5 +1,5 @@
 import { TooltipProps } from 'constants/floating';
-import { App, createApp, Directive, DirectiveBinding, h } from 'vue';
+import { App, createApp, Directive, DirectiveBinding } from 'vue';
 import Tooltip from './tooltip.vue';
 import { normalizeProps } from './utils';
 
@@ -15,18 +15,14 @@ const unmountTooltip = (el: HTMLElement) => {
 const initTooltip = (el: HTMLElement, { value }: DirectiveBinding<TooltipProps>) => {
     const props = normalizeProps(el, value)
     
-    const tooltip = h(Tooltip, {
-        ...props,
-        container: void 0,
-        referenceElement: el
-    })
-
     const div = document.createElement('div')
     // render(tooltip, div)
-    const tooltipApp = createApp(tooltip)
+    const tooltipApp = createApp(Tooltip, {
+        ...props,
+        referenceElement: el
+    })
     tooltipApp.mount(div)
-    const { firstChild } = div
-    document.body.appendChild(firstChild)
+    div.remove()
     
     nodeMap.set(el, tooltipApp)
 }
@@ -40,7 +36,7 @@ const vTooltip: Directive<HTMLElement, TooltipProps> = {
 
         initTooltip(el, binding)
     },
-    unmounted: (el) => {
+    beforeUnmount: (el) => {
         unmountTooltip(el)
     },
 }

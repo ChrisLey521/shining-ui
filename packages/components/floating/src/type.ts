@@ -4,6 +4,7 @@ import { CSSProperties, VNode } from 'vue';
 interface FloatingContentProps {
     content?: string | number | VNode
     contentAsHtml?: boolean
+    trigger?: Trigger
     width?: string
     themeStyles?: string[]
     floatingClass?: string
@@ -19,7 +20,6 @@ interface FloatingProps extends FloatingContentProps {
     container?: string | HTMLElement
     placement?: Placement
     offset?: number
-    trigger?: Trigger
     enterable?: boolean
     transition?: string
     delay?: number
@@ -31,7 +31,6 @@ interface FloatingTriggerProps {
     disabled?: boolean
     hasModelVisible?: boolean
     controlled?: boolean
-    onClickOutside?: (e?: MouseEvent) => void
 }
 
 export {
