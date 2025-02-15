@@ -22,7 +22,11 @@ interface FloatingEventsOptions {
     disabled?: boolean
     hasModelVisible?: boolean
     controlled?: boolean
-    emits: (event: "open" | "close" | "toggle", ...args: unknown[]) => void
+    actions: {
+        open: () => void
+        close: () => void
+        toggle: () => void
+    }
 }
 
 type PlacementSide = keyof typeof POPPER_SIDE

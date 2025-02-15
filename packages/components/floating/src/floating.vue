@@ -6,9 +6,6 @@
         :disabled
         :has-model-visible
         :controlled
-        @open="open"
-        @close="close"
-        @toggle="toggle"
     >
         <slot name="reference" />
     </FloatingTrigger>
@@ -31,9 +28,6 @@
                 :floating-class
                 :floating-position-styles
                 :floating-styles
-                @mouseenter="enterable && trigger === Trigger.Hover && open()"
-                @mouseleave="handleMouseLeave"
-                @close="close"
             >
                 <slot />
                 <template v-if="showArrow" #arrow>
@@ -55,10 +49,9 @@
 </template>
 
 <script setup lang="ts">
-import { stopWhenFalsePositive } from '@shining-ui/utils/dom';
 import { useFloatingVue } from 'composables/floating';
 import { Placement, Trigger } from 'constants/common';
-import { computed, onMounted, ref, useTemplateRef } from 'vue';
+import { computed, onMounted, provide, ref, useTemplateRef } from 'vue';
 import FloatingContent from './content.vue';
 import FloatingTrigger from './trigger.vue';
 import { FloatingProps } from './type';
@@ -113,13 +106,6 @@ const toggle = () => visible.value
     ? close()
     : open()
 
-const handleMouseLeave = (e: MouseEvent) => {
-    stopWhenFalsePositive(e, () => {
-        if (trigger !== Trigger.Hover) return
-        close()
-    })
-}
-
 const triggerRef = useTemplateRef('trigger')
 const triggerElement = computed(() => triggerRef.value?.element)
 
@@ -134,4 +120,9 @@ defineExpose({
     close,
     toggle
 })
+
+provide('open', open)
+provide('close', close)
+provide('toggle', toggle)
+
 </script>
