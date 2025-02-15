@@ -11,7 +11,7 @@
 
 <script setup lang="ts">
 import { useFloatingEvents } from 'composables/floating';
-import { computed, getCurrentInstance } from 'vue';
+import { computed, getCurrentInstance, inject } from 'vue';
 import { SingleChild } from '../../single-child';
 import { FloatingTriggerProps } from './type';
 
@@ -22,8 +22,9 @@ const {
     controlled
 } = defineProps<FloatingTriggerProps>()
 
-
-const emits = defineEmits(['open', 'close', 'toggle'])
+const open = inject<() => void>('open')
+const close = inject<() => void>('close')
+const toggle = inject<() => void>('toggle')
 
 const {
     showFloatingEvent,
@@ -36,7 +37,11 @@ const {
     disabled,
     hasModelVisible,
     controlled,
-    emits
+    actions: {
+        open,
+        close,
+        toggle
+    }
 })
 
 const { proxy } = getCurrentInstance()

@@ -1,7 +1,6 @@
 import { FloatingProps, POPPER_SIDE } from 'constants/floating';
 
 interface DropdownProps extends FloatingProps {
-    content?: string
     disabled?: boolean
     persistent?: boolean
 }

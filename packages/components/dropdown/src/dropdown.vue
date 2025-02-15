@@ -1,9 +1,9 @@
 <template>
     <Floating
-        :visible
+        ref="floating"
+        :visible="false"
         :disabled
         :container
-        :content
         :placement
         :offset
         :trigger
@@ -15,18 +15,16 @@
         :themeStyles
     >
         <template #reference>
-            <slot name="reference" />
+            <slot />
         </template>
-        <slot>
-            {{ content }}
-        </slot>
+        <slot name="dropdown" />
     </Floating>
 </template>
 
 <script setup lang=ts>
 import { Placement, Trigger } from 'constants/common';
 import { overlayBgMap, PopperTheme } from 'constants/floating';
-import { computed, ref } from 'vue';
+import { computed, provide, ref, useTemplateRef } from 'vue';
 import { Floating } from '../../floating';
 import { DropdownProps } from './type';
 
@@ -41,5 +39,22 @@ const {
 
 const themeStyles = computed(() => overlayBgMap.get(theme))
 
-const visible = ref(false)
+const floating = useTemplateRef('floating')
+const open = () => floating.value?.open()
+const close = () => floating.value?.close()
+
+defineExpose({
+    open,
+    close
+})
+
+const active = ref()
+const emits = defineEmits(['command'])
+const handleSelect = (cmd: string) => {
+    active.value = cmd
+    emits('command', cmd)
+}
+provide('select', handleSelect)
+provide('active', active)
+
 </script>

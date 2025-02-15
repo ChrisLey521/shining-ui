@@ -82,14 +82,14 @@ const useFloatingEvents = ({
     disabled,
     hasModelVisible,
     controlled,
-    emits
+    actions
 }: FloatingEventsOptions) => {
     
     // const visible = ref(modelVisible?.value ?? controlledVisible)
 
     const { showFloatingEvent, hideFloatingEvent } = useFloatingActions(trigger)
 
-    const toggleFloating = (action: Parameters<typeof emits>[0]) => {
+    const toggleFloating = (action: keyof typeof actions) => {
         if (disabled) return
         // 优先级策略: v-model:visible > controlledVisible (受控) > visible
 
@@ -99,10 +99,10 @@ const useFloatingEvents = ({
             if (controlled) return
             // 没有传入 props.visible 则由组件自己决定
             // visible.value = shouldShowFloating
-            emits(action)
+            actions[action]?.()
             return
         }
-        emits(action)
+        actions[action]?.()
     }
 
     const showFloating = (e: MouseEvent) => {

@@ -2,7 +2,7 @@
     <div
         ref="floating"
         v-click-outside="onClickOutside"
-        :class="[...themeStyles, ZIndex.Tooltip, floatingClass]"
+        :class="[...themeStyles, ZIndex.Tooltip, floatingClass, FLOATING_CONTENT_CLASSNAME]"
         :style="{
             width,
             ...floatingPositionStyles,
@@ -13,6 +13,8 @@
         b-solid
         py-1
         px-2
+        @mouseenter="handleMouseEnter"
+        @mouseleave="handleMouseLeave"
     >
         <slot>
             <div v-if="contentAsHtml" v-html="content" />
@@ -24,24 +26,43 @@
 
 <script setup lang="ts">
 import { vClickOutside } from '@shining-ui/directives';
-import { objectifyStyle } from '@shining-ui/utils';
+import { objectifyStyle, stopWhenFalsePositive } from '@shining-ui/utils';
 import { Trigger, ZIndex } from 'constants/common';
-import { useTemplateRef } from 'vue';
+import { inject, useTemplateRef } from 'vue';
 import { FloatingContentProps } from './type';
+
+const FLOATING_CONTENT_CLASSNAME = '__floating_content'
 
 const {
     trigger = Trigger.Hover,
+    enterable = true,
     themeStyles = [],
     floatingStyles: customFloatingStyle,
     floatingPositionStyles = {}
 } = defineProps<FloatingContentProps>()
 
+const open = inject<() => void>('open')
+const close = inject<() => void>('close')
+
 const floating = useTemplateRef('floating')
 
-const emits = defineEmits(['close'])
 const onClickOutside = ({ target }: MouseEvent) => {
     if (trigger === Trigger.Hover) return
     if (floating.value?.contains?.(target as HTMLElement)) return
-    emits('close')
+    close()
+}
+
+const handleMouseEnter = async ({ x, y }: MouseEvent) => {
+    const enteredElement = document.elementFromPoint(x, y)
+    if (!enteredElement.classList.contains(FLOATING_CONTENT_CLASSNAME)) return
+    if (!enterable) return
+    open()
+}
+
+const handleMouseLeave = (e: MouseEvent) => {
+    stopWhenFalsePositive(e, () => {
+        if (trigger !== Trigger.Hover) return
+        close()
+    })
 }
 </script>

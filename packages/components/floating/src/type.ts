@@ -5,6 +5,7 @@ interface FloatingContentProps {
     content?: string | number | VNode
     contentAsHtml?: boolean
     trigger?: Trigger
+    enterable?: boolean
     width?: string
     themeStyles?: string[]
     floatingClass?: string
@@ -13,14 +14,13 @@ interface FloatingContentProps {
 }
 
 interface FloatingProps extends FloatingContentProps {
-    visible: boolean
+    visible?: boolean
     virtual?: boolean
     disabled?: boolean
     showArrow?: boolean
     container?: string | HTMLElement
     placement?: Placement
     offset?: number
-    enterable?: boolean
     transition?: string
     delay?: number
     referenceElement?: HTMLElement
