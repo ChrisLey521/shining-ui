@@ -2,6 +2,7 @@
 <template>
     <div
         flex
+        flex-wrap
         gap-5
     >
         <sn-button-group>

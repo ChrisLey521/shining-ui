@@ -1,6 +1,7 @@
 <template>
     <div
         flex
+        flex-wrap
         gap-5
     >
         <sn-button variant="primary" color="purple">div</sn-button>

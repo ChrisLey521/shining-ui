@@ -1,6 +1,7 @@
 <template>
     <div
         flex
+        flex-wrap
         gap-5
     >
         <sn-button ghost>默认按钮</sn-button>

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { Tag } from 'components';
 import { useData } from 'vitepress';
-import { h } from 'vue';
+import { computed, h } from 'vue';
 
 defineProps({
   type: String,
@@ -10,6 +10,10 @@ defineProps({
 
 const { isDark } = useData()
 
+const size = computed(() => window.innerWidth > 640
+  ? 'medium'
+  : 'mini'
+)
 </script>
 
 <template>
@@ -24,16 +28,16 @@ const { isDark } = useData()
             background: 'var(--vp-code-bg)',
             color: 'var(--vp-code-color)',
             border: 'none',
-            size: 'small'
           }, details),
           theme: isDark ? 'dark' : 'light',
           trigger: 'click',
           contentAsComponent: true
         }"
-        text
+        :size
+        ghost
         circle
         icon="warning"
-        class="p-2 text-4"
+        class="!p-0 sm:p-1 text-4"
       />
     </ClientOnly>
   </span>
