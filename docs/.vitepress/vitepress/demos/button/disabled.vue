@@ -2,6 +2,7 @@
 <template>
     <div
         flex
+        flex-wrap
         gap-5
     >
         <sn-button disabled>默认按钮</sn-button>

@@ -2,6 +2,7 @@
 <template>
     <div
         flex
+        flex-wrap
         gap-5
     >
         <sn-button>默认按钮</sn-button>
@@ -12,6 +13,7 @@
     </div>
     <div
         flex
+        flex-wrap
         gap-5
     >
         <sn-button>默认按钮</sn-button>
@@ -22,6 +24,7 @@
     </div>
     <div
         flex
+        flex-wrap
         gap-5
     >
         <sn-button round>默认按钮</sn-button>

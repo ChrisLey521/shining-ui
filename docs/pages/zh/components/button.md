@@ -104,20 +104,20 @@ button/group
 |---------------|--------------------------------------------------|----------------------------------------------------------------------|-----------|
 |variant        |按钮变体                                           |^[enum]`'default' \| 'primary' \| 'success' \| 'warning' \| 'danger' `|`'default'`|
 |size           |按钮尺寸                                           |^[enum]`'large' \| 'medium' \| 'small' \| 'mini' `                    |`'medium'` |
-|plain          |是否朴素按钮                                       |^[boolean]                                                            |`false`     |
-|ghost          |是否幽灵按钮                                       |^[boolean]                                                            |`false`     |
-|bg             |幽灵按钮背景是否始终显示，仅当`ghost`为`true`时有效  |^[boolean]                                                             |`false`    |
-|link           |是否连接按钮                                       |^[boolean]                                                            |`false`     |
-|round          |是否圆边按钮                                       |^[boolean]                                                            |`false`     |
-|circle         |是否圆形按钮                                       |^[boolean]                                                            |`false`     |
-|loading        |按钮是否处于加载中状态                              |^[boolean]                                                            |`false`     |
-|loading-icon   |自定义加载中图标                                   |^[enum]`Icon`组件的各个图标名称，支持所有的`Icon`组件                     |`'loading'`|
-|loading-text   |自定义加载中文案                                   |^[string]                                                              |-          |
-|disabled       |按钮是否被禁用                                     |^[boolean]                                                             |`false`    |
-|icon           |按钮的图标, 出现在默认插槽内容的左侧                 |^[enum]`Icon`组件的各个图标名称，支持所有的`Icon`组件                     |`'loading'`|
+|plain          |是否朴素按钮                                       |`boolean`                                                             |`false`     |
+|ghost          |是否幽灵按钮                                       |`boolean`                                                             |`false`     |
+|bg             |幽灵按钮背景是否始终显示，仅当`ghost`为`true`时有效  |`boolean`                                                              |`false`    |
+|link           |是否连接按钮                                       |`boolean`                                                             |`false`     |
+|round          |是否圆边按钮                                       |`boolean`                                                             |`false`     |
+|circle         |是否圆形按钮                                       |`boolean`                                                             |`false`     |
+|loading        |按钮是否处于加载中状态                              |`boolean`                                                             |`false`     |
+|loading-icon   |自定义加载中图标                                   |^[enum]`Icon, 组件的各个图标名称，支持所有的Icon组件`                     |`'loading'`|
+|loading-text   |自定义加载中文案                                   |`string`                                                               |-          |
+|disabled       |按钮是否被禁用                                     |`boolean`                                                              |`false`    |
+|icon           |按钮的图标, 出现在默认插槽内容的左侧                 |^[enum]`Icon, 组件的各个图标名称，支持所有的Icon组件`                     |-          |
 |type           |原生图标的`type`属性                               |^[enum]`'button' \| 'submit' \| 'reset'`                               |`'button`  |
-|dark           |是否暗色调主题                                     |^[boolean]                                                             |`false`    |
-|tag            |按钮的`html`标签                                   |^[string]                                                              |`'button'` |
-|color          |自定义按钮的文字颜色                                |^[string]                                                              |-         |
-|border         |自定义按钮的边框颜色                                |^[string]                                                              |-         |
-|background     |自定义按钮的背景颜色                                |^[string]                                                              |-         |
+|dark           |是否暗色调主题                                     |`boolean`                                                              |`false`    |
+|tag            |按钮的`html`标签                                   |`string`                                                               |`'button'` |
+|color          |自定义按钮的文字颜色                                |`string`                                                               |-         |
+|border         |自定义按钮的边框颜色                                |`string`                                                               |-         |
+|background     |自定义按钮的背景颜色                                |`string`                                                               |-         |

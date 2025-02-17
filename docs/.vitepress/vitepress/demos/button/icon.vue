@@ -2,6 +2,7 @@
 <template>
     <div
         flex
+        flex-wrap
         items-center
         gap-5
     >
