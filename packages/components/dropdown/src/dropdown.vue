@@ -13,6 +13,7 @@
         :delay
         :transition
         :themeStyles
+        :x-padding="false"
     >
         <template #reference>
             <slot />
@@ -34,7 +35,9 @@ const {
     offset,
     trigger = Trigger.Hover,
     container = 'body',
-    disabled
+    disabled,
+    // splitButton,
+    // variant
 } = defineProps<DropdownProps>()
 
 const themeStyles = computed(() => overlayBgMap.get(theme))

@@ -12,7 +12,6 @@
         b
         b-solid
         py-1
-        px-2
         @mouseenter="handleMouseEnter"
         @mouseleave="handleMouseLeave"
     >

@@ -19,10 +19,11 @@ interface FloatingProps extends FloatingContentProps {
     disabled?: boolean
     showArrow?: boolean
     container?: string | HTMLElement
-    placement?: Placement
+    placement?: `${Placement}`
     offset?: number
     transition?: string
     delay?: number
+    xPadding?: boolean
     referenceElement?: HTMLElement
 }
 

@@ -35,13 +35,13 @@
                     v-tooltip="{ placement: 'bottom', content: t('playground') }"
                     icon="magic-stick"
                     circle
-                    text
+                    ghost
                 />
                 <sn-button
                     v-tooltip="{ placement: 'bottom', content: t('copy') }"
                     icon="copy"
                     circle
-                    text
+                    ghost
                 />
                 <sn-button
                     v-tooltip="{ placement: 'bottom', content: t('source code') }"
@@ -50,7 +50,7 @@
                         : 'arrow-up-bold'
                     "
                     circle
-                    text
+                    ghost
                     @click="codeCollopsed = !codeCollopsed"
                 />
             </div>

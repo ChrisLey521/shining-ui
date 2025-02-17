@@ -7,3 +7,11 @@
 dropdown/basic
 
 :::
+
+## 分隔按钮
+
+:::demo
+
+dropdown/split-button
+
+:::

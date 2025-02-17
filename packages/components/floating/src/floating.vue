@@ -17,6 +17,9 @@
             <FloatingContent
                 ref="floating"
                 v-if="visible && !disabled"
+                :class="{
+                    'px-2': xPadding
+                }"
                 :show-arrow
                 :trigger
                 :enterable
@@ -66,6 +69,7 @@ const {
     trigger = Trigger.Hover,
     enterable = true,
     showArrow = true,
+    xPadding = true,
     referenceElement
 } = defineProps<FloatingProps>()
 

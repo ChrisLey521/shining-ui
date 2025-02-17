@@ -1,5 +1,11 @@
 <template>
-    <li :class="{ '!bg-blue-3 text-blue-5': active === command }" @click="handleClick">
+    <li
+        hover:bg-gray-2
+        px-3
+        :class="{
+            '!bg-blue-2 text-blue-5': active === command
+        }"
+        @click="handleClick">
         <slot />
     </li>
 </template>
