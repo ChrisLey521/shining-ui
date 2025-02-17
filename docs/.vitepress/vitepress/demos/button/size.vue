@@ -3,6 +3,7 @@
     <div
         flex
         flex-wrap
+        items-center
         gap-5
     >
         <sn-button variant="primary">默认</sn-button>

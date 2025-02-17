@@ -4,8 +4,8 @@
         flex-wrap
         gap-5
     >
-        <sn-button variant="primary" color="purple">div</sn-button>
-        <sn-button variant="primary" background="yellowgreen" tag="section" ghost>section</sn-button>
-        <sn-button variant="success" color="orange" border="yellow" tag="span" ghost>span</sn-button>
+        <sn-button color="purple">文字</sn-button>
+        <sn-button variant="primary" background="yellowgreen">背景</sn-button>
+        <sn-button variant="success" border="yellow">边框</sn-button>
     </div>
 </template>
