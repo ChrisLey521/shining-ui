@@ -1,3 +1,4 @@
 @import url('./variables.css');
 @import url('./uno.css');
-/* @import url('./directives.css'); */
+@import url('../../components/button/src/styles.scss');
+@import url('./directives.css');

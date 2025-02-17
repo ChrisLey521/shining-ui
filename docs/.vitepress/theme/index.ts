@@ -2,7 +2,7 @@
 import ApiType from '@common/api-type.vue';
 import ExhibitionCard from '@common/exhibition-card.vue';
 import '@shining-ui/theme-chalk';
-import { Button, Dropdown, Icon, Overlay, Tag, Tooltip } from 'components';
+import { Button, ButtonGroup, Dropdown, Icon, Overlay, Tag, Tooltip } from 'components';
 import type { Theme } from 'vitepress';
 import { vTooltip } from '../../../packages/directives';
 import '../styles/index.scss';
@@ -14,6 +14,7 @@ export default {
     // ...
     // app.component('sn-tooltip', Tooltip)
     app.component('sn-button', Button)
+    app.component('sn-button-group', ButtonGroup)
     app.component('sn-tag', Tag)
     app.component('sn-overlay', Overlay)
     app.component('sn-tooltip', Tooltip)

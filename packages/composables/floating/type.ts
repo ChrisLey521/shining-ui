@@ -9,7 +9,7 @@ interface FloatingVueReference {
 }
 
 interface FloatingVueOptions {
-    placement?: Placement
+    placement?: `${Placement}`
     offset?: number
     showArrow?: boolean
     reference?: Ref<HTMLElement> | HTMLElement

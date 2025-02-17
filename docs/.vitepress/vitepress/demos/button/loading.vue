@@ -1,0 +1,29 @@
+
+<template>
+    <div
+        flex
+        gap-5
+    >
+        <sn-button
+            variant="primary"
+            loading
+        >
+            提交
+        </sn-button>
+        <sn-button
+            variant="primary"
+            loading
+            loading-icon="sunny"
+        >
+            确认
+        </sn-button>
+        <sn-button
+            variant="danger"
+            loading
+            loading-icon="trash"
+            loading-text="在删了，不要催"
+        >
+            删除
+        </sn-button>
+    </div>
+</template>

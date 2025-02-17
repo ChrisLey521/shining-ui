@@ -9,13 +9,14 @@ interface ButtonProps {
     variant?: Variant
     fullWidth?: boolean
     plain?: boolean
-    text?: boolean
+    ghost?: boolean
     bg?: boolean
     link?: boolean
     round?: boolean
     circle?: boolean
     loading?: boolean
     loadingIcon?: `${IconName}`
+    loadingText?: string
     disabled?: boolean
     icon?: `${IconName}`
     autofocus?: boolean
@@ -28,8 +29,13 @@ interface ButtonProps {
     background?: string
 }
 
+interface ButtonGroupContext {
+    variant?: Variant
+    size?: Size
+}
+
 export {
-    ButtonNativeType,
+    ButtonGroupContext, ButtonNativeType,
     ButtonProps
 }
 

@@ -25,6 +25,8 @@
         "rule-empty-line-before": null,
         "comment-empty-line-before": null,
         "declaration-block-single-line-max-declarations": null,
-        "selector-class-pattern": null
+        "selector-class-pattern": null,
+        "color-function-notation": null,
+        "hue-degree-notation": null
     }
 }

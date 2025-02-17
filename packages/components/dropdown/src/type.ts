@@ -1,8 +1,21 @@
+import { Placement, Variant } from 'constants/common';
 import { FloatingProps, POPPER_SIDE } from 'constants/floating';
 
-interface DropdownProps extends FloatingProps {
+enum YPlacement {
+    TopStart = Placement.TopStart,
+    Top = Placement.Top,
+    TopEnd = Placement.TopEnd,
+    BottomStart = Placement.BottomStart,
+    Bottom = Placement.Bottom,
+    BottomEnd = Placement.BottomEnd
+}
+
+interface DropdownProps extends Omit<FloatingProps, 'placement'> {
     disabled?: boolean
     persistent?: boolean
+    placement?: YPlacement
+    splitButton?: boolean
+    variant?: Variant
 }
 
 type PlacementSide = keyof typeof POPPER_SIDE

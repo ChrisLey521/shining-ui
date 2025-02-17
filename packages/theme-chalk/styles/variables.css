@@ -1,5 +1,6 @@
 
 :root {
+    /* 调色盘 color */
     --primary-5: #3060fd;
     --info-5: #8c8c8c;
     --success-5: #02c640;
@@ -10,4 +11,7 @@
     --success-2: #a5ffa5;
     --warning-2: #ffdc9b;
     --danger-2: #ff9e9e;
+    /* 边框 border */
+    --sn-border-radius-base: 4px;
+    --sn-button-divider-color: hsla(0, 0%, 100%, 0.5);
 }
