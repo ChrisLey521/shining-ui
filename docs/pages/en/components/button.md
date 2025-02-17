@@ -10,9 +10,9 @@ button/basic
 
 :::
 
-## 按钮大小
+## 按钮尺寸
 
-`size`参数决定了按钮大小，默认为中等大小的按钮。
+`size`参数决定了按钮大小，共有大、中、小、mini四种尺寸，默认为中。
 
 :::demo
 
@@ -72,6 +72,8 @@ button/loading
 
 ## 自定义按钮颜色
 
+可以使用`color`, `background`, `border`来自定义按钮的文本、背景和边框颜色。
+
 :::demo
 
 button/custom
@@ -79,6 +81,8 @@ button/custom
 :::
 
 ## 自定义按钮标签
+
+通过 `tag`参数来更改按钮的标签。
 
 :::demo
 
