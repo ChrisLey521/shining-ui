@@ -2,9 +2,9 @@ import { CSSProperties, VNode } from 'vue'
 import { DEFAULT_PLACEMENT, Placement, Theme, Trigger } from './common'
 
 interface FloatingProps {
-    trigger?: Trigger
-    theme?: PopperTheme
-    placement?: Placement
+    trigger?: `${Trigger}`
+    theme?: `${PopperTheme}`
+    placement?: `${Placement}`
     offset?: number
     transition?: string
     width?: string
@@ -58,12 +58,12 @@ const POPPER_SIDE = {
     left: 'right',
 }
 
-const overlayBgMap = new Map<PopperTheme, string[]>([
+const overlayBgMap = new Map<`${PopperTheme}`, string[]>([
     [PopperTheme.Dark, ['bg-dark-5', 'text-white', 'b-gray-6']],
     [PopperTheme.Light, ['bg-white', 'text-gray-9', 'b-gray-2']]
 ])
 
-const tooltipBgMap = new Map<PopperTheme, string[]>([
+const tooltipBgMap = new Map<`${PopperTheme}`, string[]>([
     [PopperTheme.Dark, ['bg-dark-5', 'text-white', 'b-gray-6']],
     [PopperTheme.Light, ['bg-white', 'text-blue', 'b-gray-2']]
 ])

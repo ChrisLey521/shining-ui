@@ -1,7 +1,13 @@
-import presetIcons from '@unocss/preset-icons'
-import transformerAttributifyJsx from '@unocss/transformer-attributify-jsx'
-import transformerDirectives from '@unocss/transformer-directives'
-import { defineConfig, presetAttributify, presetTypography, presetUno, } from 'unocss'
+import {
+    defineConfig,
+    presetAttributify,
+    presetIcons,
+    presetTypography,
+    presetUno,
+    transformerAttributifyJsx,
+    transformerDirectives,
+    transformerVariantGroup
+} from 'unocss'
 
 export default defineConfig({
     presets: [
@@ -21,6 +27,7 @@ export default defineConfig({
             applyVariable: ['--at-apply'],
         }),
         transformerAttributifyJsx(),
+        transformerVariantGroup()
     ],
     cli: {
         entry: {

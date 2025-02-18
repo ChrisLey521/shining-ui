@@ -61,7 +61,7 @@ import { ButtonGroupContext, ButtonProps } from './type.ts';
 const {
     tag = 'button',
     size: propSize = DEFAULT_SIZE,
-    variant: propVariant = DEFAULT_BUTTON_VARIANT,
+    variant: propVariant,
     fullWidth,
     loadingIcon = IconName.Loading,
     autoInsertSpace = false,
@@ -77,7 +77,7 @@ const {
 const buttonGroupContext = inject<ButtonGroupContext>(BUTTON_GROUP_CONTEXT_KEY)
 
 const size = computed(() => propSize ?? buttonGroupContext.size)
-const variant = computed(() => propVariant ?? buttonGroupContext.variant)
+const variant = computed(() => propVariant ?? buttonGroupContext?.variant ?? DEFAULT_BUTTON_VARIANT)
 
 const sizeClass = computed(() => {
     const baseSize = sizeMap.get(size.value).slice(Number(!circle));
