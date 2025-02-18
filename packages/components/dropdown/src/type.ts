@@ -14,6 +14,7 @@ interface DropdownProps extends Omit<FloatingProps, 'placement'> {
     disabled?: boolean
     persistent?: boolean
     placement?: YPlacement
+    hideOnClick?: boolean
     splitButton?: boolean
     variant?: Variant
 }

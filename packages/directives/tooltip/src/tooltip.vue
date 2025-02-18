@@ -20,7 +20,6 @@
             :themeStyles
             :floating-class
             :floating-styles
-            :reference-element
         >
             <component v-if="contentAsComponent" :is="content"></component>
         </Floating>
@@ -77,7 +76,10 @@ const removeEvents = () => {
     removeEvent(referenceElement, 'click',floating.value.toggle)
 }
 
-onMounted(attachEvents)
+onMounted(() => {
+    attachEvents()
+    floating.value.setReference(referenceElement)
+})
 
 onBeforeUnmount(removeEvents)
 </script>

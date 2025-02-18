@@ -7,7 +7,7 @@
                     <dropdown-item command="1">
                         菜单一
                     </dropdown-item>
-                    <dropdown-item command="2">
+                    <dropdown-item command="2" disabled>
                         菜单二
                     </dropdown-item>
                 </dropdown-menu>

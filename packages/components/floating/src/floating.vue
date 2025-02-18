@@ -1,6 +1,6 @@
 <template>
     <FloatingTrigger
-        ref="trigger"
+        ref="reference"
         v-if="!virtual"
         :trigger
         :disabled
@@ -9,14 +9,15 @@
     >
         <slot name="reference" />
     </FloatingTrigger>
+    <slot v-else name="reference" />
     <Teleport :to="container">
         <Transition
-            mode="out-in"
+            mode="default"
             :name="transition"
             :duration="delay">
             <FloatingContent
                 ref="floating"
-                v-if="visible && !disabled"
+                v-if="!disabled && computedVisible"
                 :class="{
                     'px-2': xPadding
                 }"
@@ -54,7 +55,7 @@
 <script setup lang="ts">
 import { useFloatingVue } from 'composables/floating';
 import { Placement, Trigger } from 'constants/common';
-import { computed, onMounted, provide, ref, useTemplateRef } from 'vue';
+import { computed, provide, ref, useTemplateRef } from 'vue';
 import FloatingContent from './content.vue';
 import FloatingTrigger from './trigger.vue';
 import { FloatingProps } from './type';
@@ -70,17 +71,20 @@ const {
     enterable = true,
     showArrow = true,
     xPadding = true,
-    referenceElement
 } = defineProps<FloatingProps>()
 
-const reference = ref(virtual ? referenceElement : null)
+const reference = ref(null)
+
+const setReference = (target: HTMLElement) => reference.value = target
 
 const modelVisible = defineModel<boolean>('visible')
 
 const hasModelVisible = computed(() => typeof modelVisible.value !== 'undefined')
 const controlled = computed(() => typeof controlledVisible !== 'undefined')
 
-const visible = ref(modelVisible.value ?? controlledVisible ?? false)
+const visible = ref(false)
+
+const computedVisible = computed(() => modelVisible.value ?? controlledVisible ?? visible.value)
 
 const floating = useTemplateRef<HTMLElement & { element?: HTMLElement }>('floating')
 const {
@@ -97,11 +101,13 @@ const {
 })
 
 const open = () => {
+    if (controlled.value) return
     visible.value = true
     if (hasModelVisible.value) modelVisible.value = true
 }
 
 const close = () => {
+    if (controlled.value) return
     visible.value = false
     if (hasModelVisible.value) modelVisible.value = false
 }
@@ -110,19 +116,11 @@ const toggle = () => visible.value
     ? close()
     : open()
 
-const triggerRef = useTemplateRef('trigger')
-const triggerElement = computed(() => triggerRef.value?.element)
-
-onMounted(() => {
-    reference.value = virtual
-        ? referenceElement
-        : triggerElement.value
-})
-
 defineExpose({
     open,
     close,
-    toggle
+    toggle,
+    setReference
 })
 
 provide('open', open)

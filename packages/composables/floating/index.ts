@@ -2,7 +2,8 @@ import { arrow, autoUpdate, flip, offset, shift, useFloating } from '@floating-u
 import { Trigger } from 'constants/common';
 import { POPPER_SIDE } from 'constants/floating';
 import { isElement } from 'lodash-unified';
-import { computed, isRef, Ref, ref } from 'vue';
+import { computed, isRef, onBeforeUnmount, onMounted, Ref, ref } from 'vue';
+import { attachEvent, removeEvent } from '../../utils';
 import { FloatingEventsOptions, FloatingVueOptions, PlacementSide } from './type';
 
 const normalizeRef = (reference?: Ref<unknown> | HTMLElement) => {
@@ -82,6 +83,7 @@ const useFloatingEvents = ({
     disabled,
     hasModelVisible,
     controlled,
+    reference,
     actions
 }: FloatingEventsOptions) => {
     
@@ -119,6 +121,34 @@ const useFloatingEvents = ({
         toggleFloating('toggle')
     }
 
+    if (!reference) {
+        return {
+            /** 用于 @[event]="showFloating" 动态事件绑定 */
+            showFloatingEvent,
+            hideFloatingEvent,
+            showFloating,
+            hideFloating,
+            handleReferenceClick,
+        }
+    }
+    onMounted(() => {
+        console.log('挂载')
+        const el = reference.value
+        if (!el) return
+        attachEvent(el, showFloatingEvent.value, showFloating)
+        attachEvent(el, hideFloatingEvent.value, hideFloating)
+        attachEvent(el, 'click', handleReferenceClick)
+    })
+
+    onBeforeUnmount(() => {
+        console.log('卸载')
+        const el = reference.value
+        if (!el) return
+        removeEvent(el, showFloatingEvent.value, showFloating)
+        removeEvent(el, hideFloatingEvent.value, hideFloating)
+        removeEvent(el, 'click', handleReferenceClick)
+    })
+
     return {
         /** 用于 @[event]="showFloating" 动态事件绑定 */
         showFloatingEvent,
@@ -129,9 +159,9 @@ const useFloatingEvents = ({
     }
 }
 
-const useFloatingActions = (trigger: Trigger) => {
+const useFloatingActions = (trigger: `${Trigger}`) => {
     const showFloatingEvent = computed(() => {
-        const showFloatingEventMap = new Map<Trigger, string>([
+        const showFloatingEventMap = new Map<`${Trigger}`, string>([
             [Trigger.Hover, 'mouseenter'],
             [Trigger.Focus, 'focus'],
             [Trigger.ContextMenu, 'contextmenu']
@@ -141,7 +171,7 @@ const useFloatingActions = (trigger: Trigger) => {
     })
 
     const hideFloatingEvent = computed(() => {
-        const showFloatingEventMap = new Map<Trigger, string>([
+        const showFloatingEventMap = new Map<`${Trigger}`, string>([
             [Trigger.Hover, 'mouseleave'],
             [Trigger.Focus, 'blur']
         ])

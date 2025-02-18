@@ -1,7 +1,7 @@
 <template>
     <Floating
         ref="floating"
-        :visible="false"
+        :virtual="splitButton"
         :disabled
         :container
         :placement
@@ -16,16 +16,30 @@
         :x-padding="false"
     >
         <template #reference>
-            <slot />
+            <ButtonGroup v-if="splitButton" :variant>
+                <Button>
+                    <slot />
+                </Button>
+                <Button
+                    ref="reference"
+                    icon="arrow-down"
+                    @[showFloatingEvent]="open"
+                    @[hideFloatingEvent]="close"
+                    @click="trigger === Trigger.Click && toggle()"
+                />
+            </ButtonGroup>
+            <slot v-else />
         </template>
         <slot name="dropdown" />
     </Floating>
 </template>
 
 <script setup lang=ts>
+import { useFloatingActions } from 'composables/floating';
 import { Placement, Trigger } from 'constants/common';
 import { overlayBgMap, PopperTheme } from 'constants/floating';
-import { computed, provide, ref, useTemplateRef } from 'vue';
+import { computed, onMounted, provide, ref, useTemplateRef } from 'vue';
+import { Button, ButtonGroup } from '../../button';
 import { Floating } from '../../floating';
 import { DropdownProps } from './type';
 
@@ -36,19 +50,36 @@ const {
     trigger = Trigger.Hover,
     container = 'body',
     disabled,
-    // splitButton,
-    // variant
+    hideOnClick = true,
+    splitButton,
+    variant
 } = defineProps<DropdownProps>()
 
 const themeStyles = computed(() => overlayBgMap.get(theme))
 
 const floating = useTemplateRef('floating')
+const reference = useTemplateRef('reference')
+
+// provide('virtualRef', reference)
+onMounted(() => {
+    if (!splitButton) return
+    const el = reference.value?.$el
+    floating.value.setReference(el)
+})
+
+const {
+    showFloatingEvent,
+    hideFloatingEvent
+} = useFloatingActions(trigger)
+
 const open = () => floating.value?.open()
 const close = () => floating.value?.close()
+const toggle = () => floating.value?.toggle()
 
 defineExpose({
     open,
-    close
+    close,
+    toggle
 })
 
 const active = ref()
@@ -59,5 +90,6 @@ const handleSelect = (cmd: string) => {
 }
 provide('select', handleSelect)
 provide('active', active)
+provide('hideOnClick', hideOnClick)
 
 </script>
