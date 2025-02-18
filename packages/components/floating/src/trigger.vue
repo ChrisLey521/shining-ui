@@ -17,9 +17,7 @@ import { FloatingTriggerProps } from './type';
 
 const {
     trigger,
-    disabled,
-    hasModelVisible,
-    controlled
+    disabled
 } = defineProps<FloatingTriggerProps>()
 
 const open = inject<() => void>('open')
@@ -35,8 +33,6 @@ const {
 } = useFloatingEvents({
     trigger,
     disabled,
-    hasModelVisible,
-    controlled,
     actions: {
         open,
         close,

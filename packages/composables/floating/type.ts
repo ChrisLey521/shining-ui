@@ -20,8 +20,6 @@ interface FloatingVueOptions {
 interface FloatingEventsOptions {
     trigger: `${Trigger}`
     disabled?: boolean
-    hasModelVisible?: boolean
-    controlled?: boolean
     reference?: Ref<HTMLElement>
     actions: {
         open: () => void

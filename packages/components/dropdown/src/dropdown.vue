@@ -14,6 +14,7 @@
         :transition
         :themeStyles
         :x-padding="false"
+        @visible-change="(value, oldValue) => $emit('visible-change', value, oldValue)"
     >
         <template #reference>
             <ButtonGroup v-if="splitButton" :variant>
@@ -83,11 +84,17 @@ defineExpose({
 })
 
 const active = ref()
-const emits = defineEmits(['command'])
+
+const emits = defineEmits<{
+    (e: 'visible-change', value: boolean, oldValue: boolean): void
+    (e: 'command', value: string): void
+}>()
+
 const handleSelect = (cmd: string) => {
     active.value = cmd
     emits('command', cmd)
 }
+
 provide('select', handleSelect)
 provide('active', active)
 provide('hideOnClick', hideOnClick)

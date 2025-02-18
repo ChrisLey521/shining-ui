@@ -4,8 +4,6 @@
         v-if="!virtual"
         :trigger
         :disabled
-        :has-model-visible
-        :controlled
     >
         <slot name="reference" />
     </FloatingTrigger>
@@ -17,7 +15,7 @@
             :duration="delay">
             <FloatingContent
                 ref="floating"
-                v-if="!disabled && computedVisible"
+                v-if="!disabled && visible"
                 :class="{
                     'px-2': xPadding
                 }"
@@ -55,13 +53,13 @@
 <script setup lang="ts">
 import { useFloatingVue } from 'composables/floating';
 import { Placement, Trigger } from 'constants/common';
-import { computed, provide, ref, useTemplateRef } from 'vue';
+import { computed, provide, ref, useTemplateRef, watch } from 'vue';
 import FloatingContent from './content.vue';
 import FloatingTrigger from './trigger.vue';
 import { FloatingProps } from './type';
 
 const {
-    visible: controlledVisible,
+    visible: propVisible,
     virtual = false,
     container = 'body',
     placement = Placement.TopStart,
@@ -77,14 +75,15 @@ const reference = ref(null)
 
 const setReference = (target: HTMLElement) => reference.value = target
 
-const modelVisible = defineModel<boolean>('visible')
+const modelVisible = defineModel<boolean>('visible', { default: void 0 })
 
-const hasModelVisible = computed(() => typeof modelVisible.value !== 'undefined')
-const controlled = computed(() => typeof controlledVisible !== 'undefined')
+const visible = computed(() => propVisible ?? modelVisible.value)
 
-const visible = ref(false)
+const emits = defineEmits<{
+    (e: 'visible-change', value: boolean, oldValue: boolean): void
+}>()
 
-const computedVisible = computed(() => modelVisible.value ?? controlledVisible ?? visible.value)
+watch(visible, (value, oldValue) => emits('visible-change', value, oldValue))
 
 const floating = useTemplateRef<HTMLElement & { element?: HTMLElement }>('floating')
 const {
@@ -100,21 +99,9 @@ const {
     floating
 })
 
-const open = () => {
-    if (controlled.value) return
-    visible.value = true
-    if (hasModelVisible.value) modelVisible.value = true
-}
-
-const close = () => {
-    if (controlled.value) return
-    visible.value = false
-    if (hasModelVisible.value) modelVisible.value = false
-}
-
-const toggle = () => visible.value
-    ? close()
-    : open()
+const open = () => modelVisible.value = true
+const close = () => modelVisible.value = false
+const toggle = () => modelVisible.value = !modelVisible.value
 
 defineExpose({
     open,

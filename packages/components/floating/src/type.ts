@@ -29,8 +29,6 @@ interface FloatingProps extends FloatingContentProps {
 interface FloatingTriggerProps {
     trigger: `${Trigger}`
     disabled?: boolean
-    hasModelVisible?: boolean
-    controlled?: boolean
 }
 
 export {

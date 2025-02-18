@@ -81,29 +81,14 @@ const useFloatingVue = ({
 const useFloatingEvents = ({
     trigger = Trigger.Hover,
     disabled,
-    hasModelVisible,
-    controlled,
     reference,
     actions
 }: FloatingEventsOptions) => {
     
-    // const visible = ref(modelVisible?.value ?? controlledVisible)
-
     const { showFloatingEvent, hideFloatingEvent } = useFloatingActions(trigger)
 
     const toggleFloating = (action: keyof typeof actions) => {
         if (disabled) return
-        // 优先级策略: v-model:visible > controlledVisible (受控) > visible
-
-        // 没有 v-model:visible
-        if (!hasModelVisible) {
-            // 传入了 props.visible , 则由 props.visible 决定，组件不能更改可见性
-            if (controlled) return
-            // 没有传入 props.visible 则由组件自己决定
-            // visible.value = shouldShowFloating
-            actions[action]?.()
-            return
-        }
         actions[action]?.()
     }
 
