@@ -8,7 +8,7 @@
             <Icon
                 v-if="selectContext.value === value"
                 name="check"
-                :size="16"
+                :size="20"
                 class="!text-green-7"
                 flex-shrink-0
             />
@@ -17,7 +17,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, inject, provide, Reactive, watch } from 'vue';
+import { computed, inject, provide, Reactive } from 'vue';
 import { DropdownItem } from '../../dropdown';
 import { type IconName, Icon } from '../../icon';
 import { SelectContext, selectContextKey } from '../../select';
@@ -35,5 +35,4 @@ const selectContext = inject<Reactive<SelectContext>>(selectContextKey)
 // 覆盖 dropdown 向 dropdown-item 注入的 active
 provide('active', computed(() => selectContext.value))
 
-watch(() => selectContext.value, console.log)
 </script>

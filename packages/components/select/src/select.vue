@@ -5,7 +5,7 @@
         @command="handleSelect">
         <input-impl
             ref="selectRef"
-            v-model="value"
+            :value="inputValue"
             :editable="false"
         />
         <template #dropdown>
@@ -28,23 +28,38 @@ import { isEmpty } from 'lodash-unified';
 import { computed, provide, reactive, useTemplateRef, watch } from 'vue';
 import { Dropdown } from '../../dropdown';
 import { InputImpl } from '../../input';
-import { Option, OptionProps } from '../../option';
+import { isOptionProps, Option, OptionProps } from '../../option';
 import { selectContextKey } from './const';
 import SelectPanel from './panel.vue';
-import { BasicValue, isBasicValues, SelectEvents, SelectValue } from './type';
+import { BasicValue, isBasicValue, SelectEvents, SelectValue } from './type';
 const {
     // 不指定默认值时, 为什么默认值是 false？
     value: propValue = void 0,
-    multiple
+    multiple,
+    options = [],
+    defaultText
 } = defineProps<{
     multiple?: boolean
     value?: SelectValue
     options: OptionProps[]
+    defaultText?: string
 }>()
 
-// console.log('propVal -> ', propValue, multiple)
-
 const modelValue = defineModel<SelectValue>()
+
+const selectedOptions = computed<OptionProps | OptionProps[]>(() => {
+    if (isBasicValue(modelValue.value)) {
+        return options.find(opt => opt.value === modelValue.value)
+    }
+    return options.filter(opt => (modelValue.value as BasicValue[]).includes(opt.value))
+})
+
+const inputValue = computed(() => isOptionProps(selectedOptions.value)
+    ? (selectedOptions.value as OptionProps)?.label ?? defaultText
+    : (selectedOptions.value as OptionProps[]).map(({ label }) => label)
+)
+
+watch(inputValue, console.log)
 
 const value = computed({
     get: () => propValue ?? modelValue.value,
@@ -68,17 +83,16 @@ provide(selectContextKey, reactive({
 }))
 
 const handleSelect = (selectedValue: BasicValue) => {
-    if (!isBasicValues(modelValue.value)) {
+    if (isBasicValue(modelValue.value)) {
         modelValue.value = selectedValue
-        console.log('select -> ', selectedValue, propValue, modelValue.value)
         return emits('select', selectedValue)
     }
 
-    const hasSelected = (modelValue.value as BasicValue[]).includes(selectedValue)
+    const hasSelected = modelValue.value.includes(selectedValue)
     if (hasSelected) {
-        modelValue.value = (modelValue.value  as BasicValue[]).filter(val => val !== selectedValue)
+        modelValue.value = modelValue.value.filter(val => val !== selectedValue)
     } else {
-        (modelValue.value as BasicValue[]).push(selectedValue)
+        modelValue.value.push(selectedValue)
     }
     emits('select', selectedValue, modelValue.value)
 }

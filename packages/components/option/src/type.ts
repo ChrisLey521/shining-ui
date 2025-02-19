@@ -8,6 +8,9 @@ interface OptionProps {
     children?: OptionProps[]
 }
 
+const isOptionProps = (value: OptionProps | OptionProps[]) => !Array.isArray(value)
+
 export {
-    OptionProps
+    isOptionProps, OptionProps
 }
+

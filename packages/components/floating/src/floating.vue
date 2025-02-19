@@ -79,6 +79,8 @@ const modelVisible = defineModel<boolean>('visible', { default: void 0 })
 
 const visible = computed(() => propVisible ?? modelVisible.value)
 
+// provide('floatingVisible', visible)
+
 const emits = defineEmits<{
     (e: 'visible-change', value: boolean, oldValue: boolean): void
 }>()

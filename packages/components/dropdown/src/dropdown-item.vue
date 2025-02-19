@@ -9,9 +9,9 @@
         py-1
         :class="[
             seperator,
-            disabled ? 'bg-gray-3 cursor-not-allowed' : 'hover:bg-gray-2',
+            disabled ? 'bg-gray-2 cursor-not-allowed' : 'hover:bg-gray-1',
             {
-                'bg-blue-2 text-blue-5': active === command,
+                'bg-blue-1 text-blue-5': active === command,
             },
         ]"
         @click="!disabled && handleClick()">
@@ -24,9 +24,10 @@
 import { computed, inject, Ref } from 'vue';
 import { type IconName } from '../../icon/src/const';
 import Icon from '../../icon/src/icon.vue';
+import { BasicValue } from '../../select';
 
 const { command, divided } = defineProps<{
-    command: string
+    command: BasicValue
     divided?: boolean
     disabled?: boolean
     icon?: IconName
@@ -42,7 +43,7 @@ const active = inject<Ref<string>>('active')
 
 const hideOnClick = inject<Ref<boolean>>('hideOnClick')
 
-const select = inject<(cmd: string) => void>('select')
+const select = inject<(cmd: BasicValue) => void>('select')
 const close = inject<() => void>('close')
 const handleClick = () => {
     select(command)

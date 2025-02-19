@@ -2,7 +2,7 @@
 type BasicValue = string | number | boolean
 type SelectValue = BasicValue | BasicValue[]
 
-const isBasicValues = (val: SelectValue): val is BasicValue[] => Array.isArray(val)
+const isBasicValue = (val: SelectValue): val is BasicValue => !Array.isArray(val)
 
 interface SelectEvents {
     (e: 'change', value: SelectValue, oldValue: SelectValue): void
@@ -19,6 +19,6 @@ interface SelectContext {
 }
 
 export {
-    BasicValue, isBasicValues, SelectContext, SelectEvents, SelectValue
+    BasicValue, isBasicValue, SelectContext, SelectEvents, SelectValue
 }
 
