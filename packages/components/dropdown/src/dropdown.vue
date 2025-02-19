@@ -40,7 +40,8 @@ import { useFloatingActions } from 'composables/floating';
 import { Placement, Trigger } from 'constants/common';
 import { overlayBgMap, PopperTheme } from 'constants/floating';
 import { computed, onMounted, provide, ref, useTemplateRef } from 'vue';
-import { Button, ButtonGroup } from '../../button';
+import { Button } from '../../button';
+import { ButtonGroup } from '../../button-group';
 import { Floating } from '../../floating';
 import { DropdownProps } from './type';
 
