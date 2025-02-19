@@ -102,7 +102,5 @@ const darkVariantStyles: Record<Variant, Record<'default' | 'ghost' | 'plain' | 
 
 const DEFAULT_BUTTON_VARIANT: Variant = Variant.Default
 
-const BUTTON_GROUP_CONTEXT_KEY = 'buttonGroupContext'
-
-export { BUTTON_GROUP_CONTEXT_KEY, ButtonNativeType, darkVariantStyles, DEFAULT_BUTTON_VARIANT, lightVariantStyles, paddingMap, sizeMap };
+export { ButtonNativeType, darkVariantStyles, DEFAULT_BUTTON_VARIANT, lightVariantStyles, paddingMap, sizeMap };
 

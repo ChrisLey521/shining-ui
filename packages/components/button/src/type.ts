@@ -2,8 +2,6 @@ import { Size, Variant } from 'constants/common'
 import { IconName } from '../../icon/src/const'
 import { ButtonNativeType } from './const'
 
-
-
 interface ButtonProps {
     size?: Size
     variant?: Variant
@@ -29,13 +27,8 @@ interface ButtonProps {
     background?: string
 }
 
-interface ButtonGroupContext {
-    variant?: Variant
-    size?: Size
-}
-
 export {
-    ButtonGroupContext, ButtonNativeType,
+    ButtonNativeType,
     ButtonProps
 }
 

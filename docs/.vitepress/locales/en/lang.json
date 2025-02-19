@@ -14,5 +14,6 @@
     "Tag": "Tag",
     "Tooltip": "Tooltip",
     "Overlay": "Overlay",
-    "Dropdown": "Dropdown"
+    "Dropdown": "Dropdown",
+    "Select": "Select"
 }

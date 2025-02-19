@@ -11,7 +11,8 @@
 <script setup lang="ts">
 import { DEFAULT_SIZE } from 'constants/common';
 import { provide, reactive } from 'vue';
-import { BUTTON_GROUP_CONTEXT_KEY, DEFAULT_BUTTON_VARIANT } from './const';
+import { DEFAULT_BUTTON_VARIANT } from '../../button/src/const';
+import { BUTTON_GROUP_CONTEXT_KEY } from './const';
 import { ButtonGroupContext } from './type';
 
 const {

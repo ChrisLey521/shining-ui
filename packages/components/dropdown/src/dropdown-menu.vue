@@ -3,6 +3,9 @@
         px-0
         overflow-auto
         :style="{
+            width: typeof width === 'number'
+                ? `${width}px`
+                : width,
             maxHeight: typeof maxHeight === 'number'
                 ? `${maxHeight}px`
                 : maxHeight
@@ -13,6 +16,7 @@
 
 <script setup lang="ts">
 defineProps<{
-    maxHeight?: number | string
+    width?: string | number
+    maxHeight?: string | number
 }>()
 </script>

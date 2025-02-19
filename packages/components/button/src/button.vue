@@ -53,10 +53,11 @@
 <script lang="ts" setup>
 import { DEFAULT_SIZE } from 'constants/common';
 import { computed, inject, VNode } from 'vue';
+import { BUTTON_GROUP_CONTEXT_KEY, ButtonGroupContext } from '../../button-group';
 import { Icon } from '../../icon';
 import { IconName } from '../../icon/src/const';
-import { BUTTON_GROUP_CONTEXT_KEY, darkVariantStyles, DEFAULT_BUTTON_VARIANT, lightVariantStyles, paddingMap, sizeMap } from './const';
-import { ButtonGroupContext, ButtonProps } from './type.ts';
+import { darkVariantStyles, DEFAULT_BUTTON_VARIANT, lightVariantStyles, paddingMap, sizeMap } from './const';
+import { ButtonProps } from './type.ts';
 
 const {
     tag = 'button',

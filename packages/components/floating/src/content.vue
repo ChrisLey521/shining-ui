@@ -12,6 +12,7 @@
         b
         b-solid
         py-1
+        shadow-lg
         @mouseenter="handleMouseEnter"
         @mouseleave="handleMouseLeave"
     >

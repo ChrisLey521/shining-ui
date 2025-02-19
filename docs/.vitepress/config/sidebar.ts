@@ -14,42 +14,46 @@ const sidebarConfig: SidebarConfig = {
   '/components': [
     {
       text: 'Icon',
-      link: '/icon',
+      link: 'icon',
     },
     {
       text: 'Button',
-      link: '/button',
+      link: 'button',
       // children: []
     },
     {
       text: 'Overlay',
-      link: '/overlay',
+      link: 'overlay',
     },
     {
       text: 'Tooltip',
-      link: '/tooltip',
+      link: 'tooltip',
     },
     {
       text: 'Dropdown',
-      link: '/dropdown',
+      link: 'dropdown',
     },
     {
       text: 'Tag',
-      link: '/tag',
+      link: 'tag',
     },
+    {
+      text: 'Select',
+      link: 'select'
+    }
   ],
   '/examples': [
     {
       text: 'Doc Examples',
-      link: '/doc-examples'
+      link: 'doc-examples'
     },
     {
       text: 'Markdown Examples',
-      link: '/markdown-examples'
+      link: 'markdown-examples'
     },
     {
       text: 'Runtime API Examples',
-      link: '/api-examples'
+      link: 'api-examples'
     }
   ]
 }
@@ -58,7 +62,7 @@ const generateSidebarConfig = (sidebarConfig: SidebarConfig, locale: Locale) => 
   .reduce((res, [base, children]) => {
     res[getLink(base, locale)] = children.map(({ text, link }) => ({
       text: t(text!, locale),
-      link: getLink(`${base}${link ?? ''}`, locale)
+      link: getLink(`${base}/${link ?? ''}`, locale)
     }))
     return res
   }, {})
