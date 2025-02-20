@@ -62,7 +62,7 @@ const inputValue = computed(() => isOptionProps(selectedOptions.value)
 watch(inputValue, console.log)
 
 const value = computed({
-    get: () => propValue ?? modelValue.value,
+    get: () => propValue ?? modelValue.value ?? 1,
     set: (newValue) => {
         modelValue.value = newValue
     }

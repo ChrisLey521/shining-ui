@@ -8,21 +8,21 @@ enum ButtonNativeType {
     Reset = 'reset',
 }
 
-const sizeMap: Map<Size, string[]> = new Map<Size, string[]>([
+const sizeMap: Map<`${Size}`, string[]> = new Map<Size, string[]>([
     [Size.Large, ['w-40px', 'text-lg', 'h-40px']],
     [Size.Medium, ['w-32px', 'text-base', 'h-32px']],
     [Size.Small, ['w-24px', 'text-sm', 'h-24px']],
     [Size.Mini, ['w-20px', 'text-xs', 'h-20px']],
 ]);
 
-const paddingMap: Map<Size, string[]> = new Map<Size, string[]>([
+const paddingMap: Map<`${Size}`, string[]> = new Map<Size, string[]>([
     [Size.Large, ['px-20px', 'py-10px']],
     [Size.Medium, ['px-16px', 'py-8px']],
     [Size.Small, ['px-12px', 'py-6px']],
     [Size.Mini, ['px-10px', 'py-4px']],
 ]);
 
-const lightVariantStyles: Record<Variant, Record<'default' | 'ghost' | 'plain' | 'link', string[]>> = {
+const lightVariantStyles: Record<`${Variant}`, Record<'default' | 'ghost' | 'plain' | 'link', string[]>> = {
     [Variant.Primary]: {
         default: ['bg-blue-5/90', 'text-white', 'hover:bg-blue-5/80', 'active:bg-blue-5'],
         ghost: ['text-blue-5/90', 'bg-transparent', 'hover:bg-gray-1', 'active:bg-gray-2/80'],
@@ -61,7 +61,7 @@ const lightVariantStyles: Record<Variant, Record<'default' | 'ghost' | 'plain' |
     },
 };
 
-const darkVariantStyles: Record<Variant, Record<'default' | 'ghost' | 'plain' | 'link', string[]>> = {
+const darkVariantStyles: Record<`${Variant}`, Record<'default' | 'ghost' | 'plain' | 'link', string[]>> = {
     [Variant.Primary]: {
         default: ['bg-blue-5/90', 'text-white', 'hover:bg-blue-5/80', 'active:bg-blue-5'],
         ghost: ['text-blue-5/90', 'bg-transparent', 'hover:bg-neutral-8', 'active:bg-neutral-7'],
