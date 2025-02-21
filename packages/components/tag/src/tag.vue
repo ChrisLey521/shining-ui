@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { DEFAULT_SIZE, DEFAULT_THEME, DEFAULT_VARIANT, size2height, Theme, Variant } from "constants/common";
+import { DEFAULT_SIZE, DEFAULT_THEME, DEFAULT_VARIANT, size2height } from "constants/common";
 import { computed } from "vue";
+import { colorMap, widthBorder } from './const';
 import { TagProps } from './type';
 
 const {
@@ -16,47 +17,17 @@ const {
     theme = DEFAULT_THEME,
 } = defineProps<TagProps>();
 
-const colors = computed<string[]>(() => {
-    const border = 'border border-solid'
-    const darkColorMap = new Map([
-        [Variant.Primary, ['bg-[var(--primary-5)]', 'text-white', 'border-[var(--primary-5)]']],
-        [Variant.Info, ['bg-[var(--info-5)]', 'text-white', 'border-[var(--info-5)]']],
-        [Variant.Success, ['bg-[var(--success-5)]', 'text-white', 'border-[var(--success-5)]']],
-        [Variant.Warning, ['bg-[var(--warning-5)]', 'text-white', 'border-[var(--warning-5)]']],
-        [Variant.Danger, ['bg-[var(--danger-5)]', 'text-white', 'border-[var(--danger-5)]']],
-    ])
-    const lightColorMap = new Map([
-        [Variant.Primary, ['bg-[var(--primary-2)]', 'text-[var(--primary-5)]', 'border-[var(--primary-5)]']],
-        [Variant.Info, ['bg-[var(--info-2)]', 'text-[var(--info-5)]', 'border-[var(--info-5)]']],
-        [Variant.Success, ['bg-[var(--success-2)]', 'text-[var(--success-5)]', 'border-[var(--success-5)]']],
-        [Variant.Warning, ['bg-[var(--warning-2)]', 'text-[var(--warning-5)]', 'border-[var(--warning-5)]']],
-        [Variant.Danger, ['bg-[var(--danger-2)]', 'text-[var(--danger-5)]', 'border-[var(--danger-5)]']],
-    ])
-    const plainColorMap = new Map([
-        [Variant.Primary, ['bg-white', 'text-[var(--primary-5)]', 'border-[var(--primary-5)]']],
-        [Variant.Info, ['bg-white', 'text-[var(--info-5)]', 'border-[var(--info-5)]']],
-        [Variant.Success, ['bg-white', 'text-[var(--success-5)]', 'border-[var(--success-5)]']],
-        [Variant.Warning, ['bg-white', 'text-[var(--warning-5)]', 'border-[var(--warning-5)]']],
-        [Variant.Danger, ['bg-white', 'text-[var(--danger-5)]', 'border-[var(--danger-5)]']],
-    ])
-
-    const colorMap = new Map<Theme, Map<Variant, string[]>>([
-        [Theme.Dark, darkColorMap],
-        [Theme.Light, lightColorMap],
-        [Theme.Plain, plainColorMap]
-    ])
-
-    return [
-        ...(colorMap.get(theme)?.get(variant) ?? []),
-        border
-    ]
-});
+const colors = computed<string[]>(() => [
+    ...(colorMap.get(theme)?.get(variant) ?? []),
+    widthBorder
+]);
 
 const height = computed<string>(() => size2height.get(size))
 </script>
 
 <template>
     <span
+        :draggable="draggable ? 'true' : 'false'"
         :style="{ background, color, border }"
         :class="[
             {

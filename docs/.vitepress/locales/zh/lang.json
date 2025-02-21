@@ -16,5 +16,8 @@
     "Overlay": "Overlay 浮窗",
     "Dropdown": "Dropdown 下拉菜单",
     "Input": "Input 输入框",
+    "InputNumber": "InputNumber 数字输入框",
+    "InputTag": "InputTag 标签输入框",
+    "Textarea": "Textarea 文本域",
     "Select": "Select 下拉框"
 }

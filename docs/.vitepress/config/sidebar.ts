@@ -42,6 +42,18 @@ const sidebarConfig: SidebarConfig = {
       link: 'input'
     },
     {
+      text: 'InputNumber',
+      link: 'input-number'
+    },
+    {
+      text: 'InputTag',
+      link: 'input-tag'
+    },
+    {
+      text: 'Textarea',
+      link: 'textarea'
+    },
+    {
       text: 'Select',
       link: 'select'
     }
