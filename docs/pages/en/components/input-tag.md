@@ -30,7 +30,7 @@ input-tag/max
 
 ## 最大展示标签数
 
-通过`max-displayed-count`指定最大展示标签数。只会展示指定数量的标签，超过该数量的标签将会以`+n`的方式展示，鼠标悬停`+n`可触发`<Overlay></Overlay>`查看剩余标签，通过`trigger-more`参数可修改`Overlay`触发的方式，支持`hover`, `click`, `contextmenu`等。
+通过`max-displayed-count`指定最大展示标签数。只会展示指定数量的标签，超过该数量的标签将会以`+n`的方式展示，鼠标悬停`+n`可触发`<Overlay></Overlay>`查看剩余标签。
 
 :::demo
 

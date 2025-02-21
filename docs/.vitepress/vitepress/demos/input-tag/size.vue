@@ -2,7 +2,7 @@
     <div>
         <div>默认</div>
         <sn-input-tag v-model="value" />
-        <div v-mdo>大尺寸</div>
+        <div>大尺寸</div>
         <sn-input-tag v-model="value1" size="large" />
         <div>中尺寸</div>
         <sn-input-tag v-model="value2" size="medium" />
