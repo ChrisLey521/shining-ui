@@ -16,5 +16,8 @@
     "Overlay": "Overlay",
     "Dropdown": "Dropdown",
     "Input": "Input",
+    "InputNumber": "InputNumber",
+    "InputTag": "InputTag",
+    "Textarea": "Textarea",
     "Select": "Select"
 }

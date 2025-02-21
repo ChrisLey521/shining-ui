@@ -1,19 +1,21 @@
 import { Size, Theme, Variant } from 'constants/common';
 
 interface TagProps {
-    variant?: Variant;
+    variant?: `${Variant}`;
     closable?: boolean;
     disableTransitions?: boolean;
     hit?: boolean;
     color?: string;
     border?: string;
     background?: string;
-    size?: Size;
+    size?: `${Size}`;
     round?: boolean;
-    theme?: Theme;
+    theme?: `${Theme}`;
+    draggable?: boolean
     onClose?: () => void
 }
 
 export {
     TagProps
 };
+

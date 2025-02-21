@@ -21,14 +21,21 @@ enum Variant {
 }
 
 const DEFAULT_SIZE: Size = Size.Medium
-const DEFAULT_VARIANT: Variant = Variant.Primary
+const DEFAULT_VARIANT: Variant = Variant.Default
 const DEFAULT_THEME: Theme = Theme.Light
 
-const size2height: Map<Size, string> = new Map([
+const size2height: Map<`${Size}`, string> = new Map([
     [Size.Large, 'h-40px'],
     [Size.Medium, 'h-32px'],
     [Size.Small, 'h-24px'],
     [Size.Mini, 'h-20px']
+])
+
+const size2minHeight: Map<`${Size}`, string> = new Map([
+    [Size.Large, 'min-h-40px'],
+    [Size.Medium, 'min-h-32px'],
+    [Size.Small, 'min-h-24px'],
+    [Size.Mini, 'min-h-20px']
 ])
 
 enum Trigger {
@@ -63,5 +70,5 @@ enum ZIndex {
 
 const DEFAULT_PLACEMENT = Placement.TopStart
 
-export { DEFAULT_PLACEMENT, DEFAULT_SIZE, DEFAULT_THEME, DEFAULT_VARIANT, Placement, Size, size2height, Theme, Trigger, Variant, ZIndex }
+export { DEFAULT_PLACEMENT, DEFAULT_SIZE, DEFAULT_THEME, DEFAULT_VARIANT, Placement, Size, size2height, size2minHeight, Theme, Trigger, Variant, ZIndex }
 

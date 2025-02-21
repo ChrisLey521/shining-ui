@@ -1,23 +1,8 @@
 <template>
-    <div
-        :class="[
-            height,
-            'group',
-            { 'relative z-1 bg-gray-1 cursor-not-allowed': disabled }
-        ]"
-        flex
-        gap-1
-        items-center
-        w-full
-        px-2
-        py-1
-        b
-        b-solid
-        b-gray-3
-        rounded
-        focus-within:b-blue-5
-        @click="handleClick"
-    >
+    <input-wrapper
+        :size
+        :disabled
+        @click="handleClick">
         <slot name="prepend">
             <Icon
                 v-if="prefixIcon"
@@ -37,8 +22,8 @@
             :tabindex
             :disabled
             :readonly
-            :autocomplete
             :autofocus
+            :autocomplete
             flex-1
             placeholder-gray-3
             caret-blue-5
@@ -47,7 +32,7 @@
         />
         <Button
             v-if="clearable"
-            class="!hidden !group-hover:inline"
+            class="!hidden !group-hover/input__wrapper:inline"
             :size="buttonSize"
             ghost
             circle
@@ -77,14 +62,15 @@
                 @click.stop="$emit('suffix-icon-click')"
             />
         </slot>
-    </div>
+    </input-wrapper>
 </template>
 
 <script setup lang="ts">
-import { DEFAULT_SIZE, Size, size2height } from 'constants/common';
+import { DEFAULT_SIZE, Size } from 'constants/common';
 import { computed, ref, useTemplateRef, watch } from 'vue';
 import { Button } from '../../button';
 import { Icon } from '../../icon';
+import InputWrapper from './input-wrapper.vue';
 import { InputEvents, InputProps } from './type';
 
 const {
@@ -97,7 +83,6 @@ const {
     maxlength
 } = defineProps<InputProps>()
 
-const height = size2height.get(size)
 const buttonSize = computed(() => {
     const size2ButtonSize = new Map<`${Size}`, `${Size}`>([
         [Size.Large, Size.Medium],
@@ -126,21 +111,12 @@ const parse = (val: string): string => typeof parser === 'function'
     : formatLength(val)
 
 const value = computed<string>({
-    get: () => {
-        console.log('get -> ', format(modelValue.value))
-        return format(modelValue.value)
-    },
-    set: (newValue) => {
-        console.log('set -> ', newValue, 'parsed -> ', parse(newValue))
-        modelValue.value = parse(newValue)
-    }
+    get: () => format(modelValue.value),
+    set: (newValue) => modelValue.value = parse(newValue)
 })
 
 const emits = defineEmits<InputEvents>()
-watch(value, (newValue, oldValue) => {
-    console.log('变变变', newValue)
-    emits('change', newValue, oldValue)
-})
+watch(value, (newValue, oldValue) => emits('change', newValue, oldValue))
 
 const handleClear = () => modelValue.value = ''
 
