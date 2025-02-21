@@ -1,24 +1,24 @@
 <template>
     <div>
-        <input
-            ref="input"
-            v-model="value"
-            :disabled="!editable || !disabled"
-            :class="{
-                '!b-blue-5': floatingVisible
-            }"
-            relative
-            z--1
-            w-full
-            px-2
-            py-1
-            b
-            b-solid
-            b-gray-3
-            focus:b-blue-5
-            rounded
-        />
     </div>
+    <input
+        ref="input"
+        v-model="value"
+        :disabled="!editable || disabled"
+        :class="{
+            '!b-blue-5': floatingVisible
+        }"
+        relative
+        z--1
+        w-full
+        px-2
+        py-1
+        b
+        b-solid
+        b-gray-3
+        focus:b-blue-5
+        rounded
+    />
 </template>
 
 <script setup lang="ts">
@@ -45,9 +45,14 @@ const width = computed(() => typeof propWidth === 'number'
 const floatingVisible = inject('floatingVisible')
 
 const modelValue = defineModel()
-const value = computed(() => propValue ?? modelValue.value)
+const value = computed({
+    get: () => propValue ?? modelValue.value,
+    set: (newValue) => modelValue.value = newValue
+})
 
-watch(() => propValue, console.log)
+watch(() => value, (val) => {
+    console.log('propVal -> ', val)
+})
 
 // const input = useTemplateRef('input')
 </script>

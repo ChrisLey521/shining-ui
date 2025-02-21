@@ -3,8 +3,8 @@ import { IconName } from '../../icon/src/const'
 import { ButtonNativeType } from './const'
 
 interface ButtonProps {
-    size?: Size
-    variant?: Variant
+    size?: `${Size}`
+    variant?: `${Variant}`
     fullWidth?: boolean
     plain?: boolean
     ghost?: boolean

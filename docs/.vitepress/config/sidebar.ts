@@ -38,6 +38,10 @@ const sidebarConfig: SidebarConfig = {
       link: 'tag',
     },
     {
+      text: 'Input',
+      link: 'input'
+    },
+    {
       text: 'Select',
       link: 'select'
     }
