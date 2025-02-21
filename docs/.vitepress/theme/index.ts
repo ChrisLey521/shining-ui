@@ -4,10 +4,11 @@ import ExhibitionCard from '@common/exhibition-card.vue';
 import '@shining-ui/theme-chalk';
 import { Button, ButtonGroup, Dropdown, Icon, Input, Overlay, Select, Tag, Tooltip } from 'components';
 import type { Theme } from 'vitepress';
-import { vTooltip } from '../../../packages/directives';
+// import { vTooltip } from '../../../packages/directives';
 import '../styles/index.scss';
 import Layout from '../vitepress/layout/index.vue';
 
+const vTooltip = {}
 export default {
   Layout,
   enhanceApp({ app }) {

@@ -7,9 +7,21 @@
         items-center
     >
         <sn-input v-model="value1" />
-        <sn-input v-model="value2" size="large" />
-        <sn-input v-model="value3" size="medium" />
-        <sn-input v-model="value4" size="small" />
+        <sn-input
+            v-model="value2"
+            size="large"
+            clearable
+        />
+        <sn-input
+            v-model="value3"
+            size="medium"
+            clearable
+        />
+        <sn-input
+            v-model="value4"
+            size="small"
+            clearable
+        />
     </div>
 </template>
 

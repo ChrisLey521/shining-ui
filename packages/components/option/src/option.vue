@@ -18,7 +18,7 @@
 
 <script setup lang="ts">
 import { computed, inject, provide, Reactive } from 'vue';
-import { DropdownItem } from '../../dropdown';
+import { activeDropdownItemKey, DropdownItem } from '../../dropdown';
 import { type IconName, Icon } from '../../icon';
 import { SelectContext, selectContextKey } from '../../select';
 
@@ -33,6 +33,6 @@ defineProps<{
 const selectContext = inject<Reactive<SelectContext>>(selectContextKey)
 
 // 覆盖 dropdown 向 dropdown-item 注入的 active
-provide('active', computed(() => selectContext.value))
+provide(activeDropdownItemKey, computed(() => selectContext.value))
 
 </script>

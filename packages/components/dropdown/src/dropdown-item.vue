@@ -25,6 +25,7 @@ import { computed, inject, Ref } from 'vue';
 import { type IconName } from '../../icon/src/const';
 import Icon from '../../icon/src/icon.vue';
 import { BasicValue } from '../../select';
+import { activeDropdownItemKey, hideDropdownOnClickKey } from './const';
 
 const { command, divided } = defineProps<{
     command: BasicValue
@@ -39,9 +40,9 @@ const seperator = computed(() => divided
     : void 0
 )
 
-const active = inject<Ref<string>>('active')
+const active = inject<Ref<string>>(activeDropdownItemKey)
 
-const hideOnClick = inject<Ref<boolean>>('hideOnClick')
+const hideOnClick = inject<Ref<boolean>>(hideDropdownOnClickKey)
 
 const select = inject<(cmd: BasicValue) => void>('select')
 const close = inject<() => void>('close')

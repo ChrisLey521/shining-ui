@@ -6,9 +6,9 @@ interface CommonInputProps {
     disabled?: boolean
     clearable?: boolean
     placeholder?: string
-    maxLength?: number
-    minLength?: number
-    showLengthLimit?: boolean
+    maxlength?: number
+    minlength?: number
+    showWordCount?: boolean
     autocomplete?: string // on/off
     autofocus?: boolean
     form?: string
@@ -26,7 +26,13 @@ interface InputProps extends CommonInputProps {
     suffixIcon?: IconName
 }
 
+interface InputEvents {
+    (e: 'change', newValue: string, oldValue: string): void
+    (e: 'prefix-icon-click'): void
+    (e: 'suffix-icon-click'): void
+}
+
 export {
-    CommonInputProps, InputProps
+    CommonInputProps, InputEvents, InputProps
 }
 
