@@ -43,6 +43,7 @@ import { computed, onMounted, provide, ref, useTemplateRef } from 'vue';
 import { Button } from '../../button';
 import { ButtonGroup } from '../../button-group';
 import { Floating } from '../../floating';
+import { activeDropdownItemKey, hideDropdownOnClickKey, onSelectKey } from './const';
 import { DropdownProps } from './type';
 
 const {
@@ -96,8 +97,8 @@ const handleSelect = (cmd: string) => {
     emits('command', cmd)
 }
 
-provide('select', handleSelect)
-provide('active', active)
-provide('hideOnClick', hideOnClick)
+provide(onSelectKey, handleSelect)
+provide(activeDropdownItemKey, active)
+provide(hideDropdownOnClickKey, hideOnClick)
 
 </script>

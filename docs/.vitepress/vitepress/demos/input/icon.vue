@@ -1,22 +1,22 @@
 <template>
     <sn-input
         v-model="value"
-        prefixIcon=""
+        prefixIcon="tag"
         @prefix-icon-click="handlePrefixIconClick"
     />
     <sn-input
         v-model="value"
-        suffixIcon="search"
+        suffixIcon="sunny"
         @suffix-icon-click="handleSuffixIconClick"
     />
     <sn-input v-model="value">
-        <template #prefix>
-            <sn-icon name="search" />
+        <template #prepend>
+            <sn-icon name="search" @click.stop="handlePrependIconClick" />
         </template>
     </sn-input>
-    <sn-input v-model="value">
-        <template #suffix>
-            <sn-icon name="search" />
+    <sn-input v-model="value" clearable>
+        <template #append>
+            <sn-icon name="camera" @click.stop="handleAppendIconClick" />
         </template>
     </sn-input>
 </template>
@@ -28,4 +28,7 @@ const value = ref('')
 
 const handlePrefixIconClick = () => alert('prefix-icon-click')
 const handleSuffixIconClick = () => alert('suffix-icon-click')
+
+const handlePrependIconClick = () => alert('prepend')
+const handleAppendIconClick = () => alert('append')
 </script>

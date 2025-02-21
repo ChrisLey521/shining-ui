@@ -5,9 +5,6 @@
         ref="input"
         v-model="value"
         :disabled="!editable || disabled"
-        :class="{
-            '!b-blue-5': floatingVisible
-        }"
         relative
         z--1
         w-full
@@ -22,7 +19,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, inject, watch } from 'vue';
+import { computed, watch } from 'vue';
 
 const {
     value: propValue,
@@ -40,9 +37,6 @@ const width = computed(() => typeof propWidth === 'number'
     ? `${propWidth}px`
     : width
 )
-
-// 从 Floating 注入的 Ref, 仅用于下拉框打开/关闭状态
-const floatingVisible = inject('floatingVisible')
 
 const modelValue = defineModel()
 const value = computed({

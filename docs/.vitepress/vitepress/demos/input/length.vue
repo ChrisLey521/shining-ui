@@ -1,9 +1,9 @@
 <template>
     <sn-input
         v-model="value"
-        :max-length="16"
-        :min-length="6"
-        show-length-limit
+        :maxlength="16"
+        :minlength="6"
+        show-word-count
     />
 </template>
 

@@ -50,7 +50,7 @@ input/password
 
 ## 带图标的输入框
 
-通过`prefixIcon`和`suffixIcon`属性可以得到具有前后图标的输入框，也可以通过`#prefix`和`#suffix`插槽来添加前后图标。当使用了`#prefix`插槽时，`prefixIcon`属性将不再生效。`suffixIcon`属性和`#suffix`插槽同理。
+通过`prefixIcon`和`suffixIcon`属性可以得到具有前后图标的输入框，也可以通过`#prepend`和`#append`插槽来添加前后图标。当使用了`#prepend`插槽时，`prefixIcon`属性将不再生效。`suffixIcon`属性和`#append`插槽同理。
 
 :::demo
 
@@ -70,7 +70,7 @@ input/size
 
 ## 输入长度限制
 
-通过`minLength`和`maxLength`属性来限制最小/最大输入长度。可以使用`showLengthLimit`参数来控制是否显示输入长度限制。
+通过`minlength`和`maxlength`属性来限制最小/最大输入长度。可以使用`showWordCount`参数来控制是否显示输入长度限制。
 
 :::demo
 

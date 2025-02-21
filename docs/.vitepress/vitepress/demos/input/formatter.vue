@@ -1,8 +1,9 @@
 <template>
     <sn-input
         v-model="value"
-        :formatter="(val: string) => `￥ ${val}`"
-        :parser="(val: string) => val.replace('￥ ', '')"
+        clearable
+        :formatter="(val: string) => `￥${val}`"
+        :parser="(val: string) => val.replace(/^￥/, '')"
     />
 </template>
 
