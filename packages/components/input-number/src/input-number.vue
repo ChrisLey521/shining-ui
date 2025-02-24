@@ -1,6 +1,6 @@
 <template>
     <input-wrapper
-        class="!p-0 justify-between"
+        :class="['!p-0', 'justify-between', height]"
         :style="{
             width
         }"
@@ -31,6 +31,7 @@
             flex-1
             w-full
             px-1
+            text-center
             @input="handleInput"
             @focus="$emit('focus')"
             @blur="handleBlur"
@@ -76,6 +77,7 @@
 
 <script setup lang="ts">
 import { assert } from '@shining-ui/utils';
+import { size2height } from 'constants/common';
 import { computed, useTemplateRef } from 'vue';
 import { Button } from '../../button';
 import { Icon } from '../../icon';
@@ -85,6 +87,7 @@ import { InputNumberProps } from './type';
 const {
     min,
     max,
+    size = 'medium',
     disabled,
     readonly,
     step = 1,
@@ -100,6 +103,8 @@ const width = computed(() => typeof propWidth === 'number'
     ? `${propWidth}px`
     : propWidth
 )
+
+const height = computed(() => size2height.get(size))
 
 const input = useTemplateRef('input')
 
@@ -133,7 +138,7 @@ const numberPrecision = computed(() => {
 const handleInput = async (e: InputEvent) => {
     const inputValueAsNumber = (e.target as HTMLInputElement).valueAsNumber
     const formattedNumber = limitPrecision(inputValueAsNumber)
-    console.log(formattedNumber, inputValueAsNumber, limitPrecision(1.1))
+    
     if (modelValue.value === formattedNumber) return
     modelValue.value = !modelValue.value && !inputValueAsNumber
         ? void 0
