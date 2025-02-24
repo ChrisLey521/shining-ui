@@ -379,6 +379,8 @@
 [px=""]{padding-left:1rem;padding-right:1rem;}
 .px-0,
 [px-0=""]{padding-left:0;padding-right:0;}
+.px-1,
+[px-1=""]{padding-left:0.25rem;padding-right:0.25rem;}
 .px-10px{padding-left:10px;padding-right:10px;}
 .px-12px{padding-left:12px;padding-right:12px;}
 .px-16px{padding-left:16px;padding-right:16px;}
