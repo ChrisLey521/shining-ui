@@ -9,12 +9,15 @@ interface CommonInputProps {
     maxlength?: number
     minlength?: number
     showWordCount?: boolean
-    autocomplete?: string // on/off
+    // 原生属性
+    autocomplete?: 'on' | 'off'
     autofocus?: boolean
     form?: string
     name?: string
     readonly?: boolean
     tabindex?: number
+    ariaLabel?: string
+    id?: string
 }
 
 interface InputProps extends CommonInputProps {

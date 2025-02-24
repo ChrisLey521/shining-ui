@@ -1,5 +1,5 @@
 <template>
-    <sn-input-number v-model="value" />
+    <sn-input-number v-model="value" disabled />
 </template>
 
 <script setup lang="ts">

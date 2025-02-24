@@ -236,7 +236,7 @@ const iconDict: Record<IconName, string> = {
     // 箭头
     [IconName.ArrowLeft]: 'i-material-symbols-light:chevron-left-rounded',
     [IconName.ArrowRight]: 'i-material-symbols-light:chevron-right-rounded',
-    [IconName.ArrowUp]: 'i-material-symbols-light:keyboard-arrow-down-rounded',
+    [IconName.ArrowUp]: 'i-material-symbols-light:keyboard-arrow-up-rounded',
     [IconName.ArrowDown]: 'i-material-symbols-light:keyboard-arrow-down-rounded',
     [IconName.ArrowLeftBold]: 'i-material-symbols:chevron-left-rounded',
     [IconName.ArrowRightBold]: 'i-material-symbols:chevron-right-rounded',
