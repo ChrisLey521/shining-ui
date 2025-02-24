@@ -398,6 +398,8 @@
 [pe=""]{padding-inline-end:1rem;}
 [pl=""]{padding-left:1rem;}
 [pt=""]{padding-top:1rem;}
+.text-center,
+[text-center=""]{text-align:center;}
 .text-base,
 [text-base=""]{font-size:1rem;line-height:1.5rem;}
 .text-lg{font-size:1.125rem;line-height:1.75rem;}
