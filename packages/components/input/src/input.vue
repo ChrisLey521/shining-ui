@@ -50,11 +50,11 @@
             <Icon :name="showPassword ? 'view' : 'hide'" />
         </Button>
         <span
-            v-if="propType === 'text' && showWordCount"
+            v-if="propType === 'text' && showWordCount && maxlength"
             text-gray-4
             text-xs
         >
-            {{ (modelValue as string).length }} / {{ maxlength }}
+            {{ (modelValue as string)?.length ?? 0 }} / {{ maxlength }}
         </span>
         <slot name="append">
             <Icon
