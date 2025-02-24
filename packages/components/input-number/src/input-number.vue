@@ -30,7 +30,7 @@
             :aria-label
             flex-1
             w-full
-            px-2
+            px-1
             @input="handleInput"
             @focus="$emit('focus')"
             @blur="handleBlur"
@@ -93,7 +93,7 @@ const {
     plusIcon = 'plus',
     width: propWidth = 200,
     controls = true,
-    controlsPosition = 'side'
+    controlsPosition = 'right'
 } = defineProps<InputNumberProps>()
 
 const width = computed(() => typeof propWidth === 'number'
@@ -110,8 +110,9 @@ const limitPrecision = (val: number) => {
     if (Number.isInteger(val)) return val
     const valString = val.toString()
     const dotIndex = valString.indexOf('.')
+    
     return dotIndex > -1
-        ? parseFloat(valString.slice(0, numberPrecision.value + dotIndex + 1))
+        ? parseFloat(valString.slice(0, (numberPrecision.value ?? 0) + dotIndex + 1))
         : val
 }
 
@@ -132,10 +133,11 @@ const numberPrecision = computed(() => {
 const handleInput = async (e: InputEvent) => {
     const inputValueAsNumber = (e.target as HTMLInputElement).valueAsNumber
     const formattedNumber = limitPrecision(inputValueAsNumber)
+    console.log(formattedNumber, inputValueAsNumber, limitPrecision(1.1))
     if (modelValue.value === formattedNumber) return
     modelValue.value = !modelValue.value && !inputValueAsNumber
-    ? void 0
-    : formattedNumber
+        ? void 0
+        : formattedNumber
 }
 
 const focus = () => input.value?.focus()
@@ -179,7 +181,7 @@ const handleBlur = () => {
 
     const int = Math.floor(modelValue.value)
     const intLength = int ? int.toString().length : 1
-    const dot = Number.isInteger(modelValue.value) ? '.' : ''
+    const dot = Number.isInteger(modelValue.value) && numberPrecision.value > 0 ? '.' : ''
     const result = `${modelValue.value}${dot}`.padEnd(numberPrecision.value + intLength + 1, '0')
     input.value.value = result
 
