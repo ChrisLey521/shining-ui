@@ -1,5 +1,9 @@
 <template>
-    <sn-input-number v-model="value" />
+    <sn-input-number
+        v-model="value"
+        minus-icon="poor"
+        plus-icon="sunny"
+    />
 </template>
 
 <script setup lang="ts">

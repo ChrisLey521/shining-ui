@@ -24,6 +24,7 @@
             :readonly
             :autofocus
             :autocomplete
+            :aria-label
             flex-1
             placeholder-gray-3
             caret-blue-5

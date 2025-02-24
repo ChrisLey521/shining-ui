@@ -3,9 +3,12 @@
         :class="[
             minHeight,
             'group/input__wrapper',
-            { 'relative z-1 bg-gray-1 cursor-not-allowed': disabled }
+            {
+                'relative z-1 bg-gray-1 cursor-not-allowed': disabled
+            }
         ]"
         flex
+        flex-row
         flex-wrap
         gap-1
         items-center
@@ -28,7 +31,7 @@ import { DEFAULT_SIZE, Size, size2minHeight } from 'constants/common';
 const {
     size = DEFAULT_SIZE,
 } = defineProps<{
-    size?: Size
+    size?: `${Size}`
     disabled?: boolean
 }>()
 

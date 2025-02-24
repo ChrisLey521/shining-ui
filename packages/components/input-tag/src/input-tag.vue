@@ -51,6 +51,7 @@
         <input
             v-model="inputValue"
             flex-1
+            w-full
             b-0
             :maxlength="inputMaxlength"
             :minlength
@@ -58,6 +59,7 @@
             :disabled
             :readonly
             :autofocus
+            :aria-label
             caret-blue-5
             @keydown.enter="triggerKey === 'enter' && handleTrigger()"
             @keydown.space="triggerKey === 'space' && handleTrigger()"
