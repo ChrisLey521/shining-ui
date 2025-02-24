@@ -1,5 +1,5 @@
 <template>
-    <sn-textarea v-model="value" />
+    <sn-textarea v-model="value" :rows="5" />
 </template>
 
 <script setup lang="ts">

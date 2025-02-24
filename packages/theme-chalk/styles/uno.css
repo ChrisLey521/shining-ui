@@ -178,6 +178,10 @@
 .relative,
 [relative=""]{position:relative;}
 .before\:absolute::before{position:absolute;}
+.bottom-2,
+[bottom-2=""]{bottom:0.5rem;}
+.right-5,
+[right-5=""]{right:1.25rem;}
 [right~="\30 "]{right:0;}
 .before\:left-0::before{left:0;}
 .before\:top-0::before{top:0;}
@@ -259,7 +263,9 @@
 .cursor-pointer{cursor:pointer;}
 .cursor-not-allowed{cursor:not-allowed;}
 .select-all{user-select:all;user-select:all;}
+.\!resize{resize:both !important;}
 .resize{resize:both;}
+.resize-none{resize:none;}
 .items-center,
 [items-center=""]{align-items:center;}
 .justify-center{justify-content:center;}

@@ -1,5 +1,9 @@
 <template>
-    <sn-textarea v-model="value" />
+    <sn-textarea
+        v-model="value"
+        :maxlength="200"
+        show-word-count
+    />
 </template>
 
 <script setup lang="ts">

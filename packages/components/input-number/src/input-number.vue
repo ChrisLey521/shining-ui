@@ -27,11 +27,20 @@
             :step
             :disabled
             :readonly
+            :placeholder
+            :form
+            :id
+            :name
+            :tabindex
             :aria-label
             flex-1
             w-full
             px-1
             text-center
+            placeholder-gray-3
+            caret-blue-5
+            b-0
+            outline-none
             @input="handleInput"
             @focus="$emit('focus')"
             @blur="handleBlur"
