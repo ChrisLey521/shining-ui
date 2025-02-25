@@ -19,5 +19,7 @@
     "InputNumber": "InputNumber",
     "InputTag": "InputTag",
     "Textarea": "Textarea",
+    "Radio": "Radio",
+    "Checkbox": "Checkbox",
     "Select": "Select"
 }
