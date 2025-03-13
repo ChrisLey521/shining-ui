@@ -2,7 +2,7 @@
 import ApiType from '@common/api-type.vue';
 import ExhibitionCard from '@common/exhibition-card.vue';
 import '@shining-ui/theme-chalk';
-import { Button, ButtonGroup, Dropdown, Icon, Input, InputNumber, InputTag, Overlay, Select, Tag, Textarea, Tooltip } from 'components';
+import { Button, ButtonGroup, Checkbox, CheckboxGroup, Dropdown, Icon, Input, InputNumber, InputTag, Overlay, Radio, RadioGroup, Select, Tag, Textarea, Tooltip } from 'components';
 import type { Theme } from 'vitepress';
 // import { vTooltip } from '../../../packages/directives';
 import '../styles/index.scss';
@@ -25,6 +25,10 @@ export default {
     app.component('sn-input-number', InputNumber)
     app.component('sn-textarea', Textarea)
     app.component('sn-input-tag', InputTag)
+    app.component('sn-radio', Radio)
+    app.component('sn-radio-group', RadioGroup)
+    app.component('sn-checkbox', Checkbox)
+    app.component('sn-checkbox-group', CheckboxGroup)
     app.component('sn-select', Select)
     app.directive('tooltip', vTooltip)
     app.component('exhibition-card', ExhibitionCard)

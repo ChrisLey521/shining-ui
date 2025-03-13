@@ -54,6 +54,14 @@ const sidebarConfig: SidebarConfig = {
       link: 'textarea'
     },
     {
+      text: 'Radio',
+      link: 'radio'
+    },
+    {
+      text: 'Checkbox',
+      link: 'checkbox'
+    },
+    {
       text: 'Select',
       link: 'select'
     }

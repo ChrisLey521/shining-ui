@@ -19,5 +19,7 @@
     "InputNumber": "InputNumber 数字输入框",
     "InputTag": "InputTag 标签输入框",
     "Textarea": "Textarea 文本域",
+    "Radio": "Radio 单选框",
+    "Checkbox": "Checkbox 复选框",
     "Select": "Select 下拉框"
 }
