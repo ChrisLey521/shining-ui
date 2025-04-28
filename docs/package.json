@@ -23,10 +23,12 @@
     "vitepress": "1.5.0"
   },
   "dependencies": {
+    "@chrisley/earth-3d": "0.0.0",
     "@shining-ui/directives": "workspace:*",
     "@shining-ui/theme-chalk": "workspace:*",
     "@shining-ui/utils": "workspace:*",
     "components": "workspace:*",
-    "markdown-it": "14.1.0"
+    "markdown-it": "14.1.0",
+    "three": "0.176.0"
   }
 }
