@@ -78,6 +78,10 @@ const sidebarConfig: SidebarConfig = {
     {
       text: 'Runtime API Examples',
       link: 'api-examples'
+    },
+    {
+      text: '3D Earth',
+      link: 'earth-3d'
     }
   ]
 }
